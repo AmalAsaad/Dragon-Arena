@@ -3,11 +3,17 @@ body{
     background-repeat: no-repeat;
     background-size:1380px 650px;
 }
-#help{
+#ourimages{
+    margin-left: 50px;
+    /* block-size: auto; */
+}
+#help ,#owner{
     height: 70px;
     width: 70px;
     margin-top: 30px;
-    display: block;
+}
+#owner{
+    margin-left: 1100px;
 }
 #start{
     margin-top: 420px;
@@ -15,3 +21,4 @@ body{
     height: 80px;
     width: 250px;
 }
+
