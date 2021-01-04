@@ -1,0 +1,17 @@
+body{
+    background-image:url("../Img/tank-fight.png");
+    background-repeat: no-repeat;
+    background-size:1380px 650px;
+}
+#help{
+    height: 70px;
+    width: 70px;
+    margin-top: 30px;
+    display: block;
+}
+#start{
+    margin-top: 420px;
+    margin-left: 550px;
+    height: 80px;
+    width: 250px;
+}
