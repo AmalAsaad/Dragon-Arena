@@ -1,7 +1,12 @@
+html{
+    height: 100%;
+}
 body{
     background-image:url("../Img/tank-fight.png");
+    height: 100%;
+    background-position: center;
     background-repeat: no-repeat;
-    background-size:1380px 650px;
+    background-size: cover;
 }
 #ourimages{
     margin-left: 50px;
@@ -15,10 +20,25 @@ body{
 #owner{
     margin-left: 1100px;
 }
-#start{
-    margin-top: 420px;
-    margin-left: 550px;
+#play{
+    position: fixed;
+    bottom: 10px;
+    right: 500px;
     height: 80px;
     width: 250px;
+}
+#names{
+    display: none;
+    margin-top: 100px;
+    margin-left: 550px;
+    background-color:moccasin;
+    list-style: none;
+    width: 200px;
+}
+#exit{
+    width:20px; 
+    height:20px;
+    margin-left: 179.5px;
+    box-sizing: border-box;
 }
 
