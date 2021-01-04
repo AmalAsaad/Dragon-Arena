@@ -1,0 +1,35 @@
+#box{
+    width: 1105px;
+    height: 506px;
+    overflow: hidden;
+    background: #EDBB99;
+    box-shadow: 0 0 20px;
+    border-radius: 9px;
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%,-50%);
+    text-align: center;
+    z-index: 9999;
+    padding: 10px;
+    display: none;
+}
+
+#box span{
+    display: block;
+    color: yellowgreen;
+    font-size: 41px;
+}
+
+.close{
+    position: fixed;
+    font-size: 25px;
+    margin-top: -4px;
+    margin-left: 476px;
+    color: #17202A;
+    padding: 10px 30px;
+    cursor: pointer;
+    background: #E74C3C;
+    
+    border-radius: 50%;
+}
