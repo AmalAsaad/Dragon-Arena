@@ -12,13 +12,16 @@ body{
     margin-left: 50px;
     /* block-size: auto; */
 }
-#help ,#owner{
+#help{
     height: 70px;
     width: 70px;
     margin-top: 30px;
     border-radius: 50%
 }
 #owner{
+    height: 90px;
+    width: 90px;
+    margin-top: 30px;
     margin-left: 1100px;
 }
 #play{
