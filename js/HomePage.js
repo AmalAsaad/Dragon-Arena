@@ -1,3 +1,7 @@
+///////////Directing to game page//////////
+function runGame(){
+    location.assign("gamePage.html");
+}
 ////////Owner button////////////
 var ownerbtn=document.getElementById("owner");
 ownerbtn.addEventListener("click",fun1)
