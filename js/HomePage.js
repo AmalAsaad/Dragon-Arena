@@ -1,14 +1,17 @@
-var btn1=document.getElementById("owner");
-btn1.addEventListener("click",fun1)
+////////Owner button////////////
+var ownerbtn=document.getElementById("owner");
+ownerbtn.addEventListener("click",fun1)
 var list=document.getElementById("names")
 function fun1(){ 
        list.style.display='block'
 }
-var btn2=document.getElementById("exit")
-btn2.addEventListener("click",fun2)
+var exitbtn=document.getElementById("exit")
+exitbtn.addEventListener("click",fun2)
 function fun2(){
     list.style.display='none'
 }
+////////bouncing play button//////////
+// $("#play").effect( "bounce", {times:3}, 300 );
 //////////////Insruction button///////////////////
 document.getElementById("help").addEventListener("click",pop)
 document.getElementsByClassName("close")[0].addEventListener("click",pop)
