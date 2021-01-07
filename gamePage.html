@@ -5,8 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Start Game</title>
     <link href="./css/GamePage.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 </head>
 <body>
+    <section class="container1">
+        <div class = "ready">
+            <h1> Ready..! </h1>
+        </div>
+        <div class = "go">
+            <h1> Go! </h1>
+        </div>
+    </section>
+    <section class="container2">
+        <input type = "image" id = "pauseBtn" src = "Img/pause.png" alt = "puase button">
+    </section>
+    <section id="container4">
+        <div>
+            <img id = "pauseMenu" src="Img/pause-board.png" >
+            <img id = "pauseSticker" src="Img/pause-sticker.png" alt="pause sticker" >
+            <input type="image" id = "close" src="Img/close.png">
+            <h1 id = "pause">Pause</h1>
+            <div class = "pauseList">
+                <input id = "cont" type="image" src="Img/next.png">
+                <input id = "reset" type="image" src="Img/replay.png">
+                <input id = "homePage" type="image" src="Img/menu.png">
+            </div>
+            <div>
+                
+            </div>
+
+
+        </div>
+    </section>
+    <!-- <section class = "container3">
+        <div class = "red">
+            <img  src="Img/base-red.png" alt="Red score">
+            <img  src="Img/button-grey.png" alt="red score">
+        </div>
+        <div class = "blue">
+            <img  src="Img/button-blue.png" alt="red">
+            <img src="Img/base-red.png" alt="blue score">
+        </div>
+    </section> -->
     <script src="js/GamePage.js"></script>
 </body>
 </html>
