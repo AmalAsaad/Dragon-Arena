@@ -22,14 +22,45 @@
 }
 
 .close{
+    display: inline;
     position: fixed;
     font-size: 25px;
-    margin-top: -4px;
-    margin-left: 476px;
+    margin-top: -68px;
+    margin-left: 850px;
     color: #17202A;
     padding: 10px 30px;
     cursor: pointer;
     background: #E74C3C;
     
     border-radius: 50%;
+}
+
+#box #nextpage{
+    position: fixed;
+    height: 70px;
+    width: 70px;
+    margin-top: 194px;
+    margin-left: 861px;
+}
+
+.box h3{
+    display: inline;
+}
+
+#firstpagemove{
+    display: inline-block;
+    width: 326px;
+    height: 407px;
+    margin-left: 44px;
+    background: #E74C3C;
+    border-radius: 15%;
+}
+
+#firstpagefire{
+    display: inline-block;
+    width: 326px;
+    height: 407px;
+    margin-left: 44px;
+    background: #E74C3C;
+    border-radius: 15%;
 }
