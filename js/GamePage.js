@@ -1,4 +1,6 @@
-
+function runGame(){
+    location.assign("gamePage.html");
+}
 $(".ready").toggle(1000);
 $(".go").show(1000).slideUp(3000);
 $("#pauseBtn").click();
@@ -25,8 +27,6 @@ function contPlay(){
 document.getElementById("homePage").addEventListener("click",backHome);
 function backHome(){
     location.assign("index.html");
-
-
 }
 document.getElementById("reset").addEventListener("click",runGame);
 

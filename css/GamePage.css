@@ -16,7 +16,7 @@ input{
   height: 70px;
 }
 .container1{
-  color :black;
+  color: white;
   text-align: center;
   font-family: sans-serif;
   text-transform: uppercase;
@@ -34,30 +34,38 @@ input{
   height: 90px;
 }
 #container4 {
-  height: 700px;
-  width: 700px;
   display: none;
-  margin-left: 500px;
-  margin-top: 190px;
+  position: absolute;
+  height: 350px;
+  width: 700px;
+  right: 340px;
+  top: 150px;
+  animation-name: jumpDown;
+  animation-duration: 1s;
+
 }
+@keyframes jumpDown{
+  from{top:0px;}
+  to{top:150px;}
+  }
 #close{
   position: absolute;
   top:11px;
-  left: 980px;
+  left: 480px;
   height: 50px;
 }
 #pauseSticker{
   height: 99px;
   position: absolute;
-  left: 650px;
-  bottom: 650px;
+  left: 150px;
+  bottom: 300px;
   
 }
 #pause{
   position: absolute;
   color:brown;
-  left: 750px;
-  bottom: 1000px;
+  left: 250px;
+  bottom: 1100px;
   top: 0px;
   margin: 0px;
   font-family: sans-serif;
@@ -65,11 +73,9 @@ input{
   font-size: 28px;
 
 }
-.container3{
-  position:fixed;
-  bottom: 50px;
-}
+
 #pauseMenu{
+  position: absolute;
   height: 320px;
 }
 .pauseList{
@@ -78,6 +84,7 @@ input{
   margin-left: 40px;
   margin-right: 40px;
 }
+
 #reset{
   margin-left: 100px;
   margin-right: 100px;
@@ -100,17 +107,36 @@ transform: scale(1,1) translate(0px, 0px);
 #pauseSticker,#pause,#cont,#reset,#homePage,#close{
   -webkit-animation: bounce 1s;
 }
+ /* .container3{
+  position:fixed;
+   bottom: 50px; 
+}  */
 
 .blue{
-  height: 70px;
-  margin-left: 1000px;
+  position: absolute;
+  right: 20px;
+  top: 630px;
+  
 }
 .red{
-  height: 70px;
-  right: 0px;
-  margin-left: 29px;
-
+  position: absolute;
+  top: 630px;
+  left: 15px;
 }
+#redBtn,#blueBtn{
+  height: 90px;
+  position: absolute;
+}
+.base{
+  height: 90px;
+}
+#redBtn{
+  left: 3px;
+}
+#blueBtn{
+  right: 0px;
+}
+
 
 
 
