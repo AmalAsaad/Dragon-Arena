@@ -1,7 +1,3 @@
-function runGame(){
-    location.assign("gamePage.html");
-}
-
 
 $(".ready").toggle(1000);
 $(".go").show(1000).slideUp(3000);
