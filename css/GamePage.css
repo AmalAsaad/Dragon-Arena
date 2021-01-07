@@ -6,12 +6,12 @@ html,body{
   position:relative;
   height: 100%;
 }
-/* body{
+body{
   background-image: url("../Img/background.jpg");
   background-repeat: no-repeat;
-  height: 100px;
-  
-} */
+  /* height: 100px; */
+  background-size: cover;
+}
 input{
   height: 80px;
 }
