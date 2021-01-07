@@ -140,13 +140,13 @@ transform: scale(1,1) translate(0px, 0px);
 .sound,.music{
   position: absolute;
 }
-.playSound{
+#playSound, #playMusic{
   position: absolute;
   height: 40px;
   left: 30px;
   
 }
-.off{
+#off1,#off2{
   position: absolute;;
   height: 40px;
   left: 30px;
@@ -164,7 +164,7 @@ transform: scale(1,1) translate(0px, 0px);
   height: 30px;
   top: 5px;
 }
-.offtxt{
+#offtxt1,#offtxt2{
   position: absolute;
   color:burlywood;
   font-weight: bold;
