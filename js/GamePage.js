@@ -1,9 +1,11 @@
-
+function runGame(){
+    location.assign("gamePage.html");
+}
 $(".ready").toggle(1000);
 $(".go").show(1000).slideUp(3000);
 $("#pauseBtn").click();
 $("pause").toggle(1000);
-// $("#cont").hover($("cont").css("hight","90px"))
+$(".playSound").
 
 document.getElementById("pauseBtn").addEventListener("click",popUp);
 document.getElementById("close").addEventListener("click",popUp);
@@ -25,8 +27,6 @@ function contPlay(){
 document.getElementById("homePage").addEventListener("click",backHome);
 function backHome(){
     location.assign("index.html");
-
-
 }
 document.getElementById("reset").addEventListener("click",runGame);
 
