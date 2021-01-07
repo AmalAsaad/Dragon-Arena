@@ -13,7 +13,7 @@ body{
   background-size: cover;
 }
 input{
-  height: 80px;
+  height: 70px;
 }
 .container1{
   color :black;
@@ -33,7 +33,9 @@ input{
 #pauseBtn:hover{
   height: 90px;
 }
-#container4{
+#container4 {
+  height: 700px;
+  width: 700px;
   display: none;
   margin-left: 500px;
   margin-top: 190px;
@@ -48,7 +50,8 @@ input{
   height: 99px;
   position: absolute;
   left: 650px;
-  bottom: 700px;
+  bottom: 650px;
+  
 }
 #pause{
   position: absolute;
@@ -78,6 +81,24 @@ input{
 #reset{
   margin-left: 100px;
   margin-right: 100px;
+
+}
+@-webkit-keyframes bounce {
+  0% {
+transform: scale(1,1) translate(0px, 0px);
+}
+30%{
+transform: scale(1,0.8) translate(0px, 10px); 
+}
+75%{
+transform: scale(1,1.1) translate(0px, -25px); 
+}
+100% {
+transform: scale(1,1) translate(0px, 0px);
+}
+}
+#pauseSticker,#pause,#cont,#reset,#homePage,#close{
+  -webkit-animation: bounce 1s;
 }
 
 .blue{

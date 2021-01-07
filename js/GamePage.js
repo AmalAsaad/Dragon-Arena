@@ -1,8 +1,9 @@
 
 $(".ready").toggle(1000);
 $(".go").show(1000).slideUp(3000);
-$("#pauseBtn").click()
-
+$("#pauseBtn").click();
+$("pause").toggle(1000);
+// $("#cont").hover($("cont").css("hight","90px"))
 
 document.getElementById("pauseBtn").addEventListener("click",popUp);
 document.getElementById("close").addEventListener("click",popUp);
