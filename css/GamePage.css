@@ -104,7 +104,7 @@ transform: scale(1,1.1) translate(0px, -25px);
 transform: scale(1,1) translate(0px, 0px);
 }
 }
-#pauseSticker,#pause,#cont,#reset,#homePage,#close{
+#pauseSticker,#pause,#cont,#reset,#homePage,#close,.sound,.music{
   -webkit-animation: bounce 1s;
 }
  /* .container3{
@@ -136,6 +136,43 @@ transform: scale(1,1) translate(0px, 0px);
 #blueBtn{
   right: 0px;
 }
+/* sound css */
+.sound,.music{
+  position: absolute;
+}
+.playSound{
+  position: absolute;
+  height: 40px;
+  left: 30px;
+  
+}
+.off{
+  position: absolute;;
+  height: 40px;
+  left: 30px;
+}
+.sound{
+  top: 80px;
+  left: 320px;
+}
+.music{
+  top: 80px;
+  left: 80px;
+}
+.audioImg{
+  position: absolute;
+  height: 30px;
+  top: 5px;
+}
+.offtxt{
+  position: absolute;
+  color:burlywood;
+  font-weight: bold;
+  left: 90px;
+  font-family:sans-serif;
+
+}
+
 
 
 
