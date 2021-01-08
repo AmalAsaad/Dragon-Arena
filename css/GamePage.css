@@ -10,14 +10,14 @@ body{
   height: 100px;
   background-size: cover;
 }
-canvas{
+/* canvas{
   position: absolute;
   border: 1px solid black;
   height: 580px;
   width: 1435px;
   top: 50px;
   left: 47px;
-}
+} */
 /* #enemy{
   display: none;
 } */
