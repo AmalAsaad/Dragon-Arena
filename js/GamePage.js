@@ -1,3 +1,9 @@
+ var canvas = $("#tankCanvas").get(0);
+ var context = canvas.getContext("2d");
+ var enemyX = 50, enemyY = 100, enemyLenght= 50;
+
+
+
 function runGame(){
     location.assign("gamePage.html");
 }
@@ -45,29 +51,29 @@ var offtxt2 = document.getElementById("offtxt2");
 var count = 0;
 function playSound(){
         if(count === 0){
+           off1.src = "Img/on.png";
            count = 1;
            sound.play();
            offtxt1.textContent = "ON";
-        //    off1.setAttribute("src","../Img/on.png");
-           
         }
         else{
+            off1.src = "Img/off.png";
             sound.pause();
             count = 0;
             offtxt1.textContent = "OFF";
-            // off1.setAttribute("src","../Img/off.png");
+            
         }
 }
-
-
 var countMusic = 0;
 function playMusic(){
     if(countMusic === 0){
+       off2.src = "Img/on.png";
        countMusic = 1;
        music.play();
        offtxt2.textContent = "ON";
     }
     else{
+        off2.src = "Img/off.png";
         music.pause();
         countMusic = 0;
         offtxt2.textContent = "OFF";
