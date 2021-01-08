@@ -1,0 +1,66 @@
+.toggle{
+    background-color: rgb(255, 115, 0);
+    height: 100px;
+    width: 100px;
+    position:absolute;
+    top: 0;
+    bottom: 0;
+    left: -1125px;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.toggle i{
+    font-size: 60px;
+    color: rgb(255, 255, 255);
+    display: block;
+    margin-top: 20px;
+    z-index: auto;
+}
+
+.menu{
+    background: rgb(251, 255, 0);
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    transform: scale(0);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -1115px;
+    right: 0;
+    margin: auto;
+    z-index: auto;
+    border: 2px solid #e74ce7;
+    transition:0.7s ;
+}
+
+.menu a{
+    display: inline-block;
+    position: absolute;
+    font-size: 15px;
+    color: black;
+    
+}
+
+.menu a:nth-child(1){
+    top:6px;
+    left: 45px;
+}
+
+.menu a:nth-child(2){
+    top:45px;
+    left: 80px;
+}
+
+.menu a:nth-child(3){
+    top:80px;
+    left: 45px;
+}
+
+.menu a:hover{
+    color: cornflowerblue;
+}

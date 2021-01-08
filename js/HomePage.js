@@ -17,17 +17,17 @@ function fun2(){
 ////////bouncing play button//////////
 // $("#play").effect( "bounce", {times:3}, 300 );
 //////////////Insruction button///////////////////
-document.getElementById("help").addEventListener("click",pop)
-document.getElementsByClassName("close")[0].addEventListener("click",pop)
-var c = 0;
-function pop(){
+// document.getElementById("help").addEventListener("click",pop)
+// document.getElementsByClassName("close")[0].addEventListener("click",pop)
+// var c = 0;
+// function pop(){
     
-    if(c===0){
-        document.getElementById("box").style.display="block";
-        c = 1;
-    }else{
-        document.getElementById("box").style.display="none";
-        c = 0;
-    }
-}
+//     if(c===0){
+//         document.getElementById("box").style.display="block";
+//         c = 1;
+//     }else{
+//         document.getElementById("box").style.display="none";
+//         c = 0;
+//     }
+// }
 ///////////////////////////////////////////////////
