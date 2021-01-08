@@ -27,5 +27,6 @@ function hideb(){
         document.getElementById("controlmenu").style.display="none"
         document.getElementById("menu").style.transform="scale(0)"
         bullets=0;
+        show=0;
     } 
 }
