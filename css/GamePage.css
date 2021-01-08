@@ -1,17 +1,18 @@
 
 html,body{	
-    
   margin:0;	
   padding:0;	
   position:relative;
-  height: 100%;
 }
 body{
   background-image: url("../Img/background.jpg");
   background-repeat: no-repeat;
-  /* height: 100px; */
+  height: 100px;
   background-size: cover;
 }
+/* #enemy{
+  display: none;
+} */
 input{
   height: 70px;
 }
@@ -42,12 +43,11 @@ input{
   top: 150px;
   animation-name: jumpDown;
   animation-duration: 1s;
-
 }
 @keyframes jumpDown{
   from{top:0px;}
   to{top:150px;}
-  }
+}
 #close{
   position: absolute;
   top:11px;
@@ -107,16 +107,26 @@ transform: scale(1,1) translate(0px, 0px);
 #pauseSticker,#pause,#cont,#reset,#homePage,#close,.sound,.music{
   -webkit-animation: bounce 1s;
 }
- /* .container3{
-  position:fixed;
-   bottom: 50px; 
-}  */
+/*  */
 
 .blue{
   position: absolute;
   right: 20px;
   top: 630px;
   
+}
+.score{
+  position: absolute;
+  color: white;
+  font-weight: bold;
+  margin: 0px;
+  top: 20px;
+  left: 65px;
+  font-size: 2em;
+}
+#blueScore{
+  position: absolute;
+  left: 175px;
 }
 .red{
   position: absolute;
@@ -166,13 +176,19 @@ transform: scale(1,1) translate(0px, 0px);
 }
 #offtxt1,#offtxt2{
   position: absolute;
-  color:burlywood;
+  color:rgb(94, 57, 2);
   font-weight: bold;
   left: 90px;
   font-family:sans-serif;
-
 }
-
+/* canvas{
+  position: absolute;
+  border: 1px solid black;
+  height: 580px;
+  width: 1435px;
+  top: 50px;
+  left: 47px;
+} */
 
 
 

@@ -1,3 +1,12 @@
+//  var gameArea = document.getElementById("gameArea");
+//  var context = gameArea.getContext("2d");
+//  var img = document.getElementById("enemy");
+//  context.drawImage(img, 0.5,0.5);
+
+// //  context.fillRect(0,0,18,25);
+
+
+
 function runGame(){
     location.assign("gamePage.html");
 }
@@ -45,29 +54,28 @@ var offtxt2 = document.getElementById("offtxt2");
 var count = 0;
 function playSound(){
         if(count === 0){
+           off1.src = "Img/on.png";
            count = 1;
            sound.play();
            offtxt1.textContent = "ON";
-        //    off1.setAttribute("src","../Img/on.png");
-           
         }
         else{
+            off1.src = "Img/off.png";
             sound.pause();
             count = 0;
-            offtxt1.textContent = "OFF";
-            // off1.setAttribute("src","../Img/off.png");
+            offtxt1.textContent = "OFF";           
         }
 }
-
-
 var countMusic = 0;
 function playMusic(){
     if(countMusic === 0){
+       off2.src = "Img/on.png";
        countMusic = 1;
        music.play();
        offtxt2.textContent = "ON";
     }
     else{
+        off2.src = "Img/off.png";
         music.pause();
         countMusic = 0;
         offtxt2.textContent = "OFF";
