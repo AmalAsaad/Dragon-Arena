@@ -1,6 +1,9 @@
- var canvas = $("#tankCanvas").get(0);
- var context = canvas.getContext("2d");
- var enemyX = 50, enemyY = 100, enemyLenght= 50;
+//  var gameArea = document.getElementById("gameArea");
+//  var context = gameArea.getContext("2d");
+//  var img = document.getElementById("enemy");
+//  context.drawImage(img, 0.5,0.5);
+
+// //  context.fillRect(0,0,18,25);
 
 
 
@@ -60,8 +63,7 @@ function playSound(){
             off1.src = "Img/off.png";
             sound.pause();
             count = 0;
-            offtxt1.textContent = "OFF";
-            
+            offtxt1.textContent = "OFF";           
         }
 }
 var countMusic = 0;

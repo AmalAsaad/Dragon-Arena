@@ -8,9 +8,10 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 </head>
 <body>
-    <section>
-        <canvas id = "tankCanvas"></canvas>
-    </section>
+    <!-- <section>
+        <canvas id = "gameArea"></canvas>
+        <img id = "enemy" src="Img/enemyup.jpg" >
+    </section> -->
     <section class="container1">
         <div class = "ready">
             <h1> Ready..! </h1>
@@ -22,7 +23,7 @@
     <section class="container2">
         <input type = "image" id = "pauseBtn" src = "Img/pause.png" alt = "puase button">
     </section>
-    <section id="container4">
+    <section id = "container4">
         <div>
             <img id = "pauseMenu" src="Img/pause-board.png" >
             <img id = "pauseSticker" src="Img/pause-sticker.png" alt="pause sticker" >
@@ -61,11 +62,13 @@
     <section class = "container3">
         <div class = "red">
             <img  class = "base" src="Img/base-red.png" alt="Red score">
-            <img  id = "redBtn" src="Img/button-grey.png" alt="red score">
+            <img  id = "redBtn" src="Img/button-red.png" alt="red score">
+            <p class = "score">Red</p>
         </div>
         <div class = "blue">
             <img  id = "blueBtn" src="Img/button-blue.png" alt="red">
             <img class = "base" src="Img/base-red.png" alt="blue score">
+            <p id = "blueScore" class = "score">Blue</p>
         </div>
     </section>
     

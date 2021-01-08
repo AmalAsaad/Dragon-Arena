@@ -10,6 +10,9 @@ body{
   height: 100px;
   background-size: cover;
 }
+/* #enemy{
+  display: none;
+} */
 input{
   height: 70px;
 }
@@ -112,6 +115,19 @@ transform: scale(1,1) translate(0px, 0px);
   top: 630px;
   
 }
+.score{
+  position: absolute;
+  color: white;
+  font-weight: bold;
+  margin: 0px;
+  top: 20px;
+  left: 65px;
+  font-size: 2em;
+}
+#blueScore{
+  position: absolute;
+  left: 175px;
+}
 .red{
   position: absolute;
   top: 630px;
@@ -165,14 +181,14 @@ transform: scale(1,1) translate(0px, 0px);
   left: 90px;
   font-family:sans-serif;
 }
-canvas{
+/* canvas{
   position: absolute;
   border: 1px solid black;
   height: 580px;
   width: 1435px;
   top: 50px;
   left: 47px;
-}
+} */
 
 
 
