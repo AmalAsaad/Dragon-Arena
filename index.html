@@ -5,7 +5,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="css/HomePage.css" rel="stylesheet">
-        <link href="css/pop-up.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+        <link href="E:\iti\tank game\TankGame\css\menu.css" rel="stylesheet">
+        <link href="E:\iti\tank game\TankGame\css\pop.css" rel="stylesheet">
+        
     </head>
     <body>
         <!-- Home Page -->
@@ -23,12 +26,21 @@
             <li>Samar Khaled</li>
         </ul>
         <!--------instruction button-------->
-        <div id="box">
-            <h3></h3>
-            <a class="close">&#10006</a>
-            <input type="image" id="nextpage" src="Img\1194985614534001410pulsante_02_architetto_f_01.svg.hi.png">
-            <div id="popcontainer"></div>
-
+        <div class="toggle" id="toggle" >
+            <i class="fas fa-folder-minus" id="plus"></i>
+        </div>
+        
+        <div class="menu" id="menu">
+            <a href="#" id="bullets" onclick="showb()"><i class="fas fa-meteor"></i></a>
+            <a href="#" onclick="showb()"><i class="fas fa-gamepad"></i></a>
+            <a href="#" onclick="showb()"><i class="fas fa-gift"></i></a>
+        </div>
+        
+        <div id="controlmenu">
+            <input type="image" src="Img\tut-board.png" id="control">
+            <div id="close">
+               <a href="#"><i class="fas fa-times"></i></a>
+            </div>
         </div>
         
         <!---------------------------------->
@@ -39,6 +51,6 @@
         <!-- <p>hello guys</p> -->
     <script src="jquery-minified.js"></script>    
     <script src="js/HomePage.js"></script>
-    <script src="js/instructions.js"></script>
+    <script src="js\instruction.js"></script>
     </body>
 </html>
