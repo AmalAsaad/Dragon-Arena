@@ -10,6 +10,14 @@ body{
   height: 100px;
   background-size: cover;
 }
+canvas{
+  position: absolute;
+  border: 1px solid black;
+  height: 580px;
+  width: 1435px;
+  top: 50px;
+  left: 47px;
+}
 /* #enemy{
   display: none;
 } */
@@ -181,14 +189,7 @@ transform: scale(1,1) translate(0px, 0px);
   left: 90px;
   font-family:sans-serif;
 }
-canvas{
-  position: absolute;
-  border: 1px solid black;
-  height: 580px;
-  width: 1435px;
-  top: 50px;
-  left: 47px;
-}
+
 
 
 
