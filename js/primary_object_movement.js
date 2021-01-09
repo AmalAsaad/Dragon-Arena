@@ -13,31 +13,26 @@ const player = {
     framex:0,
     framey:0,
     speed:4,
-    moving:false
 }
 //enemy character Red tank //
 const redEnemy = {
     x:400,
     y:300,
-    width: 150,
-    height: 150,
+    width:96,
+    height:96,
     framex:0,
-    framey:0,
-    speed:1,
-    moving:true,
-    angle: 90,
-    moveAngle: 1,
-    
+    framey:3,
+    speed:Math.random()*2 
 };
 //main character //
 const playersprite = new Image();
 playersprite.src = "leviathan.png"
 //obstacle //
 const obstacle = new Image();
-obstacle.src="Obstcle.png"
+obstacle.src = "Obstcle.png"
 //enemy //
 const enemy = new Image();
-enemy.src = "enemy.png";
+enemy.src = "leviathan.png";
 
 //draw component of canvas //
 function drawsprite(img,sx,sy,sw,sh,dx,dy,dw,dh){
@@ -46,23 +41,24 @@ function drawsprite(img,sx,sy,sw,sh,dx,dy,dw,dh){
 
 function animate(){
     ctx.clearRect(0,0,canvas.width,canvas.height)
+    requestAnimationFrame(animate); 
     //player
     drawsprite(playersprite,player.width*player.framex,player.height*player.framey,player.width,player.height,player.x,player.y,player.width,player.height)
     moveplayer();
     //obstacle
-    drawsprite(obstacle,0,0,46,60,1000,400,46,60)
-    drawsprite(obstacle,184,0,46,60,100,300,88,99)
-    drawsprite(obstacle,46,0,46,60,500,378,70,70)
-    drawsprite(obstacle,92,0,46,60,591,451,85,106)
-    drawsprite(obstacle,138,0,46,60,323,166,76,106)
-    drawsprite(obstacle,184,0,46,60,1120,123,97,78)
-    drawsprite(obstacle,230,0,46,60,810,450,81,105)
+    drawsprite(obstacle,0,0,46,60,1000,400,46,60);
+    drawsprite(obstacle,184,0,46,60,100,300,88,99);
+    drawsprite(obstacle,46,0,46,60,500,378,70,70);
+    drawsprite(obstacle,92,0,46,60,591,451,85,106);
+    drawsprite(obstacle,138,0,46,60,323,166,76,106);
+    drawsprite(obstacle,184,0,46,60,1120,123,97,78);
+    drawsprite(obstacle,230,0,46,60,810,450,81,105);
+    drawsprite(obstacle,0,0,46,60,1000,100,46,80);
+    drawsprite(obstacle,0,0,46,60,50,250,46,60);
     //enemy
     drawsprite(enemy, redEnemy.width*redEnemy.framex , redEnemy.height*redEnemy.framey ,redEnemy.width, redEnemy.height, redEnemy.x,redEnemy.y,redEnemy.width,redEnemy.height);
     moveEnemy();
-
-
-    requestAnimationFrame(animate)
+      
 }
 animate();
 
@@ -96,10 +92,41 @@ function moveplayer(){
         player.framey = 2;
     }
 }
-function moveEnemy(){
-        redEnemy.angle += redEnemy.moveAngle * Math.PI / 180;
-        redEnemy.x += redEnemy.speed * 3;
-        redEnemy.y -= redEnemy.speed * 4;
-        player.framey = 3;
 
+// cut image direction 
+// 3 +y Up.
+// 1 -x Left.
+// 0 -y Down.
+// 2 +x Right.
+
+var direction = [0,1,2,3];
+
+var myVar = setInterval(moveEnemy, 1000);
+
+
+function moveEnemy(){
+    if(redEnemy.x < canvas.width && redEnemy.y < canvas.height){
+        for(let i = 0 ; i < 4; i++ ){
+            if(redEnemy.framey === 3){
+                redEnemy.y -= redEnemy.speed; 
+            }
+            //     redEnemy.framey = 2;
+            // }
+            // if(redEnemy.framey === 2){
+            //     redEnemy.x -= redEnemy.speed;      
+            // }
+
+        }
+        
+        // if(redEnemy.x === 400){
+        //     redEnemy.framey = 1;
+        //     redEnemy.y = 650;     
+        // }
+        // if(redEnemy.y === 650){
+        //     redEnemy.framey = 3;
+        //     redEnemy.y =240;    
+        // }  
+    }
+    
+     
 }
