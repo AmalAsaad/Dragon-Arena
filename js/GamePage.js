@@ -1,21 +1,39 @@
-//  var gameArea = document.getElementById("gameArea");
-//  var context = gameArea.getContext("2d");
-//  var img = document.getElementById("enemy");
-//  context.drawImage(img, 0.5,0.5);
-
-// //  context.fillRect(0,0,18,25);
 
 
 
+
+// =====================================================//
 function runGame(){
     location.assign("gamePage.html");
+    // myGameArea.start();
 }
+// var myGameArea = {
+//     canvas : document.createElement("canvas"),
+//     start : function() {
+//         this.canvas.width = 1279;
+//         this.canvas.height = 565;
+//         this.context = this.canvas.getContext("2d");
+//         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+//         this.interval = setInterval(updateGameArea, 20);
+//     },
+//     clear : function() {
+//         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+//     }
+// }
+// function updateGameArea() {
+//     myGameArea.clear();
+//     myGamePiece.update();
+// }
+
+
+
+//Ready go show up//
 $(".ready").toggle(1000);
 $(".go").show(1000).slideUp(3000);
 $("#pauseBtn").click();
 $("pause").toggle(1000);
 
-
+// puase menue //
 document.getElementById("pauseBtn").addEventListener("click",popUp);
 document.getElementById("close").addEventListener("click",popUp);
 var click = 0;
