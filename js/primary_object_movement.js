@@ -3,6 +3,28 @@ const ctx = canvas.getContext('2d');
 canvas.width = 1279;
 canvas.height = 565;
 
+////////Power up classes/////////
+////star///
+var timetodrawstar=0;
+const starphoto=new Image()
+starphoto.src="star.png";
+class Star{
+    constructor(){
+        this.x=Math.floor(Math.random() * 1000);
+        this.y=Math.floor(Math.random() * 500);
+    }
+    draw(){
+        ctx.drawImage(starphoto,this.x,this.y);
+    }
+}
+var star=new Star();
+function createStar(){
+    if(timetodrawstar %500 === 0){
+        star=new Star;
+    }
+    star.draw();
+    }
+////////////////////////////////////
 const keys = [];
 // main character Blue tank//
 const player = {
@@ -58,7 +80,9 @@ function animate(){
     //enemy
     drawsprite(enemy, redEnemy.width*redEnemy.framex , redEnemy.height*redEnemy.framey ,redEnemy.width, redEnemy.height, redEnemy.x,redEnemy.y,redEnemy.width,redEnemy.height);
     moveEnemy();
-      
+    ///star power up///
+    timetodrawstar++;
+    createStar();
 }
 animate();
 
