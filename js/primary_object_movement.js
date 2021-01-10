@@ -137,27 +137,30 @@ var direction = [0,1,2,3];
 
 // var myVar = setInterval(moveEnemy, 1000);
 
-
+//move enemy//
 function moveEnemy(){
     if(redEnemy.x < canvas.width - redEnemy.width && redEnemy.y < canvas.height - redEnemy.height){
         for(let i = 0 ; i < 4; i++ ){
             if(redEnemy.framey === 3){
                 redEnemy.y -= redEnemy.speed; 
-                if(red === 30){ 
+                if(red === 20){ 
                     redEnemy.framey = 2;
-                }
-                if(red === 50){
-                    redEnemy.x -= redEnemy.speed;
                     red++;
                 }
-                
-                
-                // redEnemy.framey = 1;
-                // redEnemy.y = redEnemy.speed; 
-                // redEnemy.framey = 3;
-                // redEnemy.y =redEnemy.speed;  
+                if(red === 40 && redEnemy.framey === 2){
+                    redEnemy.x -= redEnemy.speed;
+                    red++;
+                    redEnemy.framey = 0;
+                }
+                if(red === 70 && redEnemy.framey === 0){
+                    redEnemy.y += redEnemy.speed;
+                    red++;
+                    redEnemy.framey = 1;
+                }
+                if(red === 90 && redEnemy.framey === 1){
+                    redEnemy.x += redEnemy.speed;
+                } 
             }
-
         } 
     }
     
