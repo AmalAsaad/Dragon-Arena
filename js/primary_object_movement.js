@@ -156,31 +156,24 @@ function moveplayer(){
 
 var direction = [0,1,2,3];
 
-var myVar = setInterval(moveEnemy, 1000);
+// var myVar = setInterval(moveEnemy, 1000);
 
 
 function moveEnemy(){
-    if(redEnemy.x < canvas.width && redEnemy.y < canvas.height){
+    if(redEnemy.x < canvas.width - redEnemy.width && redEnemy.y < canvas.height - redEnemy.height){
         for(let i = 0 ; i < 4; i++ ){
             if(redEnemy.framey === 3){
                 redEnemy.y -= redEnemy.speed; 
+                // redEnemy.x -= redEnemy.speed;
+                // redEnemy.framey = 2;
+                
+                // redEnemy.framey = 1;
+                // redEnemy.y = redEnemy.speed; 
+                // redEnemy.framey = 3;
+                // redEnemy.y =redEnemy.speed;  
             }
-            //     redEnemy.framey = 2;
-            // }
-            // if(redEnemy.framey === 2){
-            //     redEnemy.x -= redEnemy.speed;      
-            // }
 
-        }
-        
-        // if(redEnemy.x === 400){
-        //     redEnemy.framey = 1;
-        //     redEnemy.y = 650;     
-        // }
-        // if(redEnemy.y === 650){
-        //     redEnemy.framey = 3;
-        //     redEnemy.y =240;    
-        // }  
+        } 
     }
     
      
