@@ -5,7 +5,7 @@
 }
 
 body{
-    background-color: #3b5d3d;
+    background-color: #48adf0;
 }
 
 .container{
@@ -17,7 +17,7 @@ body{
     width: 100%;
 }
 .container span{
-    color: white;
+    color: rgb(11, 78, 42);
     text-transform: uppercase;
     display: block;
 }
@@ -27,7 +27,7 @@ body{
     font-size: 100px;
     font-weight: 700;
     margin-bottom: 20px;
-    background: #3b5d3d;
+    background: #b4f54b;
     position: relative;
     animation: text 3s 1;
 }
