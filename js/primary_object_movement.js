@@ -3,15 +3,24 @@ const ctx = canvas.getContext('2d');
 canvas.width = 1279;
 canvas.height = 565;
 
-////////Power up classes/////////
+////////Power up classes///////////////////
+//////general class to inherit from it//
+class PowerUp{
+    constructor(){
+        this.x=Math.floor(Math.random() * 1000);
+        this.y=Math.floor(Math.random() * 500);
+    }
+    static draw(){
+        // ctx.drawImage(starphoto,this.x,this.y);
+    }
+}
 ////star///
 var timetodrawstar=0;
 const starphoto=new Image()
 starphoto.src="star.png";
-class Star{
+class Star extends PowerUp{
     constructor(){
-        this.x=Math.floor(Math.random() * 1000);
-        this.y=Math.floor(Math.random() * 500);
+        super();
     }
     draw(){
         ctx.drawImage(starphoto,this.x,this.y);
@@ -28,10 +37,9 @@ function createStar(){
 var timetodrawlife=50;
 const lifephoto=new Image()
 lifephoto.src="heart.png";
-class Life{
+class Life extends PowerUp{
     constructor(){
-        this.x=Math.floor(Math.random() * 1000);
-        this.y=Math.floor(Math.random() * 500);
+        super();
     }
     draw(){
         ctx.drawImage(lifephoto,this.x,this.y);
