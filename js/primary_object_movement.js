@@ -19,10 +19,30 @@ class Star{
 }
 var star=new Star();
 function createStar(){
-    if(timetodrawstar %500 === 0){
+    if(timetodrawstar %200 === 0){
         star=new Star;
     }
     star.draw();
+    }
+////life///
+var timetodrawlife=50;
+const lifephoto=new Image()
+lifephoto.src="heart.png";
+class Life{
+    constructor(){
+        this.x=Math.floor(Math.random() * 1000);
+        this.y=Math.floor(Math.random() * 500);
+    }
+    draw(){
+        ctx.drawImage(lifephoto,this.x,this.y);
+    }
+}
+var life=new Life();
+function createLife(){
+    if(timetodrawlife %300 === 0){
+        life=new Life;
+    }
+    life.draw();
     }
 ////////////////////////////////////
 const keys = [];
@@ -83,6 +103,9 @@ function animate(){
     ///star power up///
     timetodrawstar++;
     createStar();
+    ///life power up///
+    timetodrawlife++;
+    createLife();
 }
 animate();
 
