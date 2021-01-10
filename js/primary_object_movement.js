@@ -137,7 +137,7 @@ var direction = [0,1,2,3];
 
 // var myVar = setInterval(moveEnemy, 1000);
 
-
+//move enemy//
 function moveEnemy(){
     if(redEnemy.x < canvas.width - redEnemy.width && redEnemy.y < canvas.height - redEnemy.height){
         for(let i = 0 ; i < 4; i++ ){
@@ -156,14 +156,11 @@ function moveEnemy(){
                     redEnemy.y += redEnemy.speed;
                     red++;
                     redEnemy.framey =1;
-
                 }
                 if(red === 100 && redEnemy.framey === 1){
-
                     redEnemy.x += redEnemy.speed;
                 } 
             }
-
         } 
     }
     
