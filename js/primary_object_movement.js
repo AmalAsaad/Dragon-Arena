@@ -145,17 +145,23 @@ function moveEnemy(){
                 redEnemy.y -= redEnemy.speed; 
                 if(red === 30){ 
                     redEnemy.framey = 2;
-                }
-                if(red === 50){
-                    redEnemy.x -= redEnemy.speed;
                     red++;
                 }
-                
-                
-                // redEnemy.framey = 1;
-                // redEnemy.y = redEnemy.speed; 
-                // redEnemy.framey = 3;
-                // redEnemy.y =redEnemy.speed;  
+                if(red === 50 && redEnemy.framey === 2){
+                    redEnemy.x -= redEnemy.speed;
+                    red++;
+                    redEnemy.framey = 0;
+                }
+                if(red === 70 && redEnemy.framey === 0){
+                    redEnemy.y += redEnemy.speed;
+                    red++;
+                    redEnemy.framey =1;
+
+                }
+                if(red === 100 && redEnemy.framey === 1){
+
+                    redEnemy.x += redEnemy.speed;
+                } 
             }
 
         } 
