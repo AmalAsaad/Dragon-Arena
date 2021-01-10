@@ -1,14 +1,12 @@
-
-
-
-
-// =====================================================//
 function runGame(){
     if(countMusic === 1){
         music.play();
     }
     location.assign("gamePage.html");
 }
+
+// =====================================================//
+
 
 
 //Ready go show up//
