@@ -3,13 +3,23 @@ const ctx = canvas.getContext('2d');
 canvas.width = 1279;
 canvas.height = 565;
 
-////////Power up classes/////////
-////star///
-var timetodrawstar=0;
-class Star{
+////////Power up classes//////////
+//////General Class of Power Ups//
+//////general class to inherit from it//
+class PowerUp{
     constructor(){
         this.x=Math.floor(Math.random() * 1000);
         this.y=Math.floor(Math.random() * 500);
+    }
+    static draw(){
+        // ctx.drawImage(starphoto,this.x,this.y);
+    }
+}
+////star///
+var timetodrawstar=0;
+class Star extends PowerUp{
+    constructor(){
+        super();
     }
     draw(){
         ctx.drawImage(starphoto,this.x,this.y);
@@ -17,10 +27,27 @@ class Star{
 }
 var star=new Star();
 function createStar(){
-    if(timetodrawstar %500 === 0){
+    if(timetodrawstar %200 === 0){
         star=new Star;
     }
     star.draw();
+}
+////Life///
+var timetodrawlife=0;
+class Life extends PowerUp{
+    constructor(){
+        super();
+    }
+    draw(){
+        ctx.drawImage(lifephoto,this.x,this.y);
+    }
+}
+var life=new Life();
+function createLife(){
+    if(timetodrawlife %300 === 0){
+        life=new Life;
+    }
+    life.draw();
 }
 ////////////////////////////////////
 // main character Blue tank//
@@ -57,6 +84,9 @@ enemy.src = "leviathan.png";
 //stars //
 const starphoto=new Image()
 starphoto.src="star.png";
+//Life //
+const lifephoto=new Image()
+lifephoto.src="heart.png";
 
 //draw component of canvas //
 function drawsprite(img,sx,sy,sw,sh,dx,dy,dw,dh){
@@ -93,6 +123,9 @@ function animate(){
     ///star power up///
     timetodrawstar++;
     createStar();
+    ///life power up///
+    timetodrawlife++;
+    createLife();
 }
 animate();
 
