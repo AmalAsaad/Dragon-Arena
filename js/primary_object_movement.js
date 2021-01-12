@@ -52,14 +52,89 @@ function createLife(){
 ////////////////////////////////////
 // main character Blue tank//
 const keys = [];
-const player = {
-    x:200,
-    y:200,
-    width: 96,
-    height: 96,
-    framex:0,
-    framey:0,
-    speed:4,
+// const player = {
+//     x:200,
+//     y:200,
+//     width: 96,
+//     height: 96,
+//     framex:0,
+//     framey:0,
+//     speed:4,
+// }
+class player{
+    constructor(){
+    this.x=200;
+    this.y=200
+    this.width=96
+    this.height=96
+    this.framex=0
+    this.framey=0
+    this.speed=4
+    this.radius = 40;
+    }
+}
+
+//obstacle
+class obstacle{
+    constructor(){
+        this.x = Math.floor(Math.random() * 801) ;
+        this.y = Math.floor(Math.random() * 501) ;
+        this.sx = Math.floor(Math.random()*7);
+        this.sy = 0;
+    }
+}
+//somehidden circle to calculate distance between our main object
+//and the other obstacles
+class hiddencircle{
+    constructor(){
+        this.radius = 30;
+        this.x = 0;
+        this.y = 0;
+        this.distance;
+    }
+
+    draw(){
+        ctx.fillStyle = 'blue';
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,this.radius,0,Math.PI*2)
+        ctx.fill();
+        ctx.closePath();
+        ctx.stroke();
+    }
+
+    collision(){
+        let distance_x = circle1.x      - this.x;
+        let distance_y = circle1.y     - this.y;
+        let radii_sum  = circle1.radius + this.radius;
+        if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum){
+            let length = Math.sqrt(distance_x * distance_x + distance_y * distance_y) || 1;
+            let unit_x = distance_x / length;
+            let unit_y = distance_y / length;
+            player1.x = (this.x + (radii_sum + 1) * unit_x) - 55;
+            player1.y = (this.y + (radii_sum + 1) * unit_y) - 50;
+            //console.log(collision);
+        }
+    }
+}
+
+const circlearray = [];
+const obstaclearray =[];
+function obsnum(){
+    for (let i = 0 ; i< 5 ; i++){
+        obstaclearray.push(new obstacle())
+        circlearray.push(new hiddencircle())
+        circlearray[i].x = obstaclearray[i].x +23;
+        circlearray[i].y = obstaclearray[i].y +23;
+    }
+}
+
+const player1 = new player();
+const circle1 = new hiddencircle();
+function playercircle(){
+    circle1.x = player1.x + 50;
+    circle1.y=player1.y + 55;
+    circle1.radius=49;
+    //circle1.draw();
 }
 //enemy character Red tank //
 var red = 0;
@@ -76,8 +151,8 @@ const redEnemy = {
 const playersprite = new Image();
 playersprite.src = "leviathan.png"
 //obstacle //
-const obstacle = new Image();
-obstacle.src = "Obstcle.png"
+const obst = new Image();
+obst.src = "Obstcle.png"
 //enemy //
 const enemy = new Image();
 enemy.src = "leviathan.png";
@@ -96,24 +171,25 @@ function drawsprite(img,sx,sy,sw,sh,dx,dy,dw,dh){
 
 function animate(){
     ctx.clearRect(0,0,canvas.width,canvas.height)
-    requestAnimationFrame(animate); 
+    
     //player
-    drawsprite(playersprite,player.width*player.framex,player.height*player.framey,player.width,player.height,player.x,player.y,player.width,player.height)
+    drawsprite(playersprite,player1.width*player1.framex,player1.height*player1.framey,player1.width,player1.height,player1.x,player1.y,player1.width,player1.height)
     moveplayer();
+    
     //obstacle
       //small rock
-    drawsprite(obstacle,0,0,46,60,1000,400,46,60);
-    drawsprite(obstacle,0,0,46,60,50,250,46,60);
-    drawsprite(obstacle,0,0,46,60,1000,100,46,80);
-       //big rock
-    drawsprite(obstacle,92,0,46,60,591,451,85,106);
-    drawsprite(obstacle,92,0,46,60,591,451,85,106);
-       //trees
-    drawsprite(obstacle,184,0,46,60,100,300,88,99);
-    drawsprite(obstacle,184,0,46,60,1120,100,88,90);
-    drawsprite(obstacle,46,0,46,60,500,378,70,70);
-    drawsprite(obstacle,138,0,46,60,323,166,76,106);
-    drawsprite(obstacle,230,0,46,60,810,450,81,105);
+    // drawsprite(obstacle,0,0,46,60,1000,400,46,60);
+    // drawsprite(obstacle,0,0,46,60,50,250,46,60);
+    // drawsprite(obstacle,0,0,46,60,1000,100,46,80);
+    //    //big rock
+    // drawsprite(obstacle,92,0,46,60,591,451,85,106);
+    // drawsprite(obstacle,92,0,46,60,591,451,85,106);
+    //    //trees
+    // drawsprite(obstacle,184,0,46,60,100,300,88,99);
+    // drawsprite(obstacle,184,0,46,60,1120,100,88,90);
+    // drawsprite(obstacle,46,0,46,60,500,378,70,70);
+    // drawsprite(obstacle,138,0,46,60,323,166,76,106);
+    // drawsprite(obstacle,230,0,46,60,810,450,81,105);
     
     
     //enemy
@@ -126,12 +202,27 @@ function animate(){
     ///life power up///
     timetodrawlife++;
     createLife();
+    for (let i =0 ; i<obstaclearray.length ; i++){
+        
+        
+        ctx.drawImage(obst,obstaclearray[i].sx*46,0,46,60,obstaclearray[i].x,obstaclearray[i].y,46,66)
+        circlearray[i].draw();
+        circlearray[i].collision();
+        // if (circlearray[i].distance < circlearray[i].radius + player1.radius){
+        //     player1.speed = 0;
+            
+            
+        // }
+    }
+    playercircle();
+    requestAnimationFrame(animate); 
 }
+obsnum()
 animate();
 
 window.addEventListener("keydown",function(e){
     keys[e.which] = true;
-    console.log(keys);
+    
 })
 window.addEventListener("keyup",function(e){
     delete keys[e.which];
@@ -139,24 +230,24 @@ window.addEventListener("keyup",function(e){
 
 
 function moveplayer(){
-    if (keys[38] && player.y>-16){
-        player.y -= player.speed;
-        player.framey = 3;
+    if (keys[38] && player1.y>-16){
+        player1.y -= player1.speed;
+        player1.framey = 3;
     }
 
-    if (keys[37] && player.x>0){
-        player.x -= player.speed;
-        player.framey = 1;
+    if (keys[37] && player1.x>0){
+        player1.x -= player1.speed;
+        player1.framey = 1;
     }
 
-    if (keys[40] &&  player.y<canvas.height - player.height){
-        player.y += player.speed;
-        player.framey = 0;
+    if (keys[40] &&  player1.y<canvas.height - player1.height){
+        player1.y += player1.speed;
+        player1.framey = 0;
     }
 
-    if (keys[39] && player.x<canvas.width - player.width){
-        player.x += player.speed;
-        player.framey = 2;
+    if (keys[39] && player1.x<canvas.width - player1.width){
+        player1.x += player1.speed;
+        player1.framey = 2;
     }
 }
 
