@@ -77,9 +77,9 @@ class player{
 //obstacle
 class obstacle{
     constructor(){
-        this.x = Math.floor(Math.random() * 801) ;
-        this.y = Math.floor(Math.random() * 501) ;
-        this.sx = Math.floor(Math.random()*7);
+        this.x = 0 ;
+        this.y = 0 ;
+        this.sx = Math.floor(Math.random()*6);
         this.sy = 0;
     }
 }
@@ -103,37 +103,40 @@ class hiddencircle{
     }
 
     collision(){
-        let distance_x = circle1.x      - this.x;
-        let distance_y = circle1.y     - this.y;
-        let radii_sum  = circle1.radius + this.radius;
+        let distance_x = player1.x      - this.x;
+        let distance_y = player1.y     - this.y;
+        let radii_sum  = player1.radius + this.radius;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum){
             let length = Math.sqrt(distance_x * distance_x + distance_y * distance_y) || 1;
             let unit_x = distance_x / length;
             let unit_y = distance_y / length;
-            player1.x = (this.x + (radii_sum + 1) * unit_x) - 55;
-            player1.y = (this.y + (radii_sum + 1) * unit_y) - 50;
-            //console.log(collision);
+            player1.x = this.x + (radii_sum + 1) * unit_x ;
+            player1.y = (this.y + (radii_sum + 1) * unit_y) ;
         }
     }
 }
 
 const circlearray = [];
 const obstaclearray =[];
+const obsx = [300,400,800,975];
+const obsy = [100,350,250,400]
 function obsnum(){
-    for (let i = 0 ; i< 5 ; i++){
+    for (let i = 0 ; i< 4 ; i++){
         obstaclearray.push(new obstacle())
         circlearray.push(new hiddencircle())
-        circlearray[i].x = obstaclearray[i].x +23;
-        circlearray[i].y = obstaclearray[i].y +23;
+        circlearray[i].x = obsx[i];
+        circlearray[i].y = obsy[i];
+        obstaclearray[i].x = obsx[i];
+        obstaclearray[i].y = obsy[i];
     }
 }
 
 const player1 = new player();
 const circle1 = new hiddencircle();
 function playercircle(){
-    circle1.x = player1.x + 50;
-    circle1.y=player1.y + 55;
-    circle1.radius=49;
+    circle1.x = player1.x;
+    circle1.y= player1.y;
+    circle1.radius=66;
     //circle1.draw();
 }
 //enemy character Red tank //
@@ -205,8 +208,8 @@ function animate(){
     for (let i =0 ; i<obstaclearray.length ; i++){
         
         
-        ctx.drawImage(obst,obstaclearray[i].sx*46,0,46,60,obstaclearray[i].x,obstaclearray[i].y,46,66)
-        circlearray[i].draw();
+        ctx.drawImage(obst,obstaclearray[i].sx*46,0,46,60,obstaclearray[i].x,obstaclearray[i].y,92,132)
+        //circlearray[i].draw();
         circlearray[i].collision();
         // if (circlearray[i].distance < circlearray[i].radius + player1.radius){
         //     player1.speed = 0;
