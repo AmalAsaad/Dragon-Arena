@@ -173,7 +173,6 @@ var direction = [0,1,2,3];
 //move enemy//
 function moveEnemy(){
     if(redEnemy.x < canvas.width - redEnemy.width && redEnemy.y < canvas.height - redEnemy.height){
-        for(let i = 0 ; i < 4; i++ ){
             if(redEnemy.framey === 3){
                 redEnemy.y -= redEnemy.speed; 
                 if(red ===  20){ 
@@ -191,6 +190,5 @@ function moveEnemy(){
                     redEnemy.x += redEnemy.speed;
                 } 
             }
-        } 
     }    
 }
