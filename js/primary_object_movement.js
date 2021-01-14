@@ -7,6 +7,8 @@ const keys = [];
 const circlearray = [];
 const obstaclearray =[];
 const enemies = [];
+const heart = [];
+const starr = [];
 var timetodrawstar=0;
 var timetodrawlife=0;
 var enemycounter =0 ;
@@ -53,12 +55,16 @@ class PowerUp{
     constructor(){
         this.x=Math.floor(Math.random() * 1000);
         this.y=Math.floor(Math.random() * 500);
+        this.distance;
     }
     static draw(){
         // ctx.drawImage(starphoto,this.x,this.y);
     }
 }
 ////star///
+
+
+
 class Star extends PowerUp{
     constructor(){
         super();
@@ -67,14 +73,35 @@ class Star extends PowerUp{
         ctx.drawImage(starphoto,this.x,this.y);
     }
 }
-var star=new Star();
+//var star=new Star();
+starr.push(new Star);
 function createStar(){
-    if(timetodrawstar %200 === 0){
-        star=new Star;
+    if(timetodrawstar %300 === 0){
+             //star=new Star;
+                    if(starr.length===1){
+                        starr.splice(0,1);
+                    }
+                    starr.push(new Star());
     }
-    star.draw();
-}
+    if (starr.length>0){
+        let distance_x = (player1.x+25)      - starr[0].x;
+        let distance_y = (player1.y+25)     - starr[0].y;
+        let radii_sum  = (player1.radius) + 20;
+                    if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum){
+                            starr.splice(0,1);
+                    }
+    }
+
+    if (starr.length>0){
+        starr[0].draw();
+    }
+        
+    }
+    
+
 ////Life///
+
+
 class Life extends PowerUp{
     constructor(){
         super();
@@ -83,13 +110,33 @@ class Life extends PowerUp{
         ctx.drawImage(lifephoto,this.x,this.y);
     }
 }
-var life=new Life();
+//var life=new Life();
+heart.push(new Life);
 function createLife(){
-    if(timetodrawlife %300 === 0){
-        life=new Life;
+
+    if(timetodrawlife %200 === 0){
+        //life=new Life;
+                    if(heart.length===1){
+                        heart.splice(0,1);
+                    }
+                    heart.push(new Life());
     }
-    life.draw();
+
+    if (heart.length>0){
+        let distance_x = (player1.x+25)      - heart[0].x;
+        let distance_y = (player1.y+25)     - heart[0].y;
+        let radii_sum  = (player1.radius) + 11;
+                    if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum){
+                            heart.splice(0,1);
+                    }
+    }
+        
+    if (heart.length>0){
+        heart[0].draw();
+    }
+    
 }
+
 // main character Blue tank class//
 class player{
     constructor(){
@@ -221,8 +268,8 @@ function obsnum(){
         circlearray.push(new hiddencircle())
         circlearray[i].x = obsx[i];
         circlearray[i].y = obsy[i];
-        obstaclearray[i].x = obsx[i];
-        obstaclearray[i].y = obsy[i];
+        obstaclearray[i].x = obsx[i]+15;
+        obstaclearray[i].y = obsy[i]-25;
     }
 }
 
@@ -233,7 +280,7 @@ const circle1 = new hiddencircle();
 function playercircle(){
     circle1.x = player1.x;
     circle1.y= player1.y;
-    circle1.radius=66;
+    circle1.radius=33;
     //circle1.draw();
 }
 
@@ -268,9 +315,10 @@ function loop(){
     ///life power up///
     timetodrawlife++;
     createLife();
+
     //obstacles
-    for (let i =0 ; i<obstaclearray.length ; i++){    
-        ctx.drawImage(obst,obstaclearray[i].sx*46,0,46,60,obstaclearray[i].x,obstaclearray[i].y,92,132)
+    for (let i =0 ; i<obstaclearray.length ; i++){
+        ctx.drawImage(obst,obstaclearray[i].sx*46,0,46,60,obstaclearray[i].x,obstaclearray[i].y,75,132)
         //circlearray[i].draw();
         circlearray[i].collision();
         // if (circlearray[i].distance < circlearray[i].radius + player1.radius){
