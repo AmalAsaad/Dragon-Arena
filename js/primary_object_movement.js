@@ -11,9 +11,10 @@ const heart = [];
 const starr = [];
 var timetodrawstar=0;
 var timetodrawlife=0;
-var enemycounter =0 ;
+var enemycounter = 3 ;
 var setUpEnemy = true;
-var totalEnemies = Math.floor(Math.random()*10)+5;
+var totalEnemies = 5; 
+// Math.floor(Math.random()*10)+5;
 const obsx = [300,400,800,975];
 const obsy = [100,350,250,400];
 
@@ -84,8 +85,8 @@ function createStar(){
                     starr.push(new Star());
     }
     if (starr.length>0){
-        let distance_x = (player1.x+25)      - starr[0].x;
-        let distance_y = (player1.y+25)     - starr[0].y;
+        let distance_x = (player1.x+25) - starr[0].x;
+        let distance_y = (player1.y+25) - starr[0].y;
         let radii_sum  = (player1.radius) + 20;
                     if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum){
                             starr.splice(0,1);
@@ -100,8 +101,6 @@ function createStar(){
     
 
 ////Life///
-
-
 class Life extends PowerUp{
     constructor(){
         super();
@@ -123,8 +122,8 @@ function createLife(){
     }
 
     if (heart.length>0){
-        let distance_x = (player1.x+25)      - heart[0].x;
-        let distance_y = (player1.y+25)     - heart[0].y;
+        let distance_x = (player1.x+25) - heart[0].x;
+        let distance_y = (player1.y+25) - heart[0].y;
         let radii_sum  = (player1.radius) + 11;
                     if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum){
                             heart.splice(0,1);
@@ -167,15 +166,15 @@ class redEnemy{
         ctx.drawImage(enemy, this.w*this.framex ,this.h*this.framey ,this.w, this.h, this.x,this.y,this.w,this.h);
     }
     move(){
-        if(this.framey===0){
+        if(this.framey === 0){
             this.y += this.yspeed;
-            if(this.y>=canvas.height - this.h){
-                this.framey = Math.floor(Math.random() * 4);
-                this.x += this.xspeed;
-                this.x -= this.xspeed;
-                this.y += this.xspeed;
-                this.y -= this.xspeed;
-            }
+                if(this.y>=canvas.height - this.h){
+                    this.framey = Math.floor(Math.random() * 4);
+                    this.x += this.xspeed;
+                    this.x -= this.xspeed;
+                    this.y += this.xspeed;
+                    this.y -= this.xspeed;
+                }    
         }
         if(this.framey === 1){
             this.x -= this.xspeed;
@@ -356,11 +355,12 @@ function moveplayer(){
 //create enemies 
 function makeEnemies(){
     var enemyangle = 90;
-    const gap = Math.floor(Math.random() * 100)+3;
+    // const gap = Math.floor(Math.random() * 100)+3;
+    const gap = 100;
     var enemyW = 96;
     var enemyH = 96;
     var enemyXpos = enemycounter + enemyW + gap*enemycounter;
-    var enemyYpos= enemycounter + enemyH + gap*enemycounter;
+    var enemyYpos = enemycounter + enemyH + gap;
     var enemyFramex = 0;
     var enemyFramey = Math.floor(Math.random() * 4);
     var enemyXspeed = Math.floor(Math.random()*10)+4;
