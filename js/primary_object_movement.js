@@ -150,8 +150,75 @@ class player{
     this.radius = 40;
     }
 }
-////main character///
-const player1 = new player();
+//enemy class //
+class redEnemy{
+    constructor(x,y,h,w,xspeed,yspeed,framex,framey,angle){
+        this.x=x;
+        this.y=y;
+        this.h=h;
+        this.w=w;
+        this.framex=framex;
+        this.framey=framey;
+        this.xspeed=xspeed;
+        this.yspeed=yspeed;
+        this.angle =angle;
+    }
+    draw(){
+        ctx.drawImage(enemy, this.w*this.framex ,this.h*this.framey ,this.w, this.h, this.x,this.y,this.w,this.h);
+    }
+    move(){
+        if(this.framey===0){
+            this.y += this.yspeed;
+            if(this.y>=canvas.height - this.h){
+                this.framey = Math.floor(Math.random() * 4);
+                this.x += this.xspeed;
+                this.x -= this.xspeed;
+                this.y += this.xspeed;
+                this.y -= this.xspeed;
+            }
+        }
+        if(this.framey === 1){
+            this.x -= this.xspeed;
+            if(this.x<=0 || this.x + this.w >= canvas.width ){
+                this.framey = Math.floor(Math.random() * 4);
+                this.x += this.xspeed;
+                this.x -= this.xspeed;
+                this.y += this.xspeed;
+                this.y -= this.xspeed;
+            }
+        }
+        if(this.framey === 2){
+            this.x += this.xspeed;
+            if(this.x>=canvas.width - this.w){
+                this.framey =Math.floor(Math.random() * 4);
+                this.x += this.xspeed;
+                this.x -= this.xspeed;
+                this.y += this.xspeed;
+                this.y -= this.xspeed;
+            }
+        }
+        if(this.framey === 3){
+            this.y -= this.xspeed;
+            if(this.y <= -16){
+                this.framey = Math.floor(Math.random() * 4);
+                this.x += this.xspeed;
+                this.x -= this.xspeed;
+                this.y += this.xspeed;
+                this.y -= this.xspeed;
+                
+            }
+        }
+        // if(this.x + this.w >= canvas.width || this.x <= 0){
+        //     // this.x = 0 - this.w;
+        //     this.xspeed *= -1;
+        //     // this.xspeed = Math.floor(Math.random()*10+5);
+        // }
+        // if(this.y >canvas.height){
+        //     this.y = 0 - this.h;
+        //     this.yspeed = Math.floor(Math.random()*10+5);
+        // }
+    }
+}
 
 ///Bullet///
 class  Bullet{
@@ -227,6 +294,7 @@ function obsnum(){
     }
 }
 
+const player1 = new player();
 const circle1 = new hiddencircle();
 
 function playercircle(){
