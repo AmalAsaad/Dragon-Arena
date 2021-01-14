@@ -1,9 +1,54 @@
-const canvas = document.getElementById("canvas1");
-const ctx = canvas.getContext('2d');
-canvas.width = 1279;
-canvas.height = 565;
+// cut image direction 
+// 3 +y Up.
+// 1 -x Left.
+// 0 -y Down.
+// 2 +x Right.
+const keys = [];
+const circlearray = [];
+const obstaclearray =[];
+const enemies = [];
+const heart = [];
+const starr = [];
+var timetodrawstar=0;
+var timetodrawlife=0;
+var enemycounter =0 ;
+var setUpEnemy = true;
+var totalEnemies = Math.floor(Math.random()*10)+5;
+const obsx = [300,400,800,975];
+const obsy = [100,350,250,400];
 
-////////Power up classes//////////
+//events on arrows for player movement//
+window.addEventListener("keydown",function(e){
+    keys[e.which] = true;   
+})
+window.addEventListener("keyup",function(e){
+    delete keys[e.which];
+})
+// update canvas
+window.onload = function(){
+    canvas = document.getElementById("canvas1"); 
+    ctx = canvas.getContext('2d');
+    setInterval(loop,1000/50);
+}
+/// images ///
+//player //
+const playersprite = new Image();
+playersprite.src = "leviathan.png"
+//obstacle //
+const obst = new Image();
+obst.src = "Obstcle.png"
+//enemy //
+const enemy = new Image();
+enemy.src = "leviathan.png";
+//stars //
+const starphoto=new Image()
+starphoto.src="star.png";
+//Life //
+const lifephoto=new Image()
+lifephoto.src="heart.png";
+
+
+//Power up classes//
 //////General Class of Power Ups//
 //////general class to inherit from it//
 class PowerUp{
@@ -17,8 +62,9 @@ class PowerUp{
     }
 }
 ////star///
-var timetodrawstar=0;
-const starr = [];
+
+
+
 class Star extends PowerUp{
     constructor(){
         super();
@@ -54,8 +100,8 @@ function createStar(){
     
 
 ////Life///
-var timetodrawlife=0;
-const heart = [];
+
+
 class Life extends PowerUp{
     constructor(){
         super();
@@ -91,8 +137,7 @@ function createLife(){
     
 }
 
-// main character Blue tank//
-const keys = [];
+// main character Blue tank class//
 class player{
     constructor(){
     this.x=200;
@@ -147,7 +192,6 @@ class hiddencircle{
         this.y = 0;
         this.distance;
     }
-
     draw(){
         ctx.fillStyle = 'blue';
         ctx.beginPath();
@@ -158,8 +202,8 @@ class hiddencircle{
     }
 
     collision(){
-        let distance_x = player1.x      - this.x;
-        let distance_y = player1.y     - this.y;
+        let distance_x = player1.x - this.x;
+        let distance_y = player1.y  - this.y;
         let radii_sum  = player1.radius + this.radius;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum){
             let length = Math.sqrt(distance_x * distance_x + distance_y * distance_y) || 1;
@@ -171,10 +215,7 @@ class hiddencircle{
     }
 }
 
-const circlearray = [];
-const obstaclearray =[];
-const obsx = [300,400,800,975];
-const obsy = [100,350,250,400]
+//obstacle sum//
 function obsnum(){
     for (let i = 0 ; i< 4 ; i++){
         obstaclearray.push(new obstacle())
@@ -186,52 +227,23 @@ function obsnum(){
     }
 }
 
-
 const circle1 = new hiddencircle();
+
 function playercircle(){
     circle1.x = player1.x;
     circle1.y= player1.y;
     circle1.radius=33;
     //circle1.draw();
 }
-//enemy character Red tank //
-var red = 0;
-const redEnemy = {
-    x:400,
-    y:300,
-    width:96,
-    height:96,
-    framex:0,
-    framey:3,
-    speed:Math.random()*3 
-};
-//main character //
-const playersprite = new Image();
-playersprite.src = "leviathan.png"
-//obstacle //
-const obst = new Image();
-obst.src = "Obstcle.png"
-//enemy //
-const enemy = new Image();
-enemy.src = "leviathan.png";
-//stars //
-const starphoto=new Image()
-starphoto.src="star.png";
-//Life //
-const lifephoto=new Image()
-lifephoto.src="heart.png";
 
 //draw component of canvas //
 function drawsprite(img,sx,sy,sw,sh,dx,dy,dw,dh){
-    ctx.drawImage(img,sx,sy,sw,sh,dx,dy,dw,dh)
+    ctx.drawImage(img,sx,sy,sw,sh,dx,dy,dw,dh);
 }
 
 /////create bullet////
 var bullet=new Bullet(player1.x+player1.width/2,player1.y+player1.height/2,5,'green',{x:0,y:10});
 var bullets=[bullet];
-// window.addEventListener("click",()=>{
-//     bullets.push(new Bullet(player1.x,player1.y,5,'red',{x:1,y:1}))
-// })
 document.body.onkeyup = function(e){
     if(e.keyCode == 32){
         if(player1.framey===0){
@@ -246,73 +258,54 @@ document.body.onkeyup = function(e){
         else if (player1.framey===1){
             bullets.push(new Bullet(player1.x,player1.y+player1.height/2,5,'green',{x:-10,y:0}))
         }
-    }}
-//////////Our main canvas drawing    
-function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height)
+    }
+}
+//////////Our main canvas drawing        
+function loop(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
     
     ///bullet
     bullets.forEach(bullet =>{
         bullet.update();
     })
-    
     //player
     drawsprite(playersprite,player1.width*player1.framex,player1.height*player1.framey,player1.width,player1.height,player1.x,player1.y,player1.width,player1.height)
-    moveplayer();
-    
-    //obstacle
-      //small rock
-    // drawsprite(obstacle,0,0,46,60,1000,400,46,60);
-    // drawsprite(obstacle,0,0,46,60,50,250,46,60);
-    // drawsprite(obstacle,0,0,46,60,1000,100,46,80);
-    //    //big rock
-    // drawsprite(obstacle,92,0,46,60,591,451,85,106);
-    // drawsprite(obstacle,92,0,46,60,591,451,85,106);
-    //    //trees
-    // drawsprite(obstacle,184,0,46,60,100,300,88,99);
-    // drawsprite(obstacle,184,0,46,60,1120,100,88,90);
-    // drawsprite(obstacle,46,0,46,60,500,378,70,70);
-    // drawsprite(obstacle,138,0,46,60,323,166,76,106);
-    // drawsprite(obstacle,230,0,46,60,810,450,81,105);
-    
-    
+    moveplayer();    
+
     //enemy
-    drawsprite(enemy, redEnemy.width*redEnemy.framex , redEnemy.height*redEnemy.framey ,redEnemy.width, redEnemy.height, redEnemy.x,redEnemy.y,redEnemy.width,redEnemy.height);
-    red++ ;
-    moveEnemy();
+    if(setUpEnemy){
+        for(var i =0 ; i<totalEnemies ; i++ ){
+            makeEnemies();
+        }
+        setUpEnemy = false;
+    }
+    if(enemies.length>0){
+        enemies.forEach(function(enemy,i){
+            enemy.draw();
+            enemy.move();
+        });
+    }
     ///star power up///
     timetodrawstar++;
     createStar();
     ///life power up///
     timetodrawlife++;
     createLife();
+
+    //obstacles
     for (let i =0 ; i<obstaclearray.length ; i++){
-        
-        
         ctx.drawImage(obst,obstaclearray[i].sx*46,0,46,60,obstaclearray[i].x,obstaclearray[i].y,75,132)
         //circlearray[i].draw();
         circlearray[i].collision();
         // if (circlearray[i].distance < circlearray[i].radius + player1.radius){
-        //     player1.speed = 0;
-            
-            
+        //     player1.speed = 0;            
         // }
     }
     playercircle();
-    requestAnimationFrame(animate); 
 }
 obsnum()
-animate();
 
-window.addEventListener("keydown",function(e){
-    keys[e.which] = true;
-    
-})
-window.addEventListener("keyup",function(e){
-    delete keys[e.which];
-})
-
-
+//player move
 function moveplayer(){
     if (keys[38] && player1.y>-16){
         player1.y -= player1.speed;
@@ -334,43 +327,20 @@ function moveplayer(){
         player1.framey = 2;
     }
 }
-
-// cut image direction 
-// 3 +y Up.
-// 1 -x Left.
-// 0 -y Down.
-// 2 +x Right.
-
-var direction = [0,1,2,3];
-
-// var myVar = setInterval(moveEnemy, 1000);
-
-//move enemy//
-function moveEnemy(){
-    if(redEnemy.x < canvas.width - redEnemy.width && redEnemy.y < canvas.height - redEnemy.height){
-        for(let i = 0 ; i < 4; i++ ){
-            if(redEnemy.framey === 3){
-                redEnemy.y -= redEnemy.speed; 
-                if(red === 20){ 
-                    redEnemy.framey = 2;
-                    red++;
-                }
-                if(red === 40 && redEnemy.framey === 2){
-                    redEnemy.x -= redEnemy.speed;
-                    red++;
-                    redEnemy.framey = 0;
-                }
-                if(red === 70 && redEnemy.framey === 0){
-                    redEnemy.y += redEnemy.speed;
-                    red++;
-                    redEnemy.framey = 1;
-                }
-                if(red === 90 && redEnemy.framey === 1){
-                    redEnemy.x += redEnemy.speed;
-                } 
-            }
-        } 
-    }
-    
-     
+//create enemies 
+function makeEnemies(){
+    var enemyangle = 90;
+    const gap = Math.floor(Math.random() * 100)+3;
+    var enemyW = 96;
+    var enemyH = 96;
+    var enemyXpos = enemycounter + enemyW + gap*enemycounter;
+    var enemyYpos= enemycounter + enemyH + gap*enemycounter;
+    var enemyFramex = 0;
+    var enemyFramey = Math.floor(Math.random() * 4);
+    var enemyXspeed = Math.floor(Math.random()*10)+4;
+    var enemyYspeed = Math.floor(Math.random()*10)+4;
+    var enemy = new redEnemy(enemyXpos,enemyYpos,enemyH,enemyW,enemyXspeed,enemyYspeed,enemyFramex,enemyFramey,enemyangle);
+    enemycounter++;
+    enemies.push(enemy);
 }
+
