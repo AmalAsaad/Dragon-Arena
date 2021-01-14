@@ -220,7 +220,28 @@ class redEnemy{
     }
 }
 
-//obstacle class
+///Bullet///
+class  Bullet{
+    constructor(bx,by,br,bc,bs){
+        this.x=bx;
+        this.y=by;
+        this.radius=br;
+        this.color=bc;
+        this.speed=bs;
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);
+        ctx.fillStyle=this.color;
+        ctx.fill();
+    }
+    update(){
+        this.draw();
+        this.x+=this.speed.x;
+        this.y+=this.speed.y;
+    }
+}
+//obstacle
 class obstacle{
     constructor(){
         this.x = 0 ;
@@ -276,7 +297,6 @@ function obsnum(){
 const player1 = new player();
 const circle1 = new hiddencircle();
 
-
 function playercircle(){
     circle1.x = player1.x;
     circle1.y= player1.y;
@@ -284,14 +304,38 @@ function playercircle(){
     //circle1.draw();
 }
 
-
-
 //draw component of canvas //
 function drawsprite(img,sx,sy,sw,sh,dx,dy,dw,dh){
     ctx.drawImage(img,sx,sy,sw,sh,dx,dy,dw,dh);
 }
+
+/////create bullet////
+var bullet=new Bullet(player1.x+player1.width/2,player1.y+player1.height/2,5,'green',{x:0,y:10});
+var bullets=[bullet];
+document.body.onkeyup = function(e){
+    if(e.keyCode == 32){
+        if(player1.framey===0){
+            bullets.push(new Bullet(player1.x+player1.width/2,player1.y+player1.height/2,5,'green',{x:0,y:10}));
+        }
+        else if (player1.framey===2){
+            bullets.push(new Bullet(player1.x+player1.width,player1.y+player1.height/2,5,'green',{x:10,y:0}));
+        }
+        else if (player1.framey===3){
+            bullets.push(new Bullet(player1.x+player1.width/2,player1.y+player1.height/2,5,'green',{x:0,y:-10}));
+        }
+        else if (player1.framey===1){
+            bullets.push(new Bullet(player1.x,player1.y+player1.height/2,5,'green',{x:-10,y:0}))
+        }
+    }
+}
+//////////Our main canvas drawing        
 function loop(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
+    
+    ///bullet
+    bullets.forEach(bullet =>{
+        bullet.update();
+    })
     //player
     drawsprite(playersprite,player1.width*player1.framex,player1.height*player1.framey,player1.width,player1.height,player1.x,player1.y,player1.width,player1.height)
     moveplayer();    
@@ -328,8 +372,6 @@ function loop(){
     playercircle();
 }
 obsnum()
-
-
 
 //player move
 function moveplayer(){
