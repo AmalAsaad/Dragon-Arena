@@ -1,5 +1,7 @@
 #canvas1{
-    /* border: 1px solid black; */
+    border: 1px solid black;
+    width:"1279px" ;
+    height:"565px";
     position:absolute;
     top: 326%;
     left: 50%;

@@ -490,13 +490,7 @@ function animate() {
         //     player1.speed = 0;            
         // }
     }
-<<<<<<< HEAD
-    playercircle();
-=======
-    //playercircle();
-    drawLifeScore();
-    drawStarScore();
->>>>>>> c2997bea34c79e398272e1e4bb2f94828f354f56
+
     // request another animation loop
     requestAnimationFrame(animate);
 }
