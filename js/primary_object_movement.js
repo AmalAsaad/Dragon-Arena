@@ -201,6 +201,16 @@ class redEnemy {
         ctx.drawImage(enemy, this.w * this.framex, this.h * this.framey, this.w, this.h, this.x, this.y, this.w, this.h);
     }
 
+    enemyhit(){
+        let distance_x =(this.x+this.w/2) - (player1.x + player1.width/2);
+        let distance_y =(this.y+this.h/2) - (player1.y + player1.height/2);
+        let radii_sum = 80;
+        if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum){
+            return true;
+             console.log("collision");
+        }
+    }
+
     // || this.x + this.w >= canvas.width
     updateSpeed() {
         // 0 +y Down.
@@ -470,6 +480,9 @@ function animate() {
             enemy.updateSpeed();
             enemy.draw();
             enemy.move();
+            // if(enemy.enemyhit()){
+            //     enemies.splice(i,1);
+            // };
         });
     }
     ///star power up///
