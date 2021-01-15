@@ -27,7 +27,7 @@ var timetodrawstar = 0;
 var timetodrawlife = 0;
 var enemycounter = 3;
 var setUpEnemy = true;
-var totalEnemies = Math.floor(Math.random()*10)+1;
+var totalEnemies =1;
 // Math.floor(Math.random()*10)+5;
 const obsx = [300, 400, 800, 975];
 const obsy = [100, 350, 250, 400];
@@ -162,6 +162,15 @@ class player {
     }
 }
 
+//get random value in range of 2 values
+
+var minH = Math.floor(this.y);
+var maxH = Math.floor(canvas.height);
+var rangeH = Math.floor(Math.random() * (maxH - minH) + minH);
+var minW = Math.ceil(this.x);
+var maxW = Math.floor(canvas.width);
+var rangeW = Math.floor(Math.random() * (maxW - minW) + minW); //The maximum is exclusive and the minimum is inclusive
+
 //enemy class //
 class redEnemy {
     constructor(x, y, h, w, xspeed, yspeed, framex, framey, angle) {
@@ -178,6 +187,7 @@ class redEnemy {
     draw() {
         ctx.drawImage(enemy, this.w * this.framex, this.h * this.framey, this.w, this.h, this.x, this.y, this.w, this.h);
     }
+    
     // || this.x + this.w >= canvas.width
     updateSpeed() {
         // 0 +y Down.
@@ -211,14 +221,9 @@ class redEnemy {
     }
     move() {
         // 0 +y Down.
-        // var min = Math.ceil(this.x);
-
-        // var max = Math.floor(canvas.height);
-    
-        // var value = Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
         if (this.framey === 0) {
             this.y += this.yspeed;
-            if (this.y >= canvas.height - this.h - 100) {
+            if (this.y >= canvas.height - this.h - Math.floor(Math.random()*200)+50) {
                 // 2 +x Right.
                 this.framey = 2;
                 if (this.xspeed < 0) {
@@ -229,7 +234,7 @@ class redEnemy {
         // 2 +x Right.
         else if (this.framey === 2) {
             this.x += this.xspeed;
-            if (this.x >= canvas.width - this.w -300) {
+            if (this.x >= canvas.width - this.w - Math.floor(Math.random()*200)+20) {
                 // 3 -y Up.
                 this.framey = 3;
                 if (this.yspeed > 0) {
@@ -240,7 +245,7 @@ class redEnemy {
         // 1 -x Left.
         else if (this.framey == 1) {
             this.x += this.xspeed;
-            if (this.x <= 0 -200 ) {
+            if (this.x <= 0) {
                 // 0 +y Down.
                 this.framey = 0;
                 if (this.yspeed < 0) {
@@ -249,13 +254,11 @@ class redEnemy {
 
             }
             // this.x += this.xspeed;
-
         }
-
         // 3 -y Up.
         else if (this.framey === 3) {
             this.y += this.yspeed;
-            if (this.y <= 16 + 60) {
+            if (this.y <= 16) {
                 // 1 -x left.
                 this.framey = 1;
                 if (this.xspeed > 0) {
@@ -290,9 +293,31 @@ class obstacle {
         this.x = 0;
         this.y = 0;
         this.sx = Math.floor(Math.random() * 6);
-        this.sy = 0;
     }
 }
+
+///Bullet///
+class Bullet {
+    constructor(bx, by, br, bc, bs) {
+        this.x = bx;
+        this.y = by;
+        this.radius = br;
+        this.color = bc;
+        this.speed = bs;
+    }
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+    }
+    update() {
+        this.draw();
+        this.x += this.speed.x;
+        this.y += this.speed.y;
+    }
+}
+
 //somehidden circle to calculate distance between our main object
 //and the other obstacles
 class hiddencircle {
@@ -348,14 +373,38 @@ function playercircle() {
     //circle1.draw();
 }
 
-
-
 //draw component of canvas //
 function drawsprite(img, sx, sy, sw, sh, dx, dy, dw, dh) {
     ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
 }
+
+/////create bullet////
+var bullet = new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 5, 'green', { x: 0, y: 10 });
+var bullets = [bullet];
+document.body.onkeyup = function (e) {
+    if (e.keyCode == 32) {
+        if (player1.framey === 0) {
+            bullets.push(new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 5, 'green', { x: 0, y: 10 }));
+        }
+        else if (player1.framey === 2) {
+            bullets.push(new Bullet(player1.x + player1.width, player1.y + player1.height / 2, 5, 'green', { x: 10, y: 0 }));
+        }
+        else if (player1.framey === 3) {
+            bullets.push(new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 5, 'green', { x: 0, y: -10 }));
+        }
+        else if (player1.framey === 1) {
+            bullets.push(new Bullet(player1.x, player1.y + player1.height / 2, 5, 'green', { x: -10, y: 0 }))
+        }
+    }
+}
+//////////Our main canvas drawing        
 function loop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ///bullet
+    bullets.forEach(bullet => {
+        bullet.update();
+    })
     //player
     drawsprite(playersprite, player1.width * player1.framex, player1.height * player1.framey, player1.width, player1.height, player1.x, player1.y, player1.width, player1.height)
     moveplayer();
@@ -394,8 +443,6 @@ function loop() {
 }
 obsnum()
 
-
-
 //player move
 function moveplayer() {
     if (keys[38] && player1.y > -16) {
@@ -418,8 +465,6 @@ function moveplayer() {
         player1.framey = 2;
     }
 }
-
-//get random value in range of 2 values
 
 
 
