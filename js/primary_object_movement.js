@@ -18,22 +18,32 @@ var ctx = canvas.getContext('2d');
 //     console.log(`MouseX = ${​​​​mouse.x}​​​​, MouseY = ${​​​​mouse.y}​​​​`);
 // }​​​​)
 
-// animation will pause when paused==true
+//game sound effects
+var fxPowerup = new Audio("sound/powerup.m4a");
+var fxBullt = new Audio("sound/fxbullt.wav");
+var fxLife = new Audio("sound/life.wav");
+var fxObstacle = new Audio("sound/obstcale.wav");
+var play = new Audio("sound/music.mp3");
+
+//game variables
 var paused = false;
+var lifeScore = 1;
+var starScore = 0;
+var timetodrawstar = 0;
+var timetodrawlife = 0;
+var enemycounter = 3;
+var setUpEnemy = true;
+var totalEnemies = 3; // Math.floor(Math.random()*10)+5; if want generate random enemy each level
+
+// game array
+const obsx = [300, 400, 800, 975];
+const obsy = [100, 350, 250, 400];
 const keys = [];
 const circlearray = [];
 const obstaclearray = [];
 const enemies = [];
 const heart = [];
 const starr = [];
-var timetodrawstar = 0;
-var timetodrawlife = 0;
-var enemycounter = 3;
-var setUpEnemy = true;
-var totalEnemies = 1;
-// Math.floor(Math.random()*10)+5;
-const obsx = [300, 400, 800, 975];
-const obsy = [100, 350, 250, 400];
 
 //events on arrows for player movement//
 window.addEventListener("keydown", function (e) {
@@ -42,29 +52,28 @@ window.addEventListener("keydown", function (e) {
 window.addEventListener("keyup", function (e) {
     delete keys[e.which];
 })
+
 // update canvas
 window.onload = function () {
-        const audio = document.getElementById("audio");
-        audio.volume = 0.2;
-        audio.play();
     requestAnimationFrame(animate);
 }
-          /// images ///
+play.play();
+/// game images ///
 //player //
 const playersprite = new Image();
-playersprite.src = "leviathan.png"
+playersprite.src = "Img/leviathan.png"
 //obstacle //
 const obst = new Image();
-obst.src = "Obstcle.png"
+obst.src = "Img/Obstcle.png"
 //enemy //
 const enemy = new Image();
-enemy.src = "leviathan.png";
+enemy.src = "Img/leviathan.png";
 //stars //
 const starphoto = new Image()
-starphoto.src = "star.png";
+starphoto.src = "Img/star.png";
 //Life //
 const lifephoto = new Image()
-lifephoto.src = "heart.png";
+lifephoto.src = "Img/heart.png";
 
 
 //Power up classes//
@@ -90,11 +99,9 @@ class Star extends PowerUp {
         ctx.drawImage(starphoto, this.x, this.y);
     }
 }
-//var star=new Star();
 starr.push(new Star);
 function createStar() {
     if (timetodrawstar % 300 === 0) {
-        //star=new Star;
         if (starr.length === 1) {
             starr.splice(0, 1);
         }
@@ -106,6 +113,8 @@ function createStar() {
         let radii_sum = (player1.radius) + 20;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             starr.splice(0, 1);
+            fxPowerup.play();
+            starScore++;
         }
     }
 
@@ -143,6 +152,8 @@ function createLife() {
         let radii_sum = (player1.radius) + 11;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             heart.splice(0, 1);
+            fxLife.play();
+            lifeScore++;
         }
     }
 
@@ -161,7 +172,7 @@ class player {
         this.height = 96
         this.framex = 0
         this.framey = 0
-        this.speed = 4
+        this.speed = 5
         this.radius = 40;
     }
 }
@@ -350,6 +361,10 @@ class hiddencircle {
             let unit_y = distance_y / length;
             player1.x = this.x + (radii_sum + 1) * unit_x;
             player1.y = (this.y + (radii_sum + 1) * unit_y);
+            fxObstacle.play();
+            if (starScore > 0) {
+                starScore--;
+            }
         }
     }
 }
@@ -387,6 +402,7 @@ var bullet = new Bullet(player1.x + player1.width / 2, player1.y + player1.heigh
 var bullets = [bullet];
 document.body.onkeyup = function (e) {
     if (e.keyCode == 32) {
+        fxBullt.play();
         if (player1.framey === 0) {
             bullets.push(new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 5, 'green', { x: 0, y: 10 }));
         }
@@ -438,6 +454,7 @@ function animate() {
     timetodrawlife++;
     createLife();
 
+
     //obstacles
     for (let i = 0; i < obstaclearray.length; i++) {
         ctx.drawImage(obst, obstaclearray[i].sx * 46, 0, 46, 60, obstaclearray[i].x, obstaclearray[i].y, 75, 132)
@@ -448,6 +465,8 @@ function animate() {
         // }
     }
     playercircle();
+    drawLifeScore();
+    drawStarScore();
     // request another animation loop
     requestAnimationFrame(animate);
 }
@@ -476,5 +495,15 @@ function moveplayer() {
     }
 }
 
+function drawStarScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Star Score: " + starScore, 8, canvas.height);
+}
+function drawLifeScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Life Score: " + lifeScore, 1000, canvas.height);
+}
 
 
