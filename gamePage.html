@@ -10,7 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 </head>
 <body>
-    <canvas id="canvas1" width="1279" height="565"></canvas>
+    
     <section class="container1">
         <div class = "ready">
             <h1> Ready..! </h1>
@@ -62,15 +62,17 @@
         <div class = "red">
             <img  class = "base" src="Img/base-red.png" alt="Red score">
             <img  id = "redBtn" src="Img/button-red.png" alt="red score">
-            <p class = "score"></p>
+            <p id = "lifeScore" class = "score">1</p>
+            <img id = "life" src="Img/heart.png" alt="life">
         </div>
         <div class = "blue">
             <img  id = "blueBtn" src="Img/button-blue.png" alt="red">
             <img class = "base" src="Img/base-red.png" alt="blue score">
-            <p id = "blueScore" class = "score"></p>
+            <p id = "starScore" class = "score">0</p>
+            <img  id  = "star" src="Img/star.png" alt="star">
         </div>
     </section>
-   
+    <canvas id="canvas1" width="1279" height="565"></canvas>
     <script src="js/GamePage.js"></script>
     <script src="js/primary_object_movement.js"></script>
 </body>

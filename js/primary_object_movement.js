@@ -59,19 +59,15 @@ window.onload = function () {
 }
 
 /// game images ///
-//player //
+
 const playersprite = new Image();
 playersprite.src = "Img/leviathan.png"
-//obstacle //
 const obst = new Image();
 obst.src = "Img/Obstcle.png"
-//enemy //
 const enemy = new Image();
 enemy.src = "Img/leviathan.png";
-//stars //
 const starphoto = new Image()
 starphoto.src = "Img/star.png";
-//Life //
 const lifephoto = new Image()
 lifephoto.src = "Img/heart.png";
 
@@ -115,8 +111,9 @@ function createStar() {
         let radii_sum = (player1.radius) + 20;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             starr.splice(0, 1);
-            fxPowerup.play();
             starScore++;
+            starScoreStyle();
+
         }
     }
 
@@ -133,15 +130,13 @@ class Life extends PowerUp {
         super();
     }
     draw() {
-        ctx.drawImage(lifephoto, this.x, this.y,this.w,this.h);
+        ctx.drawImage(lifephoto, this.x, this.y, this.w, this.h);
     }
 }
-//var life=new Life();
 heart.push(new Life);
 function createLife() {
 
     if (timetodrawlife % 200 === 0) {
-        //life=new Life;
         if (heart.length === 1) {
             heart.splice(0, 1);
         }
@@ -154,8 +149,9 @@ function createLife() {
         let radii_sum = (player1.radius) + 11;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             heart.splice(0, 1);
-            fxLife.play();
             lifeScore++;
+            lifeScoreStyle();
+
         }
     }
 
@@ -165,7 +161,7 @@ function createLife() {
 
 }
 
-// main character Blue tank class//
+// main character class//
 class player {
     constructor() {
         this.x = 200;
@@ -378,7 +374,9 @@ class hiddencircle {
             fxObstacle.play();
             if (starScore > 0) {
                 starScore--;
+                $("#starScore").text(+starScore);
             }
+
         }
         for (let i = 0;i<enemies.length;i++){
             let distance_x = enemies[i].x - this.x;
@@ -492,9 +490,7 @@ function animate() {
         //     player1.speed = 0;            
         // }
     }
-    //playercircle();
-    drawLifeScore();
-    drawStarScore();
+
     // request another animation loop
     requestAnimationFrame(animate);
 }
@@ -523,22 +519,16 @@ function moveplayer() {
     }
 }
 
-function drawStarScore() {
-    ctx.font = "2em Arial";
-    ctx.fillStyle = "white";
-    // ctx.fillText("Star Score: " + starScore, 8, canvas.height);
-    ctx.fillText(+ starScore, 8, canvas.height);
-    ctx.drawImage(starphoto, 30, 533);
-
+function starScoreStyle() {
+    fxPowerup.play();
+    $("#starScore").text(+starScore);
+    $("#starScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
+    $("#star").css("animation-play-state"," running");
 
 }
-function drawLifeScore() {
-    ctx.font = "2em Arial";
-    ctx.fillStyle = "white";
-    // ctx.fillText("Life Score: " + lifeScore, 1000, canvas.height);
-    ctx.fillText(+ lifeScore, 1000, canvas.height);
-    ctx.drawImage(lifephoto, 1025, 537, 30, 30);
-
+function lifeScoreStyle() {
+    fxLife.play();
+    $("#lifeScore").text(+lifeScore);
+    $("#life").css("animation-play-state"," running");
+    $("#lifeScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
 }
-
-
