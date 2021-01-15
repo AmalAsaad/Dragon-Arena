@@ -59,19 +59,15 @@ window.onload = function () {
 }
 
 /// game images ///
-//player //
+
 const playersprite = new Image();
 playersprite.src = "Img/leviathan.png"
-//obstacle //
 const obst = new Image();
 obst.src = "Img/Obstcle.png"
-//enemy //
 const enemy = new Image();
 enemy.src = "Img/leviathan.png";
-//stars //
 const starphoto = new Image()
 starphoto.src = "Img/star.png";
-//Life //
 const lifephoto = new Image()
 lifephoto.src = "Img/heart.png";
 
@@ -117,6 +113,10 @@ function createStar() {
             starr.splice(0, 1);
             fxPowerup.play();
             starScore++;
+            $("#starScore").text(+starScore);
+            $("#star").animate(200, function(){
+                $(this).css("height","50px");     
+           });
         }
     }
 
@@ -136,12 +136,10 @@ class Life extends PowerUp {
         ctx.drawImage(lifephoto, this.x, this.y,this.w,this.h);
     }
 }
-//var life=new Life();
 heart.push(new Life);
 function createLife() {
 
     if (timetodrawlife % 200 === 0) {
-        //life=new Life;
         if (heart.length === 1) {
             heart.splice(0, 1);
         }
@@ -156,6 +154,7 @@ function createLife() {
             heart.splice(0, 1);
             fxLife.play();
             lifeScore++;
+            $("#lifeScore").text(+lifeScore);
         }
     }
 
@@ -165,7 +164,7 @@ function createLife() {
 
 }
 
-// main character Blue tank class//
+// main character class//
 class player {
     constructor() {
         this.x = 200;
@@ -366,7 +365,9 @@ class hiddencircle {
             fxObstacle.play();
             if (starScore > 0) {
                 starScore--;
+                $("#starScore").text(+starScore);
             }
+            
         }
     }
 }
@@ -467,8 +468,6 @@ function animate() {
         // }
     }
     playercircle();
-    drawLifeScore();
-    drawStarScore();
     // request another animation loop
     requestAnimationFrame(animate);
 }
@@ -495,24 +494,6 @@ function moveplayer() {
         player1.x += player1.speed;
         player1.framey = 2;
     }
-}
-
-function drawStarScore() {
-    ctx.font = "2em Arial";
-    ctx.fillStyle = "white";
-    // ctx.fillText("Star Score: " + starScore, 8, canvas.height);
-    ctx.fillText(+ starScore, 8, canvas.height);
-    ctx.drawImage(starphoto, 30, 533);
-
-
-}
-function drawLifeScore() {
-    ctx.font = "2em Arial";
-    ctx.fillStyle = "white";
-    // ctx.fillText("Life Score: " + lifeScore, 1000, canvas.height);
-    ctx.fillText(+ lifeScore, 1000, canvas.height);
-    ctx.drawImage(lifephoto, 1025, 537, 30, 30);
-
 }
 
 

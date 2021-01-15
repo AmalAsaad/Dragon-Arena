@@ -128,10 +128,14 @@ transform: scale(1,1) translate(0px, 0px);
   top: 20px;
   left: 65px;
   font-size: 2em;
+  font-style: Arial ; 
 }
-#blueScore{
-  position: absolute;
-  left: 175px;
+#starScore{
+  left: 200px;
+}
+#lifeScore{
+  left: 90px;
+
 }
 .red{
   position: absolute;
@@ -185,6 +189,18 @@ transform: scale(1,1) translate(0px, 0px);
   font-weight: bold;
   left: 90px;
   font-family:arial;
+}
+#star,#life{
+  position: absolute;
+  height: 40px;
+  bottom: 30px;
+  /* -webkit-animation: bounce 1s infinite; */
+}
+#life{
+  left: 220px;
+}
+#star{
+  left: 60px;
 }
 
 
