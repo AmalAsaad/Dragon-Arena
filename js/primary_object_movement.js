@@ -24,6 +24,10 @@ var fxBullt = new Audio("sound/fxbullt.wav");
 var fxLife = new Audio("sound/life.wav");
 var fxObstacle = new Audio("sound/obstcale.wav");
 var play = new Audio("sound/music.mp3");
+var fxWin = new Audio("sound/win.wav");
+var fxlose = new Audio("sound/gameOver.wav");
+
+
 
 //game variables
 var paused = false;
@@ -36,8 +40,8 @@ var setUpEnemy = true;
 var totalEnemies = 3; // Math.floor(Math.random()*10)+5; if want generate random enemy each level
 
 // game array
-const obsx = [300, 400, 800, 975,55,1150,1100,200];
-const obsy = [100, 350, 250, 400,77,450,200,460];
+const obsx = [300, 400, 800, 975, 55, 1150, 1100, 200];
+const obsy = [100, 350, 250, 400, 77, 450, 200, 460];
 const keys = [];
 const circlearray = [];
 const obstaclearray = [];
@@ -201,13 +205,13 @@ class redEnemy {
         ctx.drawImage(enemy, this.w * this.framex, this.h * this.framey, this.w, this.h, this.x, this.y, this.w, this.h);
     }
 
-    enemyhit(){
-        let distance_x =(this.x+this.w/2) - (player1.x + player1.width/2);
-        let distance_y =(this.y+this.h/2) - (player1.y + player1.height/2);
+    enemyhit() {
+        let distance_x = (this.x + this.w / 2) - (player1.x + player1.width / 2);
+        let distance_y = (this.y + this.h / 2) - (player1.y + player1.height / 2);
         let radii_sum = 80;
-        if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum){
+        if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             return true;
-             console.log("collision");
+            console.log("collision");
         }
     }
 
@@ -340,14 +344,14 @@ class Bullet {
         this.y += this.speed.y;
     }
 
-    killenemy(){
-        for (let i = 0;i<enemies.length;i++){
-            let distance_x =this.x - (enemies[i].x + enemies[i].w/2);
-            let distance_y =this.y - (enemies[i].y + enemies[i].h/2);
-            let radii_sum = 40+this.radius;
-            if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum){
-                bullets.splice(i,1)
-                 console.log("collision");
+    killenemy() {
+        for (let i = 0; i < enemies.length; i++) {
+            let distance_x = this.x - (enemies[i].x + enemies[i].w / 2);
+            let distance_y = this.y - (enemies[i].y + enemies[i].h / 2);
+            let radii_sum = 40 + this.radius;
+            if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
+                bullets.splice(i, 1)
+                console.log("collision");
             }
         }
     }
@@ -388,15 +392,15 @@ class hiddencircle {
             }
 
         }
-        for (let i = 0;i<enemies.length;i++){
+        for (let i = 0; i < enemies.length; i++) {
             let distance_x = enemies[i].x - this.x;
-            let distance_y = enemies[i].y -this.y;
+            let distance_y = enemies[i].y - this.y;
             let radii_sum = 40 + this.radius;
-            if (distance_x * distance_x + distance_y * distance_y <= radii_sum*radii_sum) {
+            if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
                 let length = Math.sqrt(distance_x * distance_x + distance_y * distance_y) || 1;
                 let unit_x = distance_x / length;
                 let unit_y = distance_y / length;
-                enemies[i].x = this.x + (radii_sum + 1 ) * unit_x;
+                enemies[i].x = this.x + (radii_sum + 1) * unit_x;
                 enemies[i].y = (this.y + (radii_sum + 1) * unit_y);
             }
         }
@@ -438,7 +442,7 @@ document.body.onkeyup = function (e) {
     if (e.keyCode == 32) {
         fxBullt.play();
         if (player1.framey === 0) {
-            bullets.push(new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2,11, 'green', { x: 0, y: 10 }));
+            bullets.push(new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 11, 'green', { x: 0, y: 10 }));
         }
         else if (player1.framey === 2) {
             bullets.push(new Bullet(player1.x + player1.width, player1.y + player1.height / 2, 11, 'green', { x: 10, y: 0 }));
@@ -536,12 +540,33 @@ function starScoreStyle() {
     fxPowerup.play();
     $("#starScore").text(+starScore);
     $("#starScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
-    $("#star").css("animation-play-state"," running");
+    $("#star").css("animation-play-state", " running");
+    Win();
 
 }
 function lifeScoreStyle() {
     fxLife.play();
     $("#lifeScore").text(+lifeScore);
-    $("#life").css("animation-play-state"," running");
+    $("#life").css("animation-play-state", " running");
     $("#lifeScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
+    Win();
+}
+function Win() {
+    if (starScore === 5 && lifeScore >= 5) {
+        fxWin.play();
+        swal("CONGRATULATIONS..!","YOU WIN","success",{
+            button: "To Next Level!",
+          })
+        .then((value) =>{
+            document.location.reload();
+            clearInterval(interval); // Needed for Chrome to end game
+          });
+    }
+}
+
+function gameOver(){
+    if(lifeScore === 2 ){
+        
+
+    }
 }

@@ -63,6 +63,22 @@ function backHome(){
     if(countMusic === 1){
         music.play();
     }
+    swal({
+        title: "Are you sure?",
+        text: "Once back, you will not be able to recover your Score!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("Poof! Your game level has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Your game level is safe!");
+        }
+      });
     location.assign("index.html");
 }
 document.getElementById("reset").addEventListener("click",runGame);
