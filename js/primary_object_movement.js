@@ -17,6 +17,9 @@ var ctx = canvas.getContext('2d');
 
 //     console.log(`MouseX = ${​​​​mouse.x}​​​​, MouseY = ${​​​​mouse.y}​​​​`);
 // }​​​​)
+
+// animation will pause when paused==true
+var paused = false;
 const keys = [];
 const circlearray = [];
 const obstaclearray = [];
@@ -27,7 +30,7 @@ var timetodrawstar = 0;
 var timetodrawlife = 0;
 var enemycounter = 3;
 var setUpEnemy = true;
-var totalEnemies =1;
+var totalEnemies = 1;
 // Math.floor(Math.random()*10)+5;
 const obsx = [300, 400, 800, 975];
 const obsy = [100, 350, 250, 400];
@@ -41,11 +44,9 @@ window.addEventListener("keyup", function (e) {
 })
 // update canvas
 window.onload = function () {
-
-    setInterval(loop, 1000 / 50);
+    requestAnimationFrame(animate);
 }
-console.log(canvas.width, canvas.height);
-/// images ///
+          /// images ///
 //player //
 const playersprite = new Image();
 playersprite.src = "leviathan.png"
@@ -187,7 +188,7 @@ class redEnemy {
     draw() {
         ctx.drawImage(enemy, this.w * this.framex, this.h * this.framey, this.w, this.h, this.x, this.y, this.w, this.h);
     }
-    
+
     // || this.x + this.w >= canvas.width
     updateSpeed() {
         // 0 +y Down.
@@ -223,7 +224,7 @@ class redEnemy {
         // 0 +y Down.
         if (this.framey === 0) {
             this.y += this.yspeed;
-            if (this.y >= canvas.height - this.h - Math.floor(Math.random()*200)+50) {
+            if (this.y >= canvas.height - this.h - Math.floor(Math.random() * 200) + 50) {
                 // 2 +x Right.
                 this.framey = 2;
                 if (this.xspeed < 0) {
@@ -234,7 +235,7 @@ class redEnemy {
         // 2 +x Right.
         else if (this.framey === 2) {
             this.x += this.xspeed;
-            if (this.x >= canvas.width - this.w - Math.floor(Math.random()*200)+20) {
+            if (this.x >= canvas.width - this.w - Math.floor(Math.random() * 200) + 20) {
                 // 3 -y Up.
                 this.framey = 3;
                 if (this.yspeed > 0) {
@@ -397,8 +398,12 @@ document.body.onkeyup = function (e) {
         }
     }
 }
-//////////Our main canvas drawing        
-function loop() {
+//////////start the animation loop       
+function animate() {
+    if (paused) {
+        return;
+    }
+    //animate anything
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     ///bullet
@@ -440,6 +445,8 @@ function loop() {
         // }
     }
     playercircle();
+    // request another animation loop
+    requestAnimationFrame(animate);
 }
 obsnum()
 

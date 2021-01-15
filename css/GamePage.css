@@ -10,19 +10,15 @@ body{
   height: 100px;
   background-size: cover;
 }
-/* canvas{
-  position: absolute;
-  border: 1px solid black;
-  height: 580px;
-  width: 1435px;
-  top: 50px;
-  left: 47px;
-} */
-/* #enemy{
-  display: none;
-} */
 input{
   height: 70px;
+}
+.blur{
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
 }
 .container1{
   color: white;

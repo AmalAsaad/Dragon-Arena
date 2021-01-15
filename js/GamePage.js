@@ -17,26 +17,41 @@ $("pause").toggle(1000);
 
 // puase menue //
 document.getElementById("pauseBtn").addEventListener("click",popUp);
+var containerElement = document.getElementById("canvas1");
 document.getElementById("close").addEventListener("click",popUp);
 var click = 0;
 function popUp(){
+    
     if(countMusic === 1){
         music.play();
     }
     if(click === 0){
         document.getElementById("container4").style.display="block";
+        containerElement.setAttribute('class', 'blur');
+        document.getElementById("3").setAttribute('class', 'blur');
+
+        paused = true;
         click = 1;
     }else{
         document.getElementById("container4").style.display="none";
+        containerElement.setAttribute('class', null);
+        document.getElementById("3").setAttribute('class', null);
+        paused = false;
         click = 0;
-    }
+        requestAnimationFrame(animate);
+
+    }  
 }
 document.getElementById("cont").addEventListener("click",contPlay);
 function contPlay(){
+    
     if(countMusic === 1){
         music.play();
     }
+    paused=false;
     document.getElementById("container4").style.display="none"; 
+    requestAnimationFrame(animate);
+    
 }
 
 document.getElementById("homePage").addEventListener("click",backHome);
