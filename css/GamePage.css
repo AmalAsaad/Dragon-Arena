@@ -127,7 +127,7 @@ transform: scale(1,1) translate(0px, 0px);
   margin: 0px;
   top: 20px;
   left: 65px;
-  font-size: 2em;
+  font-size: 3em;
   font-style: Arial ; 
 }
 #starScore{
@@ -195,12 +195,12 @@ transform: scale(1,1) translate(0px, 0px);
   height: 40px;
   bottom: 34px;  
   filter: drop-shadow( 1mm 7mm  1mm white);
-  /* animation-name: bounce;
+  animation-name: bounce;
   animation-duration: 0.7s;
-  animation-play-state: paused; */
-  animation-name: rotate;
+  animation-play-state: running;
+  /* animation-name: rotate;
   animation-duration: 0.7s infinite;
-  animation-play-state:running ;
+  animation-play-state:running ; */
 
 }
 @keyframes rotate {
