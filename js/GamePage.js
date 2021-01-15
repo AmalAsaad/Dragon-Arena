@@ -27,13 +27,15 @@ function popUp(){
         document.getElementById("container4").style.display="block";
         containerElement.setAttribute('class', 'blur');
         document.getElementById("3").setAttribute('class', 'blur');
-
+        document.getElementById("2").setAttribute('class', 'blur');
         paused = true;
         click = 1;
     }else{
         document.getElementById("container4").style.display="none";
         containerElement.setAttribute('class', null);
         document.getElementById("3").setAttribute('class', null);
+        document.getElementById("2").setAttribute('class', null);
+
         paused = false;
         click = 0;
         requestAnimationFrame(animate);
@@ -50,6 +52,8 @@ function contPlay(){
     document.getElementById("container4").style.display="none"; 
     containerElement.setAttribute('class', null);
     document.getElementById("3").setAttribute('class', null);
+    document.getElementById("2").setAttribute('class', null);
+
     requestAnimationFrame(animate);
     
 }

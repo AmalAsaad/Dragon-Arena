@@ -30,7 +30,8 @@ input{
 } 
 
 #pauseBtn{
-  position:fixed;
+  position:absolute;
+  top: 640px;
   bottom:50px;
   left:50%; 
   
