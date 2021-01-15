@@ -44,6 +44,9 @@ window.addEventListener("keyup", function (e) {
 })
 // update canvas
 window.onload = function () {
+        const audio = document.getElementById("audio");
+        audio.volume = 0.2;
+        audio.play();
     requestAnimationFrame(animate);
 }
           /// images ///
