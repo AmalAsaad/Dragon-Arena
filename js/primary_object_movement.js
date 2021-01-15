@@ -111,12 +111,9 @@ function createStar() {
         let radii_sum = (player1.radius) + 20;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             starr.splice(0, 1);
-            fxPowerup.play();
             starScore++;
-            $("#starScore").text(+starScore);
-            $("#star").animate(200, function(){
-                $(this).css("height","50px");     
-           });
+            starScoreStyle();
+
         }
     }
 
@@ -133,7 +130,7 @@ class Life extends PowerUp {
         super();
     }
     draw() {
-        ctx.drawImage(lifephoto, this.x, this.y,this.w,this.h);
+        ctx.drawImage(lifephoto, this.x, this.y, this.w, this.h);
     }
 }
 heart.push(new Life);
@@ -152,9 +149,9 @@ function createLife() {
         let radii_sum = (player1.radius) + 11;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             heart.splice(0, 1);
-            fxLife.play();
             lifeScore++;
-            $("#lifeScore").text(+lifeScore);
+            lifeScoreStyle();
+
         }
     }
 
@@ -367,7 +364,7 @@ class hiddencircle {
                 starScore--;
                 $("#starScore").text(+starScore);
             }
-            
+
         }
     }
 }
@@ -496,4 +493,16 @@ function moveplayer() {
     }
 }
 
+function starScoreStyle() {
+    fxPowerup.play();
+    $("#starScore").text(+starScore);
+    $("#starScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
+    $("#star").css("animation-play-state"," running");
 
+}
+function lifeScoreStyle() {
+    fxLife.play();
+    $("#lifeScore").text(+lifeScore);
+    $("#life").css("animation-play-state"," running");
+    $("#lifeScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
+}

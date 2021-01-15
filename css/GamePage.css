@@ -193,8 +193,23 @@ transform: scale(1,1) translate(0px, 0px);
 #star,#life{
   position: absolute;
   height: 40px;
-  bottom: 30px;
-  /* -webkit-animation: bounce 1s infinite; */
+  bottom: 34px;  
+  filter: drop-shadow( 1mm 7mm  1mm white);
+  /* animation-name: bounce;
+  animation-duration: 0.7s;
+  animation-play-state: paused; */
+  animation-name: rotate;
+  animation-duration: 0.7s infinite;
+  animation-play-state:running ;
+
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 #life{
   left: 220px;
