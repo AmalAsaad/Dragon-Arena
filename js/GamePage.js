@@ -1,13 +1,11 @@
-function runGame(){
+
+  function runGame(){
     if(countMusic === 1){
         music.play();
     }
     location.assign("gamePage.html");
 }
-
 // =====================================================//
-
-
 
 //Ready go show up//
 $(".ready").toggle(1000);
@@ -50,6 +48,8 @@ function contPlay(){
     }
     paused=false;
     document.getElementById("container4").style.display="none"; 
+    containerElement.setAttribute('class', null);
+    document.getElementById("3").setAttribute('class', null);
     requestAnimationFrame(animate);
     
 }
@@ -74,7 +74,10 @@ var off2 = document.getElementById("off2");
 var offtxt1 = document.getElementById("offtxt1");
 var offtxt2 = document.getElementById("offtxt2");
 
-
+function stayPlay(){
+    sound.play();
+    stayPlay();
+}
 var count = 0;
 function playSound(){
         if(count === 0){
@@ -118,3 +121,5 @@ function playMusic(){
        });
     }
 }
+
+
