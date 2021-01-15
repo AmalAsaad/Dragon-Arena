@@ -57,7 +57,7 @@ window.addEventListener("keyup", function (e) {
 window.onload = function () {
     requestAnimationFrame(animate);
 }
-play.play();
+
 /// game images ///
 //player //
 const playersprite = new Image();
@@ -84,6 +84,8 @@ class PowerUp {
         this.x = Math.floor(Math.random() * 1000);
         this.y = Math.floor(Math.random() * 500);
         this.distance;
+        this.w = 30;
+        this.h = 30;
     }
     static draw() {
         // ctx.drawImage(starphoto,this.x,this.y);
@@ -131,7 +133,7 @@ class Life extends PowerUp {
         super();
     }
     draw() {
-        ctx.drawImage(lifephoto, this.x, this.y);
+        ctx.drawImage(lifephoto, this.x, this.y,this.w,this.h);
     }
 }
 //var life=new Life();
@@ -496,14 +498,21 @@ function moveplayer() {
 }
 
 function drawStarScore() {
-    ctx.font = "16px Arial";
-    ctx.fillStyle = "#0095DD";
-    ctx.fillText("Star Score: " + starScore, 8, canvas.height);
+    ctx.font = "2em Arial";
+    ctx.fillStyle = "white";
+    // ctx.fillText("Star Score: " + starScore, 8, canvas.height);
+    ctx.fillText(+ starScore, 8, canvas.height);
+    ctx.drawImage(starphoto, 30, 533);
+
+
 }
 function drawLifeScore() {
-    ctx.font = "16px Arial";
-    ctx.fillStyle = "#0095DD";
-    ctx.fillText("Life Score: " + lifeScore, 1000, canvas.height);
+    ctx.font = "2em Arial";
+    ctx.fillStyle = "white";
+    // ctx.fillText("Life Score: " + lifeScore, 1000, canvas.height);
+    ctx.fillText(+ lifeScore, 1000, canvas.height);
+    ctx.drawImage(lifephoto, 1025, 537, 30, 30);
+
 }
 
 
