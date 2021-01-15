@@ -36,8 +36,8 @@ var setUpEnemy = true;
 var totalEnemies = 3; // Math.floor(Math.random()*10)+5; if want generate random enemy each level
 
 // game array
-const obsx = [300, 400, 800, 975];
-const obsy = [100, 350, 250, 400];
+const obsx = [300, 400, 800, 975,55,1150,1100,200];
+const obsy = [100, 350, 250, 400,77,450,200,460];
 const keys = [];
 const circlearray = [];
 const obstaclearray = [];
@@ -333,6 +333,18 @@ class Bullet {
         this.x += this.speed.x;
         this.y += this.speed.y;
     }
+
+    killenemy(){
+        for (let i = 0;i<enemies.length;i++){
+            let distance_x =this.x - (enemies[i].x + enemies[i].w/2);
+            let distance_y =this.y - (enemies[i].y + enemies[i].h/2);
+            let radii_sum = 40+this.radius;
+            if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum){
+                bullets.splice(i,1)
+                 console.log("collision");
+            }
+        }
+    }
 }
 
 //somehidden circle to calculate distance between our main object
@@ -368,12 +380,24 @@ class hiddencircle {
                 starScore--;
             }
         }
+        for (let i = 0;i<enemies.length;i++){
+            let distance_x = enemies[i].x - this.x;
+            let distance_y = enemies[i].y -this.y;
+            let radii_sum = 40 + this.radius;
+            if (distance_x * distance_x + distance_y * distance_y <= radii_sum*radii_sum) {
+                let length = Math.sqrt(distance_x * distance_x + distance_y * distance_y) || 1;
+                let unit_x = distance_x / length;
+                let unit_y = distance_y / length;
+                enemies[i].x = this.x + (radii_sum + 1 ) * unit_x;
+                enemies[i].y = (this.y + (radii_sum + 1) * unit_y);
+            }
+        }
     }
 }
 
 //obstacle sum//
 function obsnum() {
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 8; i++) {
         obstaclearray.push(new obstacle())
         circlearray.push(new hiddencircle())
         circlearray[i].x = obsx[i];
@@ -387,12 +411,12 @@ const player1 = new player();
 const circle1 = new hiddencircle();
 
 
-function playercircle() {
-    circle1.x = player1.x;
-    circle1.y = player1.y;
-    circle1.radius = 33;
-    //circle1.draw();
-}
+// function playercircle() {
+//     circle1.x = player1.x;
+//     circle1.y = player1.y;
+//     circle1.radius = 33;
+//     //circle1.draw();
+// }
 
 //draw component of canvas //
 function drawsprite(img, sx, sy, sw, sh, dx, dy, dw, dh) {
@@ -406,16 +430,16 @@ document.body.onkeyup = function (e) {
     if (e.keyCode == 32) {
         fxBullt.play();
         if (player1.framey === 0) {
-            bullets.push(new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 5, 'green', { x: 0, y: 10 }));
+            bullets.push(new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2,11, 'green', { x: 0, y: 10 }));
         }
         else if (player1.framey === 2) {
-            bullets.push(new Bullet(player1.x + player1.width, player1.y + player1.height / 2, 5, 'green', { x: 10, y: 0 }));
+            bullets.push(new Bullet(player1.x + player1.width, player1.y + player1.height / 2, 11, 'green', { x: 10, y: 0 }));
         }
         else if (player1.framey === 3) {
-            bullets.push(new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 5, 'green', { x: 0, y: -10 }));
+            bullets.push(new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 11, 'green', { x: 0, y: -10 }));
         }
         else if (player1.framey === 1) {
-            bullets.push(new Bullet(player1.x, player1.y + player1.height / 2, 5, 'green', { x: -10, y: 0 }))
+            bullets.push(new Bullet(player1.x, player1.y + player1.height / 2, 11, 'green', { x: -10, y: 0 }))
         }
     }
 }
@@ -430,6 +454,7 @@ function animate() {
     ///bullet
     bullets.forEach(bullet => {
         bullet.update();
+        bullet.killenemy();
     })
     //player
     drawsprite(playersprite, player1.width * player1.framex, player1.height * player1.framey, player1.width, player1.height, player1.x, player1.y, player1.width, player1.height)
@@ -462,11 +487,12 @@ function animate() {
         ctx.drawImage(obst, obstaclearray[i].sx * 46, 0, 46, 60, obstaclearray[i].x, obstaclearray[i].y, 75, 132)
         //circlearray[i].draw();
         circlearray[i].collision();
+        //obstaclearray[i].enemycollision()
         // if (circlearray[i].distance < circlearray[i].radius + player1.radius){
         //     player1.speed = 0;            
         // }
     }
-    playercircle();
+    //playercircle();
     drawLifeScore();
     drawStarScore();
     // request another animation loop
