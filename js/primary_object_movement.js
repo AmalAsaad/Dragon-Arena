@@ -62,7 +62,7 @@ window.onload = function () {
 /// game images ///
 
 const playersprite = new Image();
-playersprite.src = "leviathan.png"
+playersprite.src = "Img/leviathan.png"
 const obst = new Image();
 obst.src = "Img/Obstcle.png"
 const enemy = new Image();
