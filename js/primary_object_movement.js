@@ -557,6 +557,7 @@ function lifeScoreStyle() {
 function Win() {
     if (starScore >=20 && lifeScore >= 5) {
         fxWin.play();
+        paused = true;
         swal("CONGRATULATIONS..!","YOU WIN","success",{
             button: "To Next Level!",
           })
@@ -568,8 +569,9 @@ function Win() {
 }
 
 function gameOver(){
-    if ( lifeScore === 10) {
+    if ( lifeScore === 26) {
         fxlose.play();
+        paused = true;
         swal("UNFORTIONATLY..!","YOU Lose","error",{
             button: "TRY AGAIN!",
           })
