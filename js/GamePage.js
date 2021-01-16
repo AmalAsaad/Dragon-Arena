@@ -75,8 +75,6 @@ function backHome(){
       });
 }
 document.getElementById("reset").addEventListener("click",runGame);
-
-
 var sound = document.getElementById("audio");
 var music = document.getElementById("audioMusic");
 document.getElementById("playSound").addEventListener("click",playSound);
@@ -137,23 +135,13 @@ function playMusic(){
        });
     }
 }
-function autoPlayMusic(){
-    if(countMusic === 1){
+function autoPlayMusic(){    
        music.play();
        $("#playMusic").animate({left :'85px'},200, function(){
         off2.src = "Img/on.png";
         offtxt2.textContent = "ON";
         $("#offtxt2").css("left","55px");                
    });
-    }
-    else{
-        music.pause();
-        $("#playMusic").animate({left :'30px'},200, function(){
-            off2.src = "Img/off.png";
-            $("#offtxt2").css("left","90px");
-            offtxt2.textContent = "OFF";    
-       });
-    }
 }
 
 
