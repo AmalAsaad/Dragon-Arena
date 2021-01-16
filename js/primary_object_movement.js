@@ -34,6 +34,7 @@ var timetodrawlife = 0;
 var enemycounter = 3;
 var setUpEnemy = true;
 var totalEnemies = 3; // Math.floor(Math.random()*10)+5; if want generate random enemy each level
+var bulletscounter;
 
 // game array
 const obsx = [300, 400, 800, 975,55,1150,1100,200];
@@ -61,11 +62,11 @@ window.onload = function () {
 /// game images ///
 
 const playersprite = new Image();
-playersprite.src = "Img/leviathan.png"
+playersprite.src = "leviathan.png"
 const obst = new Image();
 obst.src = "Img/Obstcle.png"
 const enemy = new Image();
-enemy.src = "Img/leviathan.png";
+enemy.src = "bahamut.png";
 const starphoto = new Image()
 starphoto.src = "Img/star.png";
 const lifephoto = new Image()
@@ -348,28 +349,34 @@ class Bullet {
             let distance_y =this.y - (enemies[i].y + enemies[i].h/2);
             let radii_sum = 40+this.radius;
             if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum){
-                bullets.splice(i,1)
+                for(let k=0 ; k<4 ; k++){
+                    for (let j=0 ; j<4 ; j++){
+                        ctx.drawImage(explosion,k,j,64,64,enemies[i].x,enemies[i].y,100,100)
+                    }
+                }
+                bulletscounter = bullets.length-1;
+                bullets.splice(bulletscounter,1)
                 enemies.splice(i,1)
-                 console.log("collision");
             }
         }
     }
     
-    // bullet_hit_obstacle(){
-    //     for (let m = 0;m<obstaclearray.length;m++){
-    //         let distance_x =this.x - (obstaclearray[m].x + 50);
-    //         let distance_y =this.y - (obstaclearray[m].y + 50);
-    //         let radii_sum = 56+this.radius;
-    //         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum){
-    //             bullets.splice(m,1)
-    //             for(let k=0 ; k<4 ; k++){
-    //                 for (let j=0 ; j<4 ; j++){
-    //                     ctx.drawImage(explosion,k,j,64,64,obstaclearray[m].x,obstaclearray[m].y,100,100)
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+    bullet_hit_obstacle(){
+        for (let i = 0;i<obstaclearray.length;i++){
+            let distance_x =this.x - (obstaclearray[i].x + 50);
+            let distance_y =this.y - (obstaclearray[i].y + 50);
+            let radii_sum = 56+this.radius;
+            if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum){
+                bulletscounter = bullets.length-1;
+                bullets.splice(bulletscounter,1)
+                for(let k=0 ; k<4 ; k++){
+                    for (let j=0 ; j<4 ; j++){
+                        ctx.drawImage(explosion,k,j,64,64,obstaclearray[i].x,obstaclearray[i].y,100,100)
+                    }
+                }
+            }
+        }
+    }
 }
 
 //somehidden circle to calculate distance between our main object
@@ -454,20 +461,25 @@ function drawsprite(img, sx, sy, sw, sh, dx, dy, dw, dh) {
 /////create bullet////
 var bullet = new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 5, 'green', { x: 0, y: 10 });
 var bullets = [bullet];
+//var bulletscounter = 0;
 document.body.onkeyup = function (e) {
     if (e.keyCode == 32) {
         fxBullt.play();
         if (player1.framey === 0) {
             bullets.push(new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2,11, 'green', { x: 0, y: 10 }));
+            //bulletscounter++;
         }
         else if (player1.framey === 2) {
             bullets.push(new Bullet(player1.x + player1.width, player1.y + player1.height / 2, 11, 'green', { x: 10, y: 0 }));
+            //bulletscounter++;
         }
         else if (player1.framey === 3) {
             bullets.push(new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 11, 'green', { x: 0, y: -10 }));
+            //bulletscounter++;
         }
         else if (player1.framey === 1) {
             bullets.push(new Bullet(player1.x, player1.y + player1.height / 2, 11, 'green', { x: -10, y: 0 }))
+            //bulletscounter++;
         }
     }
 }
@@ -482,7 +494,7 @@ function animate() {
     ///bullet
     bullets.forEach(bullet => {
         bullet.killenemy();
-        //bullet.bullet_hit_obstacle();
+        bullet.bullet_hit_obstacle();
         bullet.update();
     })
     //player
