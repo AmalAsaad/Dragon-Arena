@@ -35,7 +35,6 @@ function popUp(){
         containerElement.setAttribute('class', null);
         document.getElementById("3").setAttribute('class', null);
         document.getElementById("2").setAttribute('class', null);
-
         paused = false;
         click = 0;
         requestAnimationFrame(animate);
@@ -53,7 +52,6 @@ function contPlay(){
     containerElement.setAttribute('class', null);
     document.getElementById("3").setAttribute('class', null);
     document.getElementById("2").setAttribute('class', null);
-
     requestAnimationFrame(animate);
     
 }
