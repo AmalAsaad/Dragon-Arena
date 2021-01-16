@@ -117,8 +117,7 @@ function createStar() {
         let radii_sum = (player1.radius) + 20;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             starr.splice(0, 1);
-            starScore+=5;
-            starScoreStyle();
+            starScoreIncrease();
         }
     }
 
@@ -154,8 +153,7 @@ function createLife() {
         let radii_sum = (player1.radius) + 11;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             heart.splice(0, 1);
-            lifeScore+=5;
-            lifeScoreStyle();
+            lifeScoreIncrease();
             gameOver();
 
         }
@@ -387,12 +385,8 @@ class hiddencircle {
             let unit_y = distance_y / length;
             player1.x = this.x + (radii_sum + 1) * unit_x;
             player1.y = (this.y + (radii_sum + 1) * unit_y);
-            fxObstacle.play();
-            if (starScore > 0) {
-                starScore--;
-                $("#starScore").text(+starScore);
-                gameOver();
-            }
+            starDecrese();
+            
 
         }
         for (let i = 0; i < enemies.length; i++) {
@@ -443,7 +437,9 @@ var bullet = new Bullet(player1.x + player1.width / 2, player1.y + player1.heigh
 var bullets = [bullet];
 document.body.onkeyup = function (e) {
     if (e.keyCode == 32) {
-        fxBullt.play();
+        if(countMusic === 1){
+            fxBullt.play();
+        }
         if (player1.framey === 0) {
             bullets.push(new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 11, 'green', { x: 0, y: 10 }));
         }
@@ -539,19 +535,27 @@ function moveplayer() {
     }
 }
 
-function starScoreStyle() {
-    fxPowerup.play();
+function starScoreIncrease() {
+    if(countMusic === 1){
+        fxPowerup.play();
+    }
+    starScore+=5;
     $("#starScore").text(+starScore);
     $("#starScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
-    $("#star").css("animation-play-state", " running");
+    $("#star").css({"animation-name":"bounce", "animation-play-state": " running" , "animation-duration": "1s",
+    "animation-iteration-count": "2"});
     Win();
 
 }
-function lifeScoreStyle() {
-    fxLife.play();
+function lifeScoreIncrease() {
+    if(countMusic === 1){
+        fxLife.play();
+    }
+    lifeScore+=5;
     $("#lifeScore").text(+lifeScore);
-    $("#life").css("animation-play-state", " running");
     $("#lifeScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
+    $("#life").css({"animation-name":"bounce", "animation-play-state": " running" , "animation-duration": "0.75s",
+    "animation-iteration-count": "2"});
     Win();
 }
 function Win() {
@@ -580,4 +584,18 @@ function gameOver(){
             clearInterval(interval); // Needed for Chrome to end game
           });
     }
+}
+function starDecrese(){
+    if(countMusic === 1){
+        fxObstacle.play();
+    }
+    if (starScore > 0) {
+        starScore--;
+        $("#starScore").text(+starScore);
+        $("#star").css({"animation-name":"rotate", "animation-play-state": " running" , "animation-duration": "0.75s",
+        "animation-iteration-count": "2","animation-direction": "alternate"});
+        gameOver();
+    }
+}
+function lifeDecreseStyle(){
 }
