@@ -387,7 +387,9 @@ class hiddencircle {
             let unit_y = distance_y / length;
             player1.x = this.x + (radii_sum + 1) * unit_x;
             player1.y = (this.y + (radii_sum + 1) * unit_y);
-            fxObstacle.play();
+            if(countMusic === 1){
+                fxObstacle.play();
+            } 
             if (starScore > 0) {
                 starScore--;
                 $("#starScore").text(+starScore);
@@ -443,7 +445,9 @@ var bullet = new Bullet(player1.x + player1.width / 2, player1.y + player1.heigh
 var bullets = [bullet];
 document.body.onkeyup = function (e) {
     if (e.keyCode == 32) {
-        fxBullt.play();
+        if(countMusic === 1){
+            fxBullt.play();
+        }
         if (player1.framey === 0) {
             bullets.push(new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 11, 'green', { x: 0, y: 10 }));
         }
@@ -540,7 +544,10 @@ function moveplayer() {
 }
 
 function starScoreStyle() {
-    fxPowerup.play();
+    if(countMusic === 1){
+        fxPowerup.play();
+    }
+    
     $("#starScore").text(+starScore);
     $("#starScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
     $("#star").css("animation-play-state", " running");
@@ -548,7 +555,9 @@ function starScoreStyle() {
 
 }
 function lifeScoreStyle() {
-    fxLife.play();
+    if(countMusic === 1){
+        fxLife.play();
+    }
     $("#lifeScore").text(+lifeScore);
     $("#life").css("animation-play-state", " running");
     $("#lifeScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");

@@ -1,8 +1,5 @@
 
   function runGame(){
-    if(countMusic === 1){
-        music.play();
-    }
     location.assign("gamePage.html");
 }
 // =====================================================//
@@ -70,14 +67,12 @@ function backHome(){
       })
       .then((willDelete) => {
         if (willDelete) {
-          swal("Poof! Your game level has been deleted!", {
-            icon: "success",
-          });
+            location.assign("index.html");
+        
         } else {
           swal("Your game level is safe!");
         }
       });
-    location.assign("index.html");
 }
 document.getElementById("reset").addEventListener("click",runGame);
 
@@ -118,7 +113,10 @@ function playSound(){
                       
         }
 }
-var countMusic = 0;
+var countMusic = 1;
+if(countMusic === 1){
+   autoPlayMusic();
+}
 function playMusic(){
     if(countMusic === 0){
        countMusic = 1;
@@ -132,6 +130,24 @@ function playMusic(){
     else{
         music.pause();
         countMusic = 0;
+        $("#playMusic").animate({left :'30px'},200, function(){
+            off2.src = "Img/off.png";
+            $("#offtxt2").css("left","90px");
+            offtxt2.textContent = "OFF";    
+       });
+    }
+}
+function autoPlayMusic(){
+    if(countMusic === 1){
+       music.play();
+       $("#playMusic").animate({left :'85px'},200, function(){
+        off2.src = "Img/on.png";
+        offtxt2.textContent = "ON";
+        $("#offtxt2").css("left","55px");                
+   });
+    }
+    else{
+        music.pause();
         $("#playMusic").animate({left :'30px'},200, function(){
             off2.src = "Img/off.png";
             $("#offtxt2").css("left","90px");
