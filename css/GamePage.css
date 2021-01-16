@@ -5,8 +5,7 @@ body{
   position:relative;
 }
 body{
-  background-image:
-  url("../Img/background.jpg");
+  background-image:url("../Img/background.jpg");
   background-position:center;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -197,13 +196,12 @@ transform: scale(1,1) translate(0px, 0px);
   height: 40px;
   bottom: 34px;  
   filter: drop-shadow( 1mm 7mm  1mm white);
-  animation-name: bounce;
-  animation-duration: 0.7s;
-  animation-play-state: running;
   /* animation-name: rotate;
-  animation-duration: 0.7s infinite;
-  animation-play-state:running ; */
-
+  animation-play-state:paused;
+  animation-duration: 1s;
+  animation-direction: alternate;
+  animation-iteration-count: 2; */
+  
 }
 @keyframes rotate {
   0% {
