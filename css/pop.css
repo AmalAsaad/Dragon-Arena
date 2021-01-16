@@ -1,9 +1,10 @@
-#controlmenu{
+#controlmenu,#PowerUpmenu,#Goalmenu{
     display: none;
     transition: 350ms;
+    animation-name: goDown;
+    animation-duration: 3s;
 }
-
-#control{
+#control,#power,#goal{
     width: 609px;
     height: 495px;
     position:absolute;
@@ -16,8 +17,174 @@
     z-index: -1;
     
 }
-
-#close{
+#controlsticker,#powersticker,#goalsticker{
+    position: absolute;
+    left: 550px;
+    top:30px;
+    height: 70px;
+    width: 200px;
+}
+#controlheader,#PowerUpheader,#Goalheader{
+    position: absolute;
+    left: 580px;
+    top: 32px;
+    color: brown;
+    font-family: arial;
+  font-weight: bold;
+  font-size: 28px;
+}
+#updr{
+    position:absolute;
+    left: 400px;
+    top:120px;
+    height: 70px;
+    border-radius:50px;
+}
+#up{
+    position:absolute;
+    top:120px;
+    left:550px;
+    height: 60px;
+    width: 60px;
+    border-radius:50px;
+    /* -webkit-animation: bounce 1s; */
+}
+#leftdr{
+    position:absolute;
+    height: 70px;
+    border-radius:25px;
+    left:400px;
+    top:220px;
+}
+#left{
+    position:absolute;
+    top:220px;
+    left:550px;
+    height: 60px;
+    width: 60px;
+    border-radius:50px;
+    /* -webkit-animation: bounce 1s; */
+}
+#right{
+    position:absolute;
+    top:220px;
+    left:700px;
+    height: 60px;
+    width: 60px;
+    border-radius:50px;
+    /* -webkit-animation: bounce 1s; */
+}
+#rightdr{
+    position:absolute;
+    height: 70px;
+    top:220px;
+    left:850px;
+    border-radius:25px;
+}
+#down{
+    position:absolute;
+    top:120px;
+    left:700px;
+    height: 60px;
+    width: 60px;
+    border-radius:50px;
+    /* -webkit-animation: bounce 1s; */
+}
+#downdr{
+    position:absolute;
+    height: 70px;
+    top:120px;
+    left:850px;
+    border-radius:50px;
+}
+#space{
+    position:absolute;
+    border-radius:50px;
+    top:320px;
+    left:470px;
+    width:150px;
+    /* -webkit-animation: bounce 1s; */
+}
+#shoot{
+    left:700px;
+    top:310px;
+}
+#again{
+    position:absolute;
+    left:400px;
+    top:400px;
+}
+#againheader{
+    left:500px;
+    top:390px;
+}
+#stopgame{
+    position:absolute;
+    left:730px;
+    top:400px;
+}
+#stopheader{
+    left:830px;
+    top:390px;
+}
+#backhome{
+    position:absolute;
+    top:480px;
+    left:400px;
+}
+#backheader{
+    top:470px;
+    left:500px;
+}
+#resume{
+    position:absolute;
+    top:480px;
+    left:730px;
+}
+#resumeheader{
+    top:470px;
+    left:830px;
+}
+#starblock{
+    position: absolute;
+    left:450px;
+    top:130px;
+    background-color: burlywood;
+    border-radius: 50px;
+    width: 450px;
+}
+#lifeblock{
+    position: absolute;
+    left:450px;
+    top:230px;
+    background-color: burlywood;
+    border-radius: 50px;
+    width: 450px;
+}
+#starpower{
+    -webkit-animation: bounce 1.5s infinite;
+}
+#lifepower{
+    width: 34px;
+    height: 34px;
+    -webkit-animation: bounce 1.5s infinite;
+}
+p{
+    display: inline-block;
+    font-family: arial;
+    font-weight: bold;
+    font-size: 18px;
+    color: brown;
+}
+#shoot,#againheader,#stopheader,#backheader,#resumeheader{
+    position:absolute;
+    color: rgb(77, 4, 77);
+    font-family: arial;
+    font-weight: bold;
+    font-size: 28px;
+    background-color:burlywood;
+}
+#close1,#close2,#close3{
     background: red;
     height: 50px;
     width: 50px;
@@ -30,13 +197,28 @@
     right: 0;
     margin: auto;
 }
-
-#close a{
+#close1 a,#close2 a,#close3 a{
     color: white;
-    font-size: 44px;
-    
+    font-size: 44px;   
 }
-
-#close a:hover{
+#close1 a,#close2 a,#close3 a:hover{
     transform:rotate(45deg);
 }
+@keyframes goDown{
+    from{top:10px;}
+    to{top:200px;}
+  }
+@-webkit-keyframes bounce {
+    0% {
+    transform: scale(1,1) translate(0px, 0px);
+    }
+    30%{
+    transform: scale(1,0.8) translate(0px, 10px); 
+    }
+    75%{
+    transform: scale(1,1.1) translate(0px, -25px); 
+    }
+    100% {
+    transform: scale(1,1) translate(0px, 0px);
+    }
+    }

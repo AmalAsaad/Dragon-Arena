@@ -12,16 +12,14 @@
     <body>
         <!-- Home Page -->
         <div id="ourimages">
-          <input type="image" id="help" src="Img/help1.jpg" alt="help image">
-          <input type="image" id="owner" src="Img/owner.png" alt="owner image">
+          <!-- <input type="image" id="help" src="Img/help1.jpg" alt="help image"> -->
+          <input type="image" id="owner" src="Img/user.jpg" alt="owner image">
         </div>
         <!-- Owner of the game -->
         <ul id="names">
             This game is made by:
-            <!-- This game is made by:<input type="image" id="exit" src="Img/exit.png"> -->
             <li>Amaal Asaad </li>
             <li>Mohammed Ahmed</li>
-            <li>Remon Alber</li>
             <li>Samar Khaled</li>
         </ul>
         <!--------instruction button-------->
@@ -30,18 +28,61 @@
         </div>
         
         <div class="menu" id="menu">
-            <a href="#" id="bullets" onclick="showb()"><i class="fas fa-meteor"></i></a>
-            <a href="#" onclick="showb()"><i class="fas fa-gamepad"></i></a>
-            <a href="#" onclick="showb()"><i class="fas fa-gift"></i></a>
+            <a href="#" id="bullets" onclick="showb3()"><i class="fas fa-meteor"></i></a>
+            <a href="#" onclick="showb1()"><i class="fas fa-gamepad"></i></a>
+            <a href="#" onclick="showb2()"><i class="fas fa-gift"></i></a>
         </div>
         
         <div id="controlmenu">
             <input type="image" src="Img\tut-board.png" id="control">
-            <div id="close">
+            <input type="image" src="Img/sticker.png" id="controlsticker">
+            <h1 id="controlheader">Instructions</h1>
+            <div id="close1">
                <a href="#"><i class="fas fa-times"></i></a>
             </div>
+            <input id="updr" type="image" src="Img/updr.jpg">
+            <input id="up" type="image" src="Img/up.jpg">
+            <input id="leftdr" type="image" src="Img/leftdr.jpg">
+            <input id="left" type="image" src="Img/left.jpg">
+            <input id="rightdr" type="image" src="Img/rightdr.jpg">
+            <input id="right" type="image" src="Img/right.jpg">
+            <input id="downdr" type="image" src="Img/downdr.jpg">
+            <input id="down" type="image" src="Img/down.jpg">
+            <input id="space" type="image" src="Img/space.jpg">
+            <h1 id="shoot">Shoot Bullets</h1>
+            <input id="again" type="image" src="Img/replay.png">
+            <h1 id="againheader">Restart</h1>
+            <input id="stopgame" type="image" src="Img/pause.png">
+            <h1 id="stopheader">Pause</h1>
+            <input id="resume" type="image" src="Img/next.png">
+            <h1 id="resumeheader">Resume</h1>
+            <input id="backhome" type="image" src="Img/menu.png">
+            <h1 id="backheader">Back to Home</h1>
         </div>
-        
+        <div id="PowerUpmenu">
+            <input type="image" src="Img\tut-board.png" id="power">
+            <input type="image" src="Img/sticker.png" id="powersticker">
+            <h1 id="PowerUpheader">Power Ups</h1>
+            <div id="close2">
+               <a href="#"><i class="fas fa-times"></i></a>
+            </div>
+            <div id="starblock">
+            <input id="starpower" type="image" src="Img/star.png">
+            <p>Take one star to increase your score by 5</p>
+            </div>
+            <div id="lifeblock">
+            <input id="lifepower" type="image" src="Img/heart.png">
+            <p>Take one life to increase your blood by 5</p>
+            </div>
+        </div>
+        <div id="Goalmenu">
+            <input type="image" src="Img\tut-board.png" id="goal">
+            <input type="image" src="Img/sticker.png" id="goalsticker">
+            <h1 id="Goalheader">Main Goal</h1>
+            <div id="close3">
+                <a href="#"><i class="fas fa-times"></i></a>
+             </div>
+        </div>
         <!---------------------------------->
         <!-- play game button -->   
         <input type="image" id="play" src ="Img/playNowButton.png" alt="play game image" onclick="runGame()">
