@@ -17,7 +17,7 @@ var ctx = canvas.getContext('2d');
 
 //     console.log(`MouseX = ${​​​​mouse.x}​​​​, MouseY = ${​​​​mouse.y}​​​​`);
 // }​​​​)
-
+//////////////////////////
 //game sound effects
 var fxPowerup = new Audio("sound/powerup.m4a");
 var fxBullt = new Audio("sound/fxbullt.wav");
