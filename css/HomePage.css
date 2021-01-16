@@ -2,7 +2,7 @@ html{
     height: 100%;
 }
 body{
-    background-image:url("../Img/home.jpg");
+    background-image:url("../Img/dragon.jpg");
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -24,9 +24,10 @@ body{
     width: 90px;
     margin-top: 30px;
     margin-left: 1100px;
+    border-radius: 50px;
 }
 @-webkit-keyframes bounce {
-    0% {
+0% {
 transform: scale(1,1) translate(0px, 0px);
 }
 30%{
@@ -45,7 +46,7 @@ transform: scale(1,1) translate(0px, 0px);
 #play{
     position: fixed;
     bottom: 10px;
-    left: 200px;
+    left: 1000px;
     height: 80px;
     width: 250px;
 }
@@ -54,27 +55,23 @@ ul li{
 }
 #names{
     display: none;
-    margin-left: 800px;
-    margin-top: 0px;
+    right: 380px;
     background-image: url("../Img/tut-board.png");
     background-size: cover;
-    /* background-color:moccasin; */
-    list-style: none;
     width: 450px;
     border-radius: 25px;
-    /* border: 4px solid orangered; */
-    position: relative;
-    /* animation-name: example; */
-    /* animation-duration: 3s; */
+    position:absolute;
+    animation-name: example;
+    animation-duration: 1s;
     font-size: 40px;
     font-style: italic;
     font-weight: bold;
-    color: rgb(126, 26, 26);
+    color: rgb(86, 10, 93);
 }
-/* @keyframes example{
+@keyframes example{
 from{top:0px;}
 to{top:100px;}
-} */
+}
 #exit{
     width:30px; 
     height:30px;
