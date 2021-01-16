@@ -6,7 +6,7 @@ body{
 }
 body{
   background-image:url("../Img/background.jpg");
-  background-position:center;
+  /* background-position:center; */
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -37,9 +37,7 @@ input{
   left:50%; 
   
 }
-#pauseBtn:hover{
-  height: 90px;
-}
+
 #container4 {
   display: none;
   position: absolute;
@@ -195,13 +193,7 @@ transform: scale(1,1) translate(0px, 0px);
   position: absolute;
   height: 40px;
   bottom: 34px;  
-  filter: drop-shadow( 1mm 7mm  1mm white);
-  /* animation-name: rotate;
-  animation-play-state:paused;
-  animation-duration: 1s;
-  animation-direction: alternate;
-  animation-iteration-count: 2; */
-  
+  filter: drop-shadow( 1mm 7mm  1mm white);  
 }
 @keyframes rotate {
   0% {

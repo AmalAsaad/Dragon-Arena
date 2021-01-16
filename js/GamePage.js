@@ -21,6 +21,15 @@ document.getElementById("homePage").addEventListener("click", backHome);
 document.getElementById("reset").addEventListener("click", runGame);
 document.getElementById("playSound").addEventListener("click", playSound);
 document.getElementById("playMusic").addEventListener("click", playMusic);
+document.addEventListener("mousedown",autoPlaySound);
+
+
+$("#pauseBtn").hover(function(){
+    $(this).css("height", "90px");    
+},function(){
+    $(this).css("height", "70px");
+})
+
 
 //select elements//
 var containerElement = document.getElementById("canvas1");
@@ -35,16 +44,15 @@ var offtxt2 = document.getElementById("offtxt2");
 //game functions //
 
 function popUp() {
-
     if (click === 0) {
-        if (countMusic === 1) {
+        if (countMusic === 1 && paused === false) {
             music.play();
         }
         document.getElementById("container4").style.display = "block";
         containerElement.setAttribute('class', 'blur');
         document.getElementById("3").setAttribute('class', 'blur');
         document.getElementById("2").setAttribute('class', 'blur');
-        paused = true;
+        paused = true;        
     } 
 }
 
@@ -121,9 +129,7 @@ function playSound() {
 if (countMusic === 1) {
     autoPlayMusic();
 }
-if (count === 1) {
-    autoPlaySound();
-}
+
 
 function playMusic() {
     if (countMusic === 0) {
@@ -154,12 +160,16 @@ function autoPlayMusic() {
 }
 
 function autoPlaySound() {
-    sound.play();
-    $("#playSound").animate({ left: '85px' }, 200, function () {
-        off1.src = "Img/on.png";
-        offtxt1.textContent = "ON";
-        $("#offtxt1").css("left", "55px");
-    });
+    if (count === 1){
+        sound.play();
+        $("#playSound").animate({ left: '85px' }, 200, function () {
+            off1.src = "Img/on.png";
+            offtxt1.textContent = "ON";
+            $("#offtxt1").css("left", "55px");
+        });
+
+    }
+   
 }
 
 
