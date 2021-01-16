@@ -1,5 +1,5 @@
 .toggle{
-    background-color: rgb(255, 115, 0);
+    background-color: rgb(117, 21, 113);
     height: 100px;
     width: 100px;
     position:absolute;
@@ -22,7 +22,7 @@
 }
 
 .menu{
-    background: rgb(251, 255, 0);
+    background: rgb(169, 48, 185);
     height: 100px;
     width: 100px;
     border-radius: 50%;
@@ -42,7 +42,7 @@
     display: inline-block;
     position: absolute;
     font-size: 15px;
-    color: black;
+    color: rgb(241, 236, 236);
     
 }
 
