@@ -6,17 +6,6 @@
 // 2 +x Right.
 var canvas = document.getElementById("canvas1");
 var ctx = canvas.getContext('2d');
-// var mouse = { x: 0, y: 0 };
-// document.addEventListener("mousedown", (e) => {​​​​
-
-//     const bounds = canvas.getBoundingClientRect();
-
-//     mouse.x = e.pageX - bounds.left ;
-
-//     mouse.y = e.pageY - bounds.top ;
-
-//     console.log(`MouseX = ${​​​​mouse.x}​​​​, MouseY = ${​​​​mouse.y}​​​​`);
-// }​​​​)
 
 //game sound effects
 var fxPowerup = new Audio("sound/powerup.m4a");
@@ -598,4 +587,5 @@ function starDecrese(){
     }
 }
 function lifeDecreseStyle(){
+
 }
