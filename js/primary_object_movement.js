@@ -143,8 +143,6 @@ function createLife() {
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             heart.splice(0, 1);
             lifeScoreIncrease();
-            gameOver();
-
         }
     }
 
@@ -239,7 +237,7 @@ class redEnemy {
         // 0 +y Down.
         if (this.framey === 0) {
             this.y += this.yspeed;
-            if (this.y >= canvas.height - this.h - Math.floor(Math.random() * 200) + 50) {
+            if (this.y >= canvas.height - this.h - 300) {
                 // 2 +x Right.
                 this.framey = 2;
                 if (this.xspeed < 0) {
@@ -250,7 +248,7 @@ class redEnemy {
         // 2 +x Right.
         else if (this.framey === 2) {
             this.x += this.xspeed;
-            if (this.x >= canvas.width - this.w - Math.floor(Math.random() * 200) + 20) {
+            if (this.x >= canvas.width - this.w - 400) {
                 // 3 -y Up.
                 this.framey = 3;
                 if (this.yspeed > 0) {
@@ -375,7 +373,7 @@ class hiddencircle {
             player1.x = this.x + (radii_sum + 1) * unit_x;
             player1.y = (this.y + (radii_sum + 1) * unit_y);
             starDecrese();
-            
+
 
         }
         for (let i = 0; i < enemies.length; i++) {
@@ -426,7 +424,7 @@ var bullet = new Bullet(player1.x + player1.width / 2, player1.y + player1.heigh
 var bullets = [bullet];
 document.body.onkeyup = function (e) {
     if (e.keyCode == 32) {
-        if(countMusic === 1){
+        if (countMusic === 1) {
             fxBullt.play();
         }
         if (player1.framey === 0) {
@@ -448,6 +446,11 @@ function animate() {
     if (paused) {
         return;
     }
+    // if(starScore===5){
+    //     totalEnemies =5;
+    //     makeEnemies();
+
+    // }
     //animate anything
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -472,9 +475,10 @@ function animate() {
             enemy.updateSpeed();
             enemy.draw();
             enemy.move();
-            // if(enemy.enemyhit()){
-            //     enemies.splice(i,1);
-            // };
+            if (enemy.enemyhit()) {
+                enemies.splice(i, 1);
+                lifeDecrese();
+            };
         });
     }
     ///star power up///
@@ -501,6 +505,8 @@ function animate() {
 }
 obsnum()
 
+
+
 //player move
 function moveplayer() {
     if (keys[38] && player1.y > -16) {
@@ -525,67 +531,82 @@ function moveplayer() {
 }
 
 function starScoreIncrease() {
-    if(countMusic === 1){
+    if (countMusic === 1) {
         fxPowerup.play();
     }
-    starScore+=5;
+    starScore += 5;
     $("#starScore").text(+starScore);
     $("#starScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
-    $("#star").css({"animation-name":"bounce", "animation-play-state": " running" , "animation-duration": "1s",
-    "animation-iteration-count": "2"});
+    $("#star").css({
+        "animation-name": "bounce", "animation-play-state": " running", "animation-duration": "1s",
+        "animation-iteration-count": "2"
+    });
     Win();
 
 }
 function lifeScoreIncrease() {
-    if(countMusic === 1){
+    if (countMusic === 1) {
         fxLife.play();
     }
-    lifeScore+=5;
+    lifeScore += 5;
     $("#lifeScore").text(+lifeScore);
     $("#lifeScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
-    $("#life").css({"animation-name":"bounce", "animation-play-state": " running" , "animation-duration": "0.75s",
-    "animation-iteration-count": "2"});
+    $("#life").css({
+        "animation-name": "bounce", "animation-play-state": " running", "animation-duration": "0.75s",
+        "animation-iteration-count": "2"
+    });
     Win();
 }
 function Win() {
-    if (starScore >=20 && lifeScore >= 5) {
+    if (starScore >= 20 && lifeScore >= 30) {
         fxWin.play();
-        paused = true;
-        swal("CONGRATULATIONS..!","YOU WIN","success",{
+        // paused = true;
+        totalEnemies = 5;
+        for(var i =0 ; i<totalEnemies; i++){
+            makeEnemies();
+        }
+        
+        console.log(totalEnemies);
+        swal("CONGRATULATIONS..!", "YOU WIN",  {
             button: "To Next Level!",
-          })
-        .then((value) =>{
-            document.location.reload();
-            clearInterval(interval); // Needed for Chrome to end game
-          });
+        })
+            // .then((value) => {
+            //     // Needed for Chrome to end game
+            // });
     }
 }
 
-function gameOver(){
-    if ( lifeScore === 26) {
+function gameOver() {
+    if (lifeScore === 30) {
         fxlose.play();
         paused = true;
-        swal("UNFORTIONATLY..!","YOU Lose","error",{
+        swal("UNFORTIONATLY..!", "YOU Lose", "error", {
             button: "TRY AGAIN!",
-          })
-        .then((value) =>{
-            document.location.reload();
-            clearInterval(interval); // Needed for Chrome to end game
-          });
+        })
+            .then((value) => {
+                document.location.reload();
+                clearInterval(interval); // Needed for Chrome to end game
+            });
     }
 }
-function starDecrese(){
-    if(countMusic === 1){
+function starDecrese() {
+    if (countMusic === 1) {
         fxObstacle.play();
     }
     if (starScore > 0) {
         starScore--;
         $("#starScore").text(+starScore);
-        $("#star").css({"animation-name":"rotate", "animation-play-state": " running" , "animation-duration": "0.75s",
-        "animation-iteration-count": "2","animation-direction": "alternate"});
+        $("#star").css({
+            "animation-name": "rotate", "animation-play-state": " running", "animation-duration": "0.75s",
+            "animation-iteration-count": "2", "animation-direction": "alternate"
+        });
         gameOver();
     }
 }
-function lifeDecreseStyle(){
+function lifeDecrese() {
+    if (lifeScore > 0 ) {
+        lifeScore --;
+        gameOver();
 
+    }
 }

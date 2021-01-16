@@ -1,7 +1,15 @@
 
-function runGame() {
-    location.assign("gamePage.html");
+function runGame() {    
+    location.replace("gamePage.html");
+    // swal("UNFORTIONATLY..!", "YOU Lose", {
+    //     button: "yes",
+    // })
+    //     .then((value) => {
+    //         location.replace("gamePage.html");
+    //         sound.play();
+    //     });     
 }
+
 // game variables//
 var countMusic = 1;
 var click = 0;
