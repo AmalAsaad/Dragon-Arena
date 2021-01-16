@@ -25,7 +25,7 @@ var fxLife = new Audio("sound/life.wav");
 var fxObstacle = new Audio("sound/obstcale.wav");
 var play = new Audio("sound/music.mp3");
 var fxWin = new Audio("sound/win.wav");
-var fxlose = new Audio("sound/gameOver.wav");
+var fxlose = new Audio("sound/gameOver.mp3");
 
 
 
@@ -74,6 +74,8 @@ const starphoto = new Image()
 starphoto.src = "Img/star.png";
 const lifephoto = new Image()
 lifephoto.src = "Img/heart.png";
+// playersprite.style("filter","hue-rotate(200deg)");
+
 
 
 //Power up classes//
@@ -115,9 +117,8 @@ function createStar() {
         let radii_sum = (player1.radius) + 20;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             starr.splice(0, 1);
-            starScore++;
+            starScore+=5;
             starScoreStyle();
-
         }
     }
 
@@ -153,8 +154,9 @@ function createLife() {
         let radii_sum = (player1.radius) + 11;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             heart.splice(0, 1);
-            lifeScore++;
+            lifeScore+=5;
             lifeScoreStyle();
+            gameOver();
 
         }
     }
@@ -389,6 +391,7 @@ class hiddencircle {
             if (starScore > 0) {
                 starScore--;
                 $("#starScore").text(+starScore);
+                gameOver();
             }
 
         }
@@ -552,7 +555,7 @@ function lifeScoreStyle() {
     Win();
 }
 function Win() {
-    if (starScore === 5 && lifeScore >= 5) {
+    if (starScore === 20 && lifeScore >= 5) {
         fxWin.play();
         swal("CONGRATULATIONS..!","YOU WIN","success",{
             button: "To Next Level!",
@@ -565,8 +568,14 @@ function Win() {
 }
 
 function gameOver(){
-    if(lifeScore === 2 ){
-        
-
+    if ( lifeScore === 6) {
+        fxlose.play();
+        swal("UNFORTIONATLY..!","YOU Lose","error",{
+            button: "TRY AGAIN!",
+          })
+        .then((value) =>{
+            document.location.reload();
+            clearInterval(interval); // Needed for Chrome to end game
+          });
     }
 }
