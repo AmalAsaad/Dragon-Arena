@@ -27,6 +27,7 @@ var timetodrawlife = 0;
 var enemycounter = 3;
 var setUpEnemy = true;
 var totalEnemies = 3; // Math.floor(Math.random()*10)+5; if want generate random enemy each level
+var bulletscounter;
 
 // game array
 const obsx = [300, 400, 800, 975, 55, 1150, 1100, 200];
@@ -63,7 +64,8 @@ const starphoto = new Image()
 starphoto.src = "Img/star.png";
 const lifephoto = new Image()
 lifephoto.src = "Img/heart.png";
-// playersprite.style("filter","hue-rotate(200deg)");
+const explosion = new Image();
+explosion.src = "exp2_0.png"
 
 
 
@@ -337,8 +339,31 @@ class Bullet {
             let distance_y = this.y - (enemies[i].y + enemies[i].h / 2);
             let radii_sum = 40 + this.radius;
             if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
-                bullets.splice(i, 1)
-                console.log("collision");
+                for(let k=0 ; k<4 ; k++){
+                    for (let j=0 ; j<4 ; j++){
+                        ctx.drawImage(explosion,k,j,64,64,enemies[i].x,enemies[i].y,100,100)
+                    }
+                }
+                bulletscounter = bullets.length-1;
+                bullets.splice(bulletscounter,1)
+                enemies.splice(i,1)
+            }
+        }
+    }
+
+    bullet_hit_obstacle(){
+        for (let i = 0;i<obstaclearray.length;i++){
+            let distance_x =this.x - (obstaclearray[i].x + 50);
+            let distance_y =this.y - (obstaclearray[i].y + 50);
+            let radii_sum = 56+this.radius;
+            if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum){
+                bulletscounter = bullets.length-1;
+                bullets.splice(bulletscounter,1)
+                for(let k=0 ; k<4 ; k++){
+                    for (let j=0 ; j<4 ; j++){
+                        ctx.drawImage(explosion,k,j,64,64,obstaclearray[i].x,obstaclearray[i].y,100,100)
+                    }
+                }
             }
         }
     }
@@ -456,8 +481,9 @@ function animate() {
 
     ///bullet
     bullets.forEach(bullet => {
-        bullet.update();
         bullet.killenemy();
+        bullet.bullet_hit_obstacle();
+        bullet.update();
     })
     //player
     drawsprite(playersprite, player1.width * player1.framex, player1.height * player1.framey, player1.width, player1.height, player1.x, player1.y, player1.width, player1.height)
