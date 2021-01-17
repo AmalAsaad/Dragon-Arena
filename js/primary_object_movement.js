@@ -15,18 +15,21 @@ var fxObstacle = new Audio("sound/obstcale.wav");
 var play = new Audio("sound/music.mp3");
 var fxWin = new Audio("sound/win.wav");
 var fxlose = new Audio("sound/gameOver.mp3");
+var fxBexp = new Audio("sound/bullet-exp.wav");
+var fxhitEnemy = new Audio("sound/hitEnemy.mp3");
+var nextLevel = new Audio("sound/nextlevel.wav");
 
 
 
 //game variables
 var paused = false;
-var lifeScore = 1;
+var lifeScore = 5;
 var starScore = 0;
 var timetodrawstar = 0;
 var timetodrawlife = 0;
 var enemycounter = 3;
 var setUpEnemy = true;
-var totalEnemies = 3; // Math.floor(Math.random()*10)+5; if want generate random enemy each level
+var totalEnemies = 3;
 var bulletscounter;
 
 // game array
@@ -49,7 +52,14 @@ window.addEventListener("keyup", function (e) {
 
 // update canvas
 window.onload = function () {
-    requestAnimationFrame(animate);
+    swal("Are you ready to play", "Lets Start", {
+        button: "READY",
+    })
+        .then((value) => {
+            $(".ready").show().toggle(1000);
+            $(".go").show(1000).slideUp(1000);
+            requestAnimationFrame(animate);
+        });
 }
 
 /// game images ///
@@ -65,7 +75,7 @@ starphoto.src = "Img/star.png";
 const lifephoto = new Image()
 lifephoto.src = "Img/heart.png";
 const explosion = new Image();
-explosion.src = "exp2_0.png"
+explosion.src = "Img/exp2_0.png"
 
 
 
@@ -144,12 +154,14 @@ function createLife() {
         let radii_sum = (player1.radius) + 11;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             heart.splice(0, 1);
-            lifeScoreIncrease();
-            gameOver();
-
+            if (lifeScore > 35 && starScore > 30) {
+                End();
+            }
+            else {
+                lifeScoreIncrease();
+            }
         }
     }
-
     if (heart.length > 0) {
         heart[0].draw();
     }
@@ -159,8 +171,8 @@ function createLife() {
 // main character class//
 class player {
     constructor() {
-        this.x = 200;
-        this.y = 200
+        this.x = 500
+        this.y = 300
         this.width = 96
         this.height = 96
         this.framex = 0
@@ -202,11 +214,9 @@ class redEnemy {
         let radii_sum = 80;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             return true;
-            console.log("collision");
+
         }
     }
-
-    // || this.x + this.w >= canvas.width
     updateSpeed() {
         // 0 +y Down.
         if (this.framey === 0) {
@@ -234,14 +244,12 @@ class redEnemy {
                 this.yspeed *= -1;
             }
         }
-
-
     }
     move() {
         // 0 +y Down.
         if (this.framey === 0) {
             this.y += this.yspeed;
-            if (this.y >= canvas.height - this.h - Math.floor(Math.random() * 200) + 50) {
+            if (this.y >= canvas.height - this.h - 100) {
                 // 2 +x Right.
                 this.framey = 2;
                 if (this.xspeed < 0) {
@@ -252,7 +260,7 @@ class redEnemy {
         // 2 +x Right.
         else if (this.framey === 2) {
             this.x += this.xspeed;
-            if (this.x >= canvas.width - this.w - Math.floor(Math.random() * 200) + 20) {
+            if (this.x >= canvas.width - this.w - 350) {
                 // 3 -y Up.
                 this.framey = 3;
                 if (this.yspeed > 0) {
@@ -287,9 +295,8 @@ class redEnemy {
     }
 }
 //create enemies 
-function makeEnemies() {
+function makeEnemies(enemycounter) {
     var enemyangle = 90;
-    // const gap = Math.floor(Math.random() * 100)+3;
     const gap = Math.floor(Math.random() * 100) + 10;
     var enemyW = 96;
     var enemyH = 96;
@@ -303,8 +310,6 @@ function makeEnemies() {
     enemycounter++;
     enemies.push(enemy);
 }
-
-
 //obstacle class
 class obstacle {
     constructor() {
@@ -313,7 +318,6 @@ class obstacle {
         this.sx = Math.floor(Math.random() * 6);
     }
 }
-
 ///Bullet///
 class Bullet {
     constructor(bx, by, br, bc, bs) {
@@ -334,36 +338,39 @@ class Bullet {
         this.x += this.speed.x;
         this.y += this.speed.y;
     }
-
     killenemy() {
         for (let i = 0; i < enemies.length; i++) {
             let distance_x = this.x - (enemies[i].x + enemies[i].w / 2);
             let distance_y = this.y - (enemies[i].y + enemies[i].h / 2);
             let radii_sum = 40 + this.radius;
             if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
-                for(let k=0 ; k<4 ; k++){
-                    for (let j=0 ; j<4 ; j++){
-                        ctx.drawImage(explosion,k,j,64,64,enemies[i].x,enemies[i].y,100,100)
+                if (countMusic === 1) {
+                    fxBexp.play();
+                }
+                for (let k = 0; k < 4; k++) {
+                    for (let j = 0; j < 4; j++) {
+                        ctx.drawImage(explosion, k, j, 64, 64, enemies[i].x, enemies[i].y, 100, 100)
                     }
                 }
-                bulletscounter = bullets.length-1;
-                bullets.splice(bulletscounter,1)
-                enemies.splice(i,1)
+                bulletscounter = bullets.length - 1;
+                bullets.splice(bulletscounter, 1)
+                enemies.splice(i, 1)
             }
         }
     }
 
-    bullet_hit_obstacle(){
-        for (let i = 0;i<obstaclearray.length;i++){
-            let distance_x =this.x - (obstaclearray[i].x + 50);
-            let distance_y =this.y - (obstaclearray[i].y + 50);
-            let radii_sum = 56+this.radius;
-            if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum){
-                bulletscounter = bullets.length-1;
-                bullets.splice(bulletscounter,1)
-                for(let k=0 ; k<4 ; k++){
-                    for (let j=0 ; j<4 ; j++){
-                        ctx.drawImage(explosion,k,j,64,64,obstaclearray[i].x,obstaclearray[i].y,100,100)
+    bullet_hit_obstacle() {
+        for (let i = 0; i < obstaclearray.length; i++) {
+            let distance_x = this.x - (obstaclearray[i].x + 50);
+            let distance_y = this.y - (obstaclearray[i].y + 50);
+            let radii_sum = 56 + this.radius;
+            if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
+                // fxBexp.play();
+                bulletscounter = bullets.length - 1;
+                bullets.splice(bulletscounter, 1)
+                for (let k = 0; k < 4; k++) {
+                    for (let j = 0; j < 4; j++) {
+                        ctx.drawImage(explosion, k, j, 64, 64, obstaclearray[i].x, obstaclearray[i].y, 100, 100)
                     }
                 }
             }
@@ -400,7 +407,7 @@ class hiddencircle {
             player1.x = this.x + (radii_sum + 1) * unit_x;
             player1.y = (this.y + (radii_sum + 1) * unit_y);
             starDecrese();
-            
+
 
         }
         for (let i = 0; i < enemies.length; i++) {
@@ -451,7 +458,7 @@ var bullet = new Bullet(player1.x + player1.width / 2, player1.y + player1.heigh
 var bullets = [bullet];
 document.body.onkeyup = function (e) {
     if (e.keyCode == 32) {
-        if(countMusic === 1){
+        if (countMusic === 1) {
             fxBullt.play();
         }
         if (player1.framey === 0) {
@@ -473,6 +480,12 @@ function animate() {
     if (paused) {
         return;
     }
+    if (enemies.length < 3) {
+        totalEnemies = 2;
+        for (let i = 0; i < totalEnemies; i++) {
+            makeEnemies(4);
+        }
+    }
     //animate anything
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -489,7 +502,7 @@ function animate() {
     //enemy
     if (setUpEnemy) {
         for (var i = 0; i < totalEnemies; i++) {
-            makeEnemies();
+            makeEnemies(1);
         }
         setUpEnemy = false;
     }
@@ -498,11 +511,22 @@ function animate() {
             enemy.updateSpeed();
             enemy.draw();
             enemy.move();
-            // if(enemy.enemyhit()){
-            //     enemies.splice(i,1);
-            // };
+            if (enemy.enemyhit()) {
+                enemies.splice(i, 1);
+                if (countMusic === 1) {
+                    fxhitEnemy.play();
+                }
+
+                for (let k = 0; k < 4; k++) {
+                    for (let j = 0; j < 4; j++) {
+                        ctx.drawImage(explosion, k, j, 64, 64, enemy.x, enemy.y, 100, 100)
+                    }
+                }
+                lifeDecrese();
+            };
         });
     }
+
     ///star power up///
     timetodrawstar++;
     createStar();
@@ -526,6 +550,8 @@ function animate() {
     requestAnimationFrame(animate);
 }
 obsnum()
+
+
 
 //player move
 function moveplayer() {
@@ -551,67 +577,115 @@ function moveplayer() {
 }
 
 function starScoreIncrease() {
-    if(countMusic === 1){
+    if (countMusic === 1) {
         fxPowerup.play();
     }
-    starScore+=5;
+    starScore += 5;
     $("#starScore").text(+starScore);
     $("#starScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
-    $("#star").css({"animation-name":"bounce", "animation-play-state": " running" , "animation-duration": "1s",
-    "animation-iteration-count": "2"});
+    $("#star").css({
+        "animation-name": "bounce", "animation-play-state": " running", "animation-duration": "1s",
+        "animation-iteration-count": "2"
+    });
     Win();
 
 }
 function lifeScoreIncrease() {
-    if(countMusic === 1){
+    if (countMusic === 1) {
         fxLife.play();
     }
-    lifeScore+=5;
+    lifeScore += 5;
     $("#lifeScore").text(+lifeScore);
     $("#lifeScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
-    $("#life").css({"animation-name":"bounce", "animation-play-state": " running" , "animation-duration": "0.75s",
-    "animation-iteration-count": "2"});
+    $("#life").css({
+        "animation-name": "bounce", "animation-play-state": " running", "animation-duration": "0.75s",
+        "animation-iteration-count": "2"
+    });
     Win();
 }
 function Win() {
-    if (starScore >=20 && lifeScore >= 5) {
-        fxWin.play();
-        paused = true;
-        swal("CONGRATULATIONS..!","YOU WIN","success",{
+    if (starScore === 20 && lifeScore === 20) {
+        // paused = true;
+        nextLevel.play();
+        swal("GOOD JOb..!", "YOU WIN, Now you Become faster ...be carefual there is more ENEMYIES Now", "success", {
             button: "To Next Level!",
-          })
-        .then((value) =>{
-            document.location.reload();
-            clearInterval(interval); // Needed for Chrome to end game
-          });
+        })
+            .then((value) => {
+                nextLevel();
+            });
+    }
+    else if (starScore === 25 && lifeScore === 30) {
+        // paused = true;
+        nextLevel.play();
+        swal("GOOD JOb..!", "YOU WIN, Now you Become faster ...be carefual there is more ENEMYIES Now", "success", {
+            button: "To Next Level!",
+        })
+            .then((value) => {
+                nextLevel();
+        });
+
     }
 }
 
-function gameOver(){
-    if ( lifeScore === 26) {
+function gameOver() {
+    if (lifeScore < 1) {
         fxlose.play();
         paused = true;
-        swal("UNFORTIONATLY..!","YOU Lose","error",{
-            button: "TRY AGAIN!",
-          })
-        .then((value) =>{
-            document.location.reload();
-            clearInterval(interval); // Needed for Chrome to end game
-          });
+        swal("UNFORTIONATLY", "YOU LOOSE", "error", {
+            button: "TRY AGAIN",
+        })
+            .then((value) => {
+                document.location.reload();
+                clearInterval(interval);
+            });
     }
 }
-function starDecrese(){
-    if(countMusic === 1){
+function starDecrese() {
+    if (countMusic === 1) {
         fxObstacle.play();
     }
     if (starScore > 0) {
         starScore--;
         $("#starScore").text(+starScore);
-        $("#star").css({"animation-name":"rotate", "animation-play-state": " running" , "animation-duration": "0.75s",
-        "animation-iteration-count": "2","animation-direction": "alternate"});
-        gameOver();
+        $("#star").css({
+            "animation-name": "rotate", "animation-play-state": " running", "animation-duration": "0.75s"
+        });
+        Win();
     }
 }
-function lifeDecreseStyle(){
+function lifeDecrese() {
+    if (lifeScore > 0) {
+        lifeScore--;
+        $("#lifeScore").text(+lifeScore);
+        $("#lifeScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
+        $("#life").css({
+            "animation-name": "rotate", "animation-play-state": " running", "animation-duration": "0.75s",
+        });
+        gameOver();
+
+    }
+}
+function nextLevel() {
+    // player1.push();
+    totalEnemies = 2;
+    for (var i = 0; i < totalEnemies; i++) {
+        makeEnemies(6);
+    }
+
+}
+function End() {
+    fxWin.play();
+    paused = true;
+    $("#win").slideDown(1000);
+    $("#goal").toggle(3000);
+
+    swal("CONGRATULATIONS..!", {
+        button: "Exit"
+    })
+        .then((value) => {
+
+            location.replace("intro.html");
+
+        });
 
 }

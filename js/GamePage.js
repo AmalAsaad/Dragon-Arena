@@ -1,17 +1,21 @@
 
-function runGame() {
-    location.assign("gamePage.html");
+function runGame() {    
+    location.replace("gamePage.html");
 }
+
 // game variables//
 var countMusic = 1;
 var click = 0;
 var count = 1;
+$("#win").hide();
+$("#goal").hide();
 
 //Ready go show up//
-$(".ready").toggle(1000);
-$(".go").show(1000).slideUp(3000);
+
 $("#pauseBtn").click();
 $("pause").toggle(1000);
+$(".go").hide();
+$(".ready").hide();
 
 // listener events//
 document.getElementById("pauseBtn").addEventListener("click", popUp);
@@ -21,9 +25,7 @@ document.getElementById("homePage").addEventListener("click", backHome);
 document.getElementById("reset").addEventListener("click", runGame);
 document.getElementById("playSound").addEventListener("click", playSound);
 document.getElementById("playMusic").addEventListener("click", playMusic);
-document.addEventListener("mousedown",autoPlaySound);
-
-
+document.addEventListener("keypress",autoPlaySound);
 $("#pauseBtn").hover(function(){
     $(this).css("height", "90px");    
 },function(){
