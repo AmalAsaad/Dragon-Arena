@@ -52,11 +52,10 @@ window.addEventListener("keyup", function (e) {
 
 // update canvas
 window.onload = function () {
-    swal("ready to play?", "press Eny key to start or Click LETS START",{
-        button: "LETS START",
+    swal("ready to play?", "press ENTER key to start with MUSIC or click 'LETS START' with SILENCE",{
+        button: "LETS START"
     })
         .then((value) => {
-            autoPlaySound();
             $(".ready").show().toggle(1500);
             $(".go").show(1000).slideUp(1000);
             requestAnimationFrame(animate);
@@ -594,7 +593,7 @@ function lifeScoreIncrease() {
     if (countMusic === 1) {
         fxLife.play();
     }
-    lifeScore += 2;
+    lifeScore += 1;
     $("#lifeScore").text(+lifeScore);
     $("#lifeScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
     $("#life").css({
@@ -658,7 +657,7 @@ function starDecrese() {
 }
 function lifeDecrese() {
     if (lifeScore > 0) {
-        lifeScore-=3;
+        lifeScore-=1;
         $("#lifeScore").text(+lifeScore);
         $("#lifeScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
         $("#life").css({
@@ -682,7 +681,7 @@ function nextLevel2() {
     // player1.push();
     totalEnemies = 3;
     for (var i = 0; i < totalEnemies; i++) {
-        makeEnemies(6);
+        makeEnemies(10);
     }
 
 }
