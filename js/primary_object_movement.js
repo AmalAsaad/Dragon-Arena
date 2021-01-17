@@ -53,7 +53,7 @@ var maxH = Math.floor(canvas.height);
 var rangeH = Math.floor(Math.random() * (maxH - minH) + minH);
 var minW = Math.ceil(this.x);
 var maxW = Math.floor(canvas.width);
-var rangeW = Math.floor(Math.random() * (maxW - minW) + minW); 
+var rangeW = Math.floor(Math.random() * (maxW - minW) + minW);
 
 // game array
 const obsx = [300, 400, 800, 975, 55, 1150, 1100, 200];
@@ -516,30 +516,13 @@ function Win() {
     if (starScore >= 35 && level1) {
         // paused = true;
         nextLevel.play();
-        swal("GOOD JOb..!", "YOU WIN, Now you Become faster ...be carefual there is more ENEMYIES Now", "success", {
-            button: "To Next Level!",
-        })
-            .then((value) => {
-                window.setTimeout(function () {
-                    // paused = false;
-                    nextLevel1();
-                }, 2000);
-            });
+        nextLevel1();
         level1 = false;
     }
     else if (starScore >= 70 && level2) {
-        // paused = true;
         nextLevel.play();
-        swal("GOOD JOb..!", "YOU WIN, Now you Become faster ...be carefual there is more ENEMYIES Now", "success", {
-            button: "To Next Level!",
-        })
-            .then((value) => {
-                window.setTimeout(function () {
-                    nextLevel2();
-                }, 2000);
-            });
+        nextLevel2();
         level2 = false;
-
     }
     else if (starScore >= 100) {
         End();
@@ -584,20 +567,36 @@ function lifeDecrese() {
     }
 }
 function nextLevel1() {
-    paused = false;
-    player1.speed = 6;
-    totalEnemies = 2;
-    for (var i = 0; i < totalEnemies; i++) {
-        makeEnemies(6);
-    }
+    swal("GOOD JOb..!", " Now you Become faster And there is more ENEMYIES Now", "success", {
+        button: "To LEVEL 2!",
+    })
+        .then((value) => {
+            window.setTimeout(function () {
+                player1.speed = 7;
+                totalEnemies = 2;
+                for (var i = 0; i < totalEnemies; i++) {
+                    makeEnemies(7);
+                }
+
+            }, 2000);
+        });
+
+
 }
 function nextLevel2() {
-    paused = false;
-    player1.speed = 10;
-    totalEnemies = 4;
-    for (var i = 0; i < totalEnemies; i++) {
-        makeEnemies(10);
-    }
+    swal("GOOD JOb..!", " Now you Become faster And there is more ENEMYIES Now", "success", {
+        button: "To LEVEL 3!",
+    })
+        .then((value) => {
+            window.setTimeout(function () {
+                player1.speed = 10;
+                totalEnemies = 4;
+                for (var i = 0; i < totalEnemies; i++) {
+                    makeEnemies(10);
+                }
+
+            }, 2000);
+        });
 }
 function End() {
     fxWin.play();

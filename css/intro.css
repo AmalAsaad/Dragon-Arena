@@ -5,7 +5,12 @@
 }
 
 body{
-    background-color: #5e0e53;
+    /* background-color: #5e0e53; */
+    background-image:url("../Img/introBg.jpg") ;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
 }
 
 .container{
@@ -17,7 +22,7 @@ body{
     width: 100%;
 }
 .container span{
-    color: rgb(6, 13, 34);
+    color: rgb(3, 11, 14);
     text-transform: uppercase;
     display: block;
 }
@@ -27,9 +32,10 @@ body{
     font-size: 100px;
     font-weight: 700;
     margin-bottom: 20px;
-    background: #fdfa4c;
+    background: #c48e2b;
     position: relative;
     animation: text 3s 1;
+
 }
 
 .text2{
@@ -39,7 +45,7 @@ body{
 
 @keyframes text{
     0%{
-        color: black;
+        color: rgb(252, 227, 7);
         margin-bottom: -85px;
     }
 
