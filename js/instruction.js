@@ -1,6 +1,14 @@
 document.getElementById("toggle").addEventListener("click",showmenu)
 document.getElementById("close").addEventListener("click",hideb)
 document.getElementById("close1").addEventListener("click",hidem)
+///////////Directing to game page//////////
+function runGame(){
+        location.assign("gamePage.html");
+    }
+    ////////Owner button////////////
+    $("#owner").click(function(){
+        $("#names").show();
+});
 function showmenu(){
         document.getElementById("menu").style.transform="scale(3)"
 }
