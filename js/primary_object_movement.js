@@ -684,7 +684,7 @@ function End() {
     })
         .then((value) => {
 
-            location.replace("index.html");
+            location.replace("intro.html");
 
         });
 

@@ -5,7 +5,8 @@
 }
 
 body{
-    background-color: #750eb1;
+    background-color: #5e0e53;
+
 }
 
 .container{
@@ -17,7 +18,7 @@ body{
     width: 100%;
 }
 .container span{
-    color: rgb(31, 29, 8);
+    color: rgb(6, 13, 34);
     text-transform: uppercase;
     display: block;
 }
