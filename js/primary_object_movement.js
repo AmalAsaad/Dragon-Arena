@@ -52,11 +52,12 @@ window.addEventListener("keyup", function (e) {
 
 // update canvas
 window.onload = function () {
-    swal("Are you ready to play", "Lets Start", {
-        button: "READY",
+    swal("ready to play?", "press Eny key to start or Click LETS START",{
+        button: "LETS START",
     })
         .then((value) => {
-            $(".ready").show().toggle(1000);
+            autoPlaySound();
+            $(".ready").show().toggle(1500);
             $(".go").show(1000).slideUp(1000);
             requestAnimationFrame(animate);
         });
@@ -154,7 +155,7 @@ function createLife() {
         let radii_sum = (player1.radius) + 11;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             heart.splice(0, 1);
-            if (lifeScore > 35 && starScore > 30) {
+            if (lifeScore > 40 && starScore >35) {
                 End();
             }
             else {
@@ -588,13 +589,12 @@ function starScoreIncrease() {
         "animation-iteration-count": "2"
     });
     Win();
-
 }
 function lifeScoreIncrease() {
     if (countMusic === 1) {
         fxLife.play();
     }
-    lifeScore += 5;
+    lifeScore += 2;
     $("#lifeScore").text(+lifeScore);
     $("#lifeScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
     $("#life").css({
@@ -604,26 +604,30 @@ function lifeScoreIncrease() {
     Win();
 }
 function Win() {
-    if (starScore === 20 && lifeScore === 20) {
+    if (starScore >= 20 && lifeScore <= 10) {
         // paused = true;
         nextLevel.play();
         swal("GOOD JOb..!", "YOU WIN, Now you Become faster ...be carefual there is more ENEMYIES Now", "success", {
             button: "To Next Level!",
         })
             .then((value) => {
-                nextLevel();
+                window.setTimeout(function () {
+                    // paused = false;
+                    nextLevel1();
+                }, 2000);
             });
     }
-    else if (starScore === 25 && lifeScore === 30) {
+    else if (starScore >= 30 && lifeScore >= 30) {
         // paused = true;
         nextLevel.play();
         swal("GOOD JOb..!", "YOU WIN, Now you Become faster ...be carefual there is more ENEMYIES Now", "success", {
             button: "To Next Level!",
         })
             .then((value) => {
-                nextLevel();
-        });
-
+                window.setTimeout(function () {                   
+                    nextLevel2();
+                }, 2000);
+            });
     }
 }
 
@@ -650,12 +654,11 @@ function starDecrese() {
         $("#star").css({
             "animation-name": "rotate", "animation-play-state": " running", "animation-duration": "0.75s"
         });
-        Win();
     }
 }
 function lifeDecrese() {
     if (lifeScore > 0) {
-        lifeScore--;
+        lifeScore-=3;
         $("#lifeScore").text(+lifeScore);
         $("#lifeScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
         $("#life").css({
@@ -665,9 +668,19 @@ function lifeDecrese() {
 
     }
 }
-function nextLevel() {
+function nextLevel1() {
+    paused = false;
     // player1.push();
     totalEnemies = 2;
+    for (var i = 0; i < totalEnemies; i++) {
+        makeEnemies(6);
+    }
+
+}
+function nextLevel2() {
+    paused = false;
+    // player1.push();
+    totalEnemies = 3;
     for (var i = 0; i < totalEnemies; i++) {
         makeEnemies(6);
     }
@@ -677,15 +690,14 @@ function End() {
     fxWin.play();
     paused = true;
     $("#win").slideDown(1000);
-    $("#goal").toggle(3000);
+    $("#goal").toggle(2000);
+    window.setTimeout(function () {
+        swal("CONGRATULATIONS..!", {
+            button: "Exit"
+        })
+            .then((value) => {
+                location.replace("intro.html");
+            });
 
-    swal("CONGRATULATIONS..!", {
-        button: "Exit"
-    })
-        .then((value) => {
-
-            location.replace("intro.html");
-
-        });
-
+    }, 2000);
 }
