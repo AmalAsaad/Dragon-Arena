@@ -1,5 +1,6 @@
 document.getElementById("toggle").addEventListener("click",showmenu)
 document.getElementById("close").addEventListener("click",hideb)
+document.getElementById("close1").addEventListener("click",hidem)
 function showmenu(){
         document.getElementById("menu").style.transform="scale(3)"
 }
@@ -24,4 +25,7 @@ function showb3(){
 function hideb(){
         document.getElementById("containerofmenus").style.display="none"
         document.getElementById("menu").style.transform="scale(0)"
+}
+function hidem(){
+    $("#names").hide();
 }

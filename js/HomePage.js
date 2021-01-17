@@ -4,5 +4,5 @@ function runGame(){
 }
 ////////Owner button////////////
 $("#owner").click(function(){
-    $("#names").slideToggle();
+    $("#names").show();
 });

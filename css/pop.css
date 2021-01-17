@@ -1,4 +1,4 @@
-#containerofmenus{
+#containerofmenus,#names{
     display: none;
     position: absolute;
     left:380px;
@@ -12,9 +12,30 @@
     height: 495px;
     position:absolute;
     border-radius: 15%;
-    z-index: -1;
+    /* z-index: -1; */
 }
-#sticker{
+#ownerboard{
+    width: 600px;
+    height: 300px;
+    position:absolute;
+    border-radius: 15%;
+    /* z-index: -1; */
+}
+#ournames{
+    position: absolute;
+    left: 50px;
+    top:50px;
+}
+ul li{
+    width: 400px;
+    font-size: 35px;
+    color: rgb(77, 4, 77);
+    font-family: arial;
+    font-weight: bold;
+    font-style: italic;
+    padding-bottom: 30px;
+}
+#sticker,#ownersticker{
     position: absolute;
     left: 180px;
     top:-30px;
@@ -22,7 +43,7 @@
     width: 200px;
     -webkit-animation: bounce 1s;
 }
-#controlheader,#PowerUpheader,#Goalheader{
+#controlheader,#PowerUpheader,#Goalheader,#ownerheader{
     position: absolute;
     left: 200px;
     top: -30px;
@@ -190,7 +211,7 @@ p{
     font-size: 28px;
     background-color:burlywood;
 }
-#close{
+#close,#close1{
     background: red;
     height: 50px;
     width: 50px;
@@ -201,11 +222,11 @@ p{
     left: 530px;
     -webkit-animation: bounce 1s;
 }
-#close a{
+#close a,#close1 a{
     color: white;
     font-size: 44px;   
 }
-#close a:hover{
+#close a :hover,#close1 a :hover{
     transform:rotate(45deg);
 }
 @keyframes goDown{
