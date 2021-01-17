@@ -31,6 +31,7 @@ var enemycounter = 3;
 var setUpEnemy = true;
 var totalEnemies = 3;
 var bulletscounter;
+var gameframe = 0;
 
 // game array
 const obsx = [300, 400, 800, 975, 55, 1150, 1100, 200];
@@ -45,9 +46,11 @@ const starr = [];
 //events on arrows for player movement//
 window.addEventListener("keydown", function (e) {
     keys[e.which] = true;
+    player1.moving = true;
 })
 window.addEventListener("keyup", function (e) {
     delete keys[e.which];
+    player1.moving = false;
 })
 
 // update canvas
@@ -69,7 +72,7 @@ playersprite.src = "Img/leviathan.png"
 const obst = new Image();
 obst.src = "Img/Obstcle.png"
 const enemy = new Image();
-enemy.src = "Img/leviathan.png";
+enemy.src = "Img/bahamut.png";
 const starphoto = new Image()
 starphoto.src = "Img/star.png";
 const lifephoto = new Image()
@@ -179,6 +182,7 @@ class player {
         this.framey = 0
         this.speed = 5
         this.radius = 40;
+        this.moving=false;
     }
 }
 
@@ -206,6 +210,17 @@ class redEnemy {
     }
     draw() {
         ctx.drawImage(enemy, this.w * this.framex, this.h * this.framey, this.w, this.h, this.x, this.y, this.w, this.h);
+    }
+
+    handleenemyframe(){
+        if (gameframe%5 === 0){
+            if(this.framex<3){
+                this.framex++;
+            }
+            else{
+                this.framex=0;
+            }
+        } 
     }
 
     enemyhit() {
@@ -453,6 +468,18 @@ function drawsprite(img, sx, sy, sw, sh, dx, dy, dw, dh) {
     ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
 }
 
+function handleplayerframe(){
+    if (gameframe%5 === 0){
+        if(player1.framex<3){
+            player1.framex++;
+        }
+        else{
+            player1.framex=0;
+        }
+    } 
+    gameframe++;
+}
+
 /////create bullet////
 var bullet = new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 5, 'blueviolet', { x: 0, y: 10 });
 var bullets = [bullet];
@@ -498,7 +525,7 @@ function animate() {
     //player
     drawsprite(playersprite, player1.width * player1.framex, player1.height * player1.framey, player1.width, player1.height, player1.x, player1.y, player1.width, player1.height)
     moveplayer();
-
+    handleplayerframe();
     //enemy
     if (setUpEnemy) {
         for (var i = 0; i < totalEnemies; i++) {
@@ -509,6 +536,7 @@ function animate() {
     if (enemies.length > 0) {
         enemies.forEach(function (enemy, i) {
             enemy.updateSpeed();
+            enemy.handleenemyframe();
             enemy.draw();
             enemy.move();
             if (enemy.enemyhit()) {
