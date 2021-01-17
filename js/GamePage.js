@@ -1,5 +1,5 @@
 
-function runGame() {    
+function runGame() {
     location.replace("gamePage.html");
 }
 
@@ -25,10 +25,10 @@ document.getElementById("homePage").addEventListener("click", backHome);
 document.getElementById("reset").addEventListener("click", runGame);
 document.getElementById("playSound").addEventListener("click", playSound);
 document.getElementById("playMusic").addEventListener("click", playMusic);
-document.addEventListener("keypress",autoPlaySound);
-$("#pauseBtn").hover(function(){
-    $(this).css("height", "90px");    
-},function(){
+document.addEventListener("keypress", autoPlaySound);
+$("#pauseBtn").hover(function () {
+    $(this).css("height", "90px");
+}, function () {
     $(this).css("height", "70px");
 })
 
@@ -54,8 +54,8 @@ function popUp() {
         containerElement.setAttribute('class', 'blur');
         document.getElementById("3").setAttribute('class', 'blur');
         document.getElementById("2").setAttribute('class', 'blur');
-        paused = true;        
-    } 
+        paused = true;
+    }
 }
 
 function popDown() {
@@ -161,17 +161,21 @@ function autoPlayMusic() {
     });
 }
 
-function autoPlaySound() {
-    if (count === 1){
-        sound.play();
-        $("#playSound").animate({ left: '85px' }, 200, function () {
-            off1.src = "Img/on.png";
-            offtxt1.textContent = "ON";
-            $("#offtxt1").css("left", "55px");
-        });
+function autoPlaySound(e) {
+    if (e.key === 'Enter') {
+        if (count === 1) {
+            sound.play();
+            $("#playSound").animate({ left: '85px' }, 200, function () {
+                off1.src = "Img/on.png";
+                offtxt1.textContent = "ON";
+                $("#offtxt1").css("left", "55px");
+            });
+
+        }
 
     }
-   
+
+
 }
 
 
