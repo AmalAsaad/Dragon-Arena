@@ -15,6 +15,9 @@ var fxObstacle = new Audio("sound/obstcale.wav");
 var play = new Audio("sound/music.mp3");
 var fxWin = new Audio("sound/win.wav");
 var fxlose = new Audio("sound/gameOver.mp3");
+var fxBexp = new Audio("sound/bullet-exp.wav");
+var fxhitEnemy = new Audio("sound/hitEnemy.mp3");
+var nextLevel= new Audio("sound/nextlevel.wav");
 
 
 
@@ -49,7 +52,14 @@ window.addEventListener("keyup", function (e) {
 
 // update canvas
 window.onload = function () {
-    requestAnimationFrame(animate);
+    swal("Are you ready to play", "Lets Start", {
+        button: "READY",
+    })
+        .then((value) => {
+            $(".ready").show().toggle(1000);
+            $(".go").show(1000).slideUp(1000);
+            requestAnimationFrame(animate);
+        });
 }
 
 /// game images ///
@@ -65,7 +75,7 @@ starphoto.src = "Img/star.png";
 const lifephoto = new Image()
 lifephoto.src = "Img/heart.png";
 const explosion = new Image();
-explosion.src = "exp2_0.png"
+explosion.src = "Img/exp2_0.png"
 
 
 
@@ -144,10 +154,14 @@ function createLife() {
         let radii_sum = (player1.radius) + 11;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             heart.splice(0, 1);
-            lifeScoreIncrease();
+            if (lifeScore > 30 && starScore >25) {
+                End();
+            }
+            else {
+                lifeScoreIncrease();
+            }
         }
     }
-
     if (heart.length > 0) {
         heart[0].draw();
     }
@@ -200,11 +214,9 @@ class redEnemy {
         let radii_sum = 80;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             return true;
-            console.log("collision");
+
         }
     }
-
-    // || this.x + this.w >= canvas.width
     updateSpeed() {
         // 0 +y Down.
         if (this.framey === 0) {
@@ -232,14 +244,12 @@ class redEnemy {
                 this.yspeed *= -1;
             }
         }
-
-
     }
     move() {
         // 0 +y Down.
         if (this.framey === 0) {
             this.y += this.yspeed;
-            if (this.y >= canvas.height - this.h - 300) {
+            if (this.y >= canvas.height - this.h - 100) {
                 // 2 +x Right.
                 this.framey = 2;
                 if (this.xspeed < 0) {
@@ -250,7 +260,7 @@ class redEnemy {
         // 2 +x Right.
         else if (this.framey === 2) {
             this.x += this.xspeed;
-            if (this.x >= canvas.width - this.w - 400) {
+            if (this.x >= canvas.width - this.w - 350) {
                 // 3 -y Up.
                 this.framey = 3;
                 if (this.yspeed > 0) {
@@ -285,9 +295,8 @@ class redEnemy {
     }
 }
 //create enemies 
-function makeEnemies() {
+function makeEnemies(enemycounter) {
     var enemyangle = 90;
-    // const gap = Math.floor(Math.random() * 100)+3;
     const gap = Math.floor(Math.random() * 100) + 10;
     var enemyW = 96;
     var enemyH = 96;
@@ -301,8 +310,6 @@ function makeEnemies() {
     enemycounter++;
     enemies.push(enemy);
 }
-
-
 //obstacle class
 class obstacle {
     constructor() {
@@ -311,7 +318,6 @@ class obstacle {
         this.sx = Math.floor(Math.random() * 6);
     }
 }
-
 ///Bullet///
 class Bullet {
     constructor(bx, by, br, bc, bs) {
@@ -332,13 +338,15 @@ class Bullet {
         this.x += this.speed.x;
         this.y += this.speed.y;
     }
-
     killenemy() {
         for (let i = 0; i < enemies.length; i++) {
             let distance_x = this.x - (enemies[i].x + enemies[i].w / 2);
             let distance_y = this.y - (enemies[i].y + enemies[i].h / 2);
             let radii_sum = 40 + this.radius;
             if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
+                if(countMusic===1){
+                    fxBexp.play();
+                }
                 for (let k = 0; k < 4; k++) {
                     for (let j = 0; j < 4; j++) {
                         ctx.drawImage(explosion, k, j, 64, 64, enemies[i].x, enemies[i].y, 100, 100)
@@ -357,6 +365,7 @@ class Bullet {
             let distance_y = this.y - (obstaclearray[i].y + 50);
             let radii_sum = 56 + this.radius;
             if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
+                // fxBexp.play();
                 bulletscounter = bullets.length - 1;
                 bullets.splice(bulletscounter, 1)
                 for (let k = 0; k < 4; k++) {
@@ -474,7 +483,7 @@ function animate() {
     if (enemies.length < 3) {
         totalEnemies = 2;
         for (let i = 0; i < totalEnemies; i++) {
-            makeEnemies();
+            makeEnemies(4);
         }
     }
     //animate anything
@@ -493,7 +502,7 @@ function animate() {
     //enemy
     if (setUpEnemy) {
         for (var i = 0; i < totalEnemies; i++) {
-            makeEnemies();
+            makeEnemies(1);
         }
         setUpEnemy = false;
     }
@@ -504,12 +513,20 @@ function animate() {
             enemy.move();
             if (enemy.enemyhit()) {
                 enemies.splice(i, 1);
-                console.log(enemies.length);
+                if(countMusic === 1){
+                    fxhitEnemy.play();
+                }
+                
+                for (let k = 0; k < 4; k++) {
+                    for (let j = 0; j < 4; j++) {
+                        ctx.drawImage(explosion, k, j, 64, 64, enemy.x, enemy.y, 100, 100)
+                    }
+                }
                 lifeDecrese();
             };
         });
     }
-   
+
     ///star power up///
     timetodrawstar++;
     createStar();
@@ -588,31 +605,27 @@ function lifeScoreIncrease() {
 }
 function Win() {
     if (starScore >= 20 && lifeScore >= 20) {
-        fxWin.play();
-        paused = true;
-        swal("CONGRATULATIONS..!", "YOU WIN","success", {
+        // paused = true;
+        nextLevel.play();
+        swal("GOOD JOb..!", "YOU WIN, Now you Become faster ...be carefual there is more ENEMYIES Now", "success", {
             button: "To Next Level!",
         })
-        .then((value) => {
-            paused = false;
-            totalEnemies = 2;
-            for (var i = 0; i < totalEnemies; i++) {
-                makeEnemies();
-            }
-        });
+            .then((value) => {
+                nextLevel();
+            });
     }
 }
 
 function gameOver() {
-    if (lifeScore <1) {
+    if (lifeScore < 1) {
         fxlose.play();
         paused = true;
-        swal("UNFORTIONATLY..!", "YOU Lose", "error", {
-            button: "TRY AGAIN!",
+        swal("UNFORTIONATLY", "YOU LOOSE", "error", {
+            button: "TRY AGAIN",
         })
             .then((value) => {
                 document.location.reload();
-                clearInterval(interval); // Needed for Chrome to end game
+                clearInterval(interval);
             });
     }
 }
@@ -624,8 +637,7 @@ function starDecrese() {
         starScore--;
         $("#starScore").text(+starScore);
         $("#star").css({
-            "animation-name": "rotate", "animation-play-state": " running", "animation-duration": "0.75s",
-            "animation-iteration-count": "2", "animation-direction": "alternate"
+            "animation-name": "rotate", "animation-play-state": " running", "animation-duration": "0.75s"
         });
         Win();
     }
@@ -637,9 +649,32 @@ function lifeDecrese() {
         $("#lifeScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
         $("#life").css({
             "animation-name": "rotate", "animation-play-state": " running", "animation-duration": "0.75s",
-            "animation-iteration-count": "2", "animation-direction": "alternate"
         });
         gameOver();
 
     }
+}
+function nextLevel() {
+    // player1.push();
+    totalEnemies = 2;
+    for (var i = 0; i < totalEnemies; i++) {
+        makeEnemies(6);
+    }
+
+}
+function End() {
+    fxWin.play();
+    paused = true;
+    $("#win").slideDown(1000);
+    $("#goal").toggle(3000);
+    
+    swal("CONGRATULATIONS..!", {
+        button: "Exit"
+    })
+        .then((value) => {
+
+            location.replace("index.html");
+
+    });
+
 }
