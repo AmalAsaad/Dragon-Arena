@@ -11,13 +11,6 @@ body{
 #ourimages{
     margin-left: 50px;
     height: 100px;
-    /* block-size: auto; */
-}
-#help{
-    height: 70px;
-    width: 70px;
-    margin-top: 30px;
-    border-radius: 50%;
 }
 #owner{
     height: 90px;
@@ -25,6 +18,16 @@ body{
     margin-top: 30px;
     margin-left: 1100px;
     border-radius: 50px;
+}
+#play,#owner{
+    -webkit-animation: bounce 1s infinite;
+}
+#play{
+    position: fixed;
+    bottom: 10px;
+    left: 1000px;
+    height: 80px;
+    width: 250px;
 }
 @-webkit-keyframes bounce {
 0% {
@@ -40,43 +43,7 @@ transform: scale(1,1.1) translate(0px, -25px);
 transform: scale(1,1) translate(0px, 0px);
 }
 }
-#play,#help,#owner{
-    -webkit-animation: bounce 1s infinite;
-}
-#play{
-    position: fixed;
-    bottom: 10px;
-    left: 1000px;
-    height: 80px;
-    width: 250px;
-}
-ul li{
-    height: 50px;
-}
-#names{
-    display: none;
-    right: 380px;
-    background-image: url("../Img/tut-board.png");
-    background-size: cover;
-    width: 450px;
-    border-radius: 25px;
-    position:absolute;
-    animation-name: example;
-    animation-duration: 1s;
-    font-size: 40px;
-    font-style: italic;
-    font-weight: bold;
-    color: rgb(86, 10, 93);
-}
-@keyframes example{
-from{top:0px;}
-to{top:100px;}
-}
-#exit{
-    width:30px; 
-    height:30px;
-    margin-left: 40px;
-    border-radius: 50%;
-    box-sizing: border-box;
-}
-
+@keyframes animateDown{
+    from{top:0px;}
+    to{top:80px;}
+  }

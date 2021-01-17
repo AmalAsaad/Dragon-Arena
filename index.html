@@ -1,45 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Dragon Arena</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/HomePage.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
-        <link href="css/menu.css" rel="stylesheet">
-        <link href="css/pop.css" rel="stylesheet">        
-    </head>
-    <body>
+<head>
+    <title>Dragon Arena</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/HomePage.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link href="css/menu.css" rel="stylesheet">
+    <link href="css/pop.css" rel="stylesheet">        
+</head>
+<body>
         <!-- Home Page -->
-        <div id="ourimages">
-          <!-- <input type="image" id="help" src="Img/help1.jpg" alt="help image"> -->
+    <div id="ourimages">
           <input type="image" id="owner" src="Img/user.jpg" alt="owner image">
-        </div>
+    </div>
         <!-- Owner of the game -->
-        <ul id="names">
-            This game is made by:
-            <li>Amaal Asaad </li>
-            <li>Mohammed Ahmed</li>
-            <li>Samar Khaled</li>
-        </ul>
-    <!--------instruction button-------->
-    <div class="toggle" id="toggle">
-        <i class="fas fa-folder-minus" id="plus"></i>
-    </div>
-
-    <div class="menu" id="menu">
-        <a href="#" id="bullets" onclick="showb3()"><i class="fas fa-meteor"></i></a>
-        <a href="#" onclick="showb1()"><i class="fas fa-gamepad"></i></a>
-        <a href="#" onclick="showb2()"><i class="fas fa-gift"></i></a>
-    </div>
-
-    <div id="controlmenu">
-        <input type="image" src="Img\tut-board.png" id="control">
-        <input type="image" src="Img/sticker.png" id="controlsticker">
-        <h1 id="controlheader">Instructions</h1>
+    <div id="names">
+        <input type="image" src="Img\tut-board.png" id="ownerboard">
+        <input type="image" src="Img/sticker.png" id="ownersticker">
         <div id="close1">
             <a href="#"><i class="fas fa-times"></i></a>
         </div>
+        <h1 id="ownerheader">Owners</h1>
+        <ul id="ournames">
+            <li>Amaal Asaad </li>
+            <li>Mohammed Ahmed</li>
+            <li>Samar Khaled Mostafa</li>
+        </ul>
+    </div>
+    <!--------instruction button-------->
+ <div class="toggle" id="toggle">
+        <i class="fas fa-folder-minus" id="plus"></i>
+ </div>
+ <div class="menu" id="menu">
+        <a href="#" id="bullets" onclick="showb3()"><i class="fas fa-meteor"></i></a>
+        <a href="#" onclick="showb1()"><i class="fas fa-gamepad"></i></a>
+        <a href="#" onclick="showb2()"><i class="fas fa-gift"></i></a>
+ </div>
+ <section id="containerofmenus">
+        <input type="image" src="Img\tut-board.png" id="menuboard">
+        <input type="image" src="Img/sticker.png" id="sticker">
+        <div id="close">
+            <a href="#"><i class="fas fa-times"></i></a>
+        </div>
+    <div id="controlmenu">
+        <h1 id="controlheader">Instructions</h1>
         <input id="updr" type="image" src="Img/updr.jpg">
         <input id="up" type="image" src="Img/up.jpg">
         <input id="leftdr" type="image" src="Img/leftdr.jpg">
@@ -60,12 +65,7 @@
         <h1 id="backheader">Back to Home</h1>
     </div>
     <div id="PowerUpmenu">
-        <input type="image" src="Img\tut-board.png" id="power">
-        <input type="image" src="Img/sticker.png" id="powersticker">
         <h1 id="PowerUpheader">Power Ups</h1>
-        <div id="close2">
-            <a href="#"><i class="fas fa-times"></i></a>
-        </div>
         <div id="starblock">
             <input id="starpower" type="image" src="Img/star.png">
             <p>Take one star to increase your score by 5</p>
@@ -76,19 +76,13 @@
         </div>
     </div>
     <div id="Goalmenu">
-        <input type="image" src="Img\tut-board.png" id="goal">
-        <input type="image" src="Img/sticker.png" id="goalsticker">
         <h1 id="Goalheader">Main Goal</h1>
-        <div id="close3">
-            <a href="#"><i class="fas fa-times"></i></a>
-        </div>
     </div>
+ </section>
     <!---------------------------------->
     <!-- play game button -->
     <input type="image" id="play" src="Img/playNowButton.png" alt="play game image" onclick="runGame()">
-
-
-    <!-- <p>hello guys</p> -->
+    <!--javascript files  -->
     <script src="jquery-minified.js"></script>
     <script src="js/HomePage.js"></script>
     <script src="js/instruction.js"></script>
