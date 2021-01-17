@@ -20,13 +20,13 @@ var fxlose = new Audio("sound/gameOver.mp3");
 
 //game variables
 var paused = false;
-var lifeScore = 1;
+var lifeScore = 5;
 var starScore = 0;
 var timetodrawstar = 0;
 var timetodrawlife = 0;
 var enemycounter = 3;
 var setUpEnemy = true;
-var totalEnemies = 3; // Math.floor(Math.random()*10)+5; if want generate random enemy each level
+var totalEnemies = 3;
 var bulletscounter;
 
 // game array
@@ -157,8 +157,8 @@ function createLife() {
 // main character class//
 class player {
     constructor() {
-        this.x = 200;
-        this.y = 200
+        this.x = 500
+        this.y = 300
         this.width = 96
         this.height = 96
         this.framex = 0
@@ -339,29 +339,29 @@ class Bullet {
             let distance_y = this.y - (enemies[i].y + enemies[i].h / 2);
             let radii_sum = 40 + this.radius;
             if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
-                for(let k=0 ; k<4 ; k++){
-                    for (let j=0 ; j<4 ; j++){
-                        ctx.drawImage(explosion,k,j,64,64,enemies[i].x,enemies[i].y,100,100)
+                for (let k = 0; k < 4; k++) {
+                    for (let j = 0; j < 4; j++) {
+                        ctx.drawImage(explosion, k, j, 64, 64, enemies[i].x, enemies[i].y, 100, 100)
                     }
                 }
-                bulletscounter = bullets.length-1;
-                bullets.splice(bulletscounter,1)
-                enemies.splice(i,1)
+                bulletscounter = bullets.length - 1;
+                bullets.splice(bulletscounter, 1)
+                enemies.splice(i, 1)
             }
         }
     }
 
-    bullet_hit_obstacle(){
-        for (let i = 0;i<obstaclearray.length;i++){
-            let distance_x =this.x - (obstaclearray[i].x + 50);
-            let distance_y =this.y - (obstaclearray[i].y + 50);
-            let radii_sum = 56+this.radius;
-            if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum){
-                bulletscounter = bullets.length-1;
-                bullets.splice(bulletscounter,1)
-                for(let k=0 ; k<4 ; k++){
-                    for (let j=0 ; j<4 ; j++){
-                        ctx.drawImage(explosion,k,j,64,64,obstaclearray[i].x,obstaclearray[i].y,100,100)
+    bullet_hit_obstacle() {
+        for (let i = 0; i < obstaclearray.length; i++) {
+            let distance_x = this.x - (obstaclearray[i].x + 50);
+            let distance_y = this.y - (obstaclearray[i].y + 50);
+            let radii_sum = 56 + this.radius;
+            if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
+                bulletscounter = bullets.length - 1;
+                bullets.splice(bulletscounter, 1)
+                for (let k = 0; k < 4; k++) {
+                    for (let j = 0; j < 4; j++) {
+                        ctx.drawImage(explosion, k, j, 64, 64, obstaclearray[i].x, obstaclearray[i].y, 100, 100)
                     }
                 }
             }
@@ -471,11 +471,12 @@ function animate() {
     if (paused) {
         return;
     }
-    // if(starScore===5){
-    //     totalEnemies =5;
-    //     makeEnemies();
-
-    // }
+    if (enemies.length < 3) {
+        totalEnemies = 2;
+        for (let i = 0; i < totalEnemies; i++) {
+            makeEnemies();
+        }
+    }
     //animate anything
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -503,10 +504,12 @@ function animate() {
             enemy.move();
             if (enemy.enemyhit()) {
                 enemies.splice(i, 1);
+                console.log(enemies.length);
                 lifeDecrese();
             };
         });
     }
+   
     ///star power up///
     timetodrawstar++;
     createStar();
@@ -584,26 +587,24 @@ function lifeScoreIncrease() {
     Win();
 }
 function Win() {
-    if (starScore >= 20 && lifeScore >= 30) {
+    if (starScore >= 20 && lifeScore >= 20) {
         fxWin.play();
-        // paused = true;
-        totalEnemies = 5;
-        for(var i =0 ; i<totalEnemies; i++){
-            makeEnemies();
-        }
-        
-        console.log(totalEnemies);
-        swal("CONGRATULATIONS..!", "YOU WIN",  {
+        paused = true;
+        swal("CONGRATULATIONS..!", "YOU WIN","success", {
             button: "To Next Level!",
         })
-            // .then((value) => {
-            //     // Needed for Chrome to end game
-            // });
+        .then((value) => {
+            paused = false;
+            totalEnemies = 2;
+            for (var i = 0; i < totalEnemies; i++) {
+                makeEnemies();
+            }
+        });
     }
 }
 
 function gameOver() {
-    if (lifeScore === 30) {
+    if (lifeScore <1) {
         fxlose.play();
         paused = true;
         swal("UNFORTIONATLY..!", "YOU Lose", "error", {
@@ -626,12 +627,18 @@ function starDecrese() {
             "animation-name": "rotate", "animation-play-state": " running", "animation-duration": "0.75s",
             "animation-iteration-count": "2", "animation-direction": "alternate"
         });
-        gameOver();
+        Win();
     }
 }
 function lifeDecrese() {
-    if (lifeScore > 0 ) {
-        lifeScore --;
+    if (lifeScore > 0) {
+        lifeScore--;
+        $("#lifeScore").text(+lifeScore);
+        $("#lifeScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
+        $("#life").css({
+            "animation-name": "rotate", "animation-play-state": " running", "animation-duration": "0.75s",
+            "animation-iteration-count": "2", "animation-direction": "alternate"
+        });
         gameOver();
 
     }

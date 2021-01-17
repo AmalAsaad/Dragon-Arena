@@ -1,13 +1,7 @@
 
 function runGame() {    
     location.replace("gamePage.html");
-    // swal("UNFORTIONATLY..!", "YOU Lose", {
-    //     button: "yes",
-    // })
-    //     .then((value) => {
-    //         location.replace("gamePage.html");
-    //         sound.play();
-    //     });     
+    // paused = true;
 }
 
 // game variables//
