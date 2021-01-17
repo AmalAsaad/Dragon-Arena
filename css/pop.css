@@ -172,18 +172,21 @@ ul li{
     top:410px;
     left:150px;
 }
-#starblock{
-    position: absolute;
-    left:50px;
+#starblock,#level1{
     top:70px;
-    background-color: burlywood;
-    border-radius: 50px;
-    width: 450px;
 }
-#lifeblock{
+#stardec,#level2{
+    top:170px;
+}
+#lifeblock,#level3{
+    top:270px;
+}
+#lifedec,#goodbye{
+    top:370px;
+}
+#starblock,#lifeblock,#stardec,#lifedec,#level1,#level2,#level3,#goodbye{
     position: absolute;
     left:50px;
-    top:170px;
     background-color: burlywood;
     border-radius: 50px;
     width: 450px;
@@ -196,7 +199,13 @@ ul li{
     height: 34px;
     -webkit-animation: bounce 1.5s infinite;
 }
+.caution{
+    width:34px;
+    height: 34px;
+    border-radius: 25px;
+}
 p{
+    margin-left: 20px;
     display: inline-block;
     font-family: arial;
     font-weight: bold;
@@ -210,6 +219,11 @@ p{
     font-weight: bold;
     font-size: 28px;
     background-color:burlywood;
+}
+span{
+    text-decoration: underline;
+    font-style: italic;
+    color:red;
 }
 #close,#close1{
     background: red;
