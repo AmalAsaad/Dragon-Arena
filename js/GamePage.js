@@ -26,8 +26,6 @@ document.getElementById("reset").addEventListener("click", runGame);
 document.getElementById("playSound").addEventListener("click", playSound);
 document.getElementById("playMusic").addEventListener("click", playMusic);
 document.addEventListener("keypress",autoPlaySound);
-
-
 $("#pauseBtn").hover(function(){
     $(this).css("height", "90px");    
 },function(){

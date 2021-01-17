@@ -17,7 +17,7 @@ var fxWin = new Audio("sound/win.wav");
 var fxlose = new Audio("sound/gameOver.mp3");
 var fxBexp = new Audio("sound/bullet-exp.wav");
 var fxhitEnemy = new Audio("sound/hitEnemy.mp3");
-var nextLevel= new Audio("sound/nextlevel.wav");
+var nextLevel = new Audio("sound/nextlevel.wav");
 
 
 
@@ -154,7 +154,7 @@ function createLife() {
         let radii_sum = (player1.radius) + 11;
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             heart.splice(0, 1);
-            if (lifeScore > 30 && starScore >25) {
+            if (lifeScore > 35 && starScore > 30) {
                 End();
             }
             else {
@@ -344,7 +344,7 @@ class Bullet {
             let distance_y = this.y - (enemies[i].y + enemies[i].h / 2);
             let radii_sum = 40 + this.radius;
             if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
-                if(countMusic===1){
+                if (countMusic === 1) {
                     fxBexp.play();
                 }
                 for (let k = 0; k < 4; k++) {
@@ -513,10 +513,10 @@ function animate() {
             enemy.move();
             if (enemy.enemyhit()) {
                 enemies.splice(i, 1);
-                if(countMusic === 1){
+                if (countMusic === 1) {
                     fxhitEnemy.play();
                 }
-                
+
                 for (let k = 0; k < 4; k++) {
                     for (let j = 0; j < 4; j++) {
                         ctx.drawImage(explosion, k, j, 64, 64, enemy.x, enemy.y, 100, 100)
@@ -604,7 +604,7 @@ function lifeScoreIncrease() {
     Win();
 }
 function Win() {
-    if (starScore >= 20 && lifeScore >= 20) {
+    if (starScore === 20 && lifeScore === 20) {
         // paused = true;
         nextLevel.play();
         swal("GOOD JOb..!", "YOU WIN, Now you Become faster ...be carefual there is more ENEMYIES Now", "success", {
@@ -613,6 +613,17 @@ function Win() {
             .then((value) => {
                 nextLevel();
             });
+    }
+    else if (starScore === 25 && lifeScore === 30) {
+        // paused = true;
+        nextLevel.play();
+        swal("GOOD JOb..!", "YOU WIN, Now you Become faster ...be carefual there is more ENEMYIES Now", "success", {
+            button: "To Next Level!",
+        })
+            .then((value) => {
+                nextLevel();
+        });
+
     }
 }
 
@@ -667,7 +678,7 @@ function End() {
     paused = true;
     $("#win").slideDown(1000);
     $("#goal").toggle(3000);
-    
+
     swal("CONGRATULATIONS..!", {
         button: "Exit"
     })
@@ -675,6 +686,6 @@ function End() {
 
             location.replace("index.html");
 
-    });
+        });
 
 }
