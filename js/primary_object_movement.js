@@ -454,7 +454,7 @@ function drawsprite(img, sx, sy, sw, sh, dx, dy, dw, dh) {
 }
 
 /////create bullet////
-var bullet = new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 5, 'green', { x: 0, y: 10 });
+var bullet = new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 5, 'blueviolet', { x: 0, y: 10 });
 var bullets = [bullet];
 document.body.onkeyup = function (e) {
     if (e.keyCode == 32) {
@@ -462,16 +462,16 @@ document.body.onkeyup = function (e) {
             fxBullt.play();
         }
         if (player1.framey === 0) {
-            bullets.push(new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 11, 'green', { x: 0, y: 10 }));
+            bullets.push(new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 11, 'blueviolet', { x: 0, y: 10 }));
         }
         else if (player1.framey === 2) {
-            bullets.push(new Bullet(player1.x + player1.width, player1.y + player1.height / 2, 11, 'green', { x: 10, y: 0 }));
+            bullets.push(new Bullet(player1.x + player1.width, player1.y + player1.height / 2, 11, 'blueviolet', { x: 10, y: 0 }));
         }
         else if (player1.framey === 3) {
-            bullets.push(new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 11, 'green', { x: 0, y: -10 }));
+            bullets.push(new Bullet(player1.x + player1.width / 2, player1.y + player1.height / 2, 11, 'blueviolet', { x: 0, y: -10 }));
         }
         else if (player1.framey === 1) {
-            bullets.push(new Bullet(player1.x, player1.y + player1.height / 2, 11, 'green', { x: -10, y: 0 }))
+            bullets.push(new Bullet(player1.x, player1.y + player1.height / 2, 11, 'blueviolet', { x: -10, y: 0 }))
         }
     }
 }
