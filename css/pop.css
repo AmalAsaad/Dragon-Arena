@@ -1,4 +1,4 @@
-#controlmenu,#PowerUpmenu,#Goalmenu{
+#containerofmenus{
     display: none;
     position: absolute;
     left:380px;
@@ -7,14 +7,14 @@
     animation-name: goDown;
     animation-duration: 1s;
 }
-#control,#power,#goal{
+#menuboard{
     width: 609px;
     height: 495px;
     position:absolute;
     border-radius: 15%;
     z-index: -1;
 }
-#controlsticker,#powersticker,#goalsticker{
+#sticker{
     position: absolute;
     left: 180px;
     top:-30px;
@@ -190,7 +190,7 @@ p{
     font-size: 28px;
     background-color:burlywood;
 }
-#close1,#close2,#close3{
+#close{
     background: red;
     height: 50px;
     width: 50px;
@@ -201,11 +201,11 @@ p{
     left: 530px;
     -webkit-animation: bounce 1s;
 }
-#close1 a,#close2 a,#close3 a{
+#close a{
     color: white;
     font-size: 44px;   
 }
-#close1 a,#close2 a,#close3 a:hover{
+#close a:hover{
     transform:rotate(45deg);
 }
 @keyframes goDown{
