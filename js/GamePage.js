@@ -3,7 +3,7 @@ function runGame() {
     location.replace("gamePage.html");
 }
 
-// game variables//
+//game variables//
 var countMusic = 1;
 var click = 0;
 var count = 1;
@@ -11,13 +11,12 @@ $("#win").hide();
 $("#goal").hide();
 
 //Ready go show up//
-
 $("#pauseBtn").click();
 $("pause").toggle(1000);
 $(".go").hide();
 $(".ready").hide();
 
-// listener events//
+//listener events//
 document.getElementById("pauseBtn").addEventListener("click", popUp);
 document.getElementById("close").addEventListener("click", popDown);
 document.getElementById("cont").addEventListener("click", contPlay);
@@ -32,7 +31,6 @@ $("#pauseBtn").hover(function () {
     $(this).css("height", "70px");
 })
 
-
 //select elements//
 var containerElement = document.getElementById("canvas1");
 var sound = document.getElementById("audio");
@@ -42,9 +40,7 @@ var off2 = document.getElementById("off2");
 var offtxt1 = document.getElementById("offtxt1");
 var offtxt2 = document.getElementById("offtxt2");
 
-
 //game functions //
-
 function popUp() {
     if (click === 0) {
         if (countMusic === 1 && paused === false) {
@@ -57,9 +53,7 @@ function popUp() {
         paused = true;
     }
 }
-
 function popDown() {
-
     if (countMusic === 1) {
         music.play();
     }
@@ -84,7 +78,6 @@ function contPlay() {
     requestAnimationFrame(animate);
 
 }
-
 function backHome() {
     if (countMusic === 1) {
         music.play();
@@ -105,8 +98,7 @@ function backHome() {
             }
         });
 }
-
-function playSound() {
+function playSound(){
     if (count === 0) {
         count = 1;
         sound.play();
@@ -127,12 +119,9 @@ function playSound() {
 
     }
 }
-
 if (countMusic === 1) {
     autoPlayMusic();
 }
-
-
 function playMusic() {
     if (countMusic === 0) {
         countMusic = 1;
@@ -153,15 +142,14 @@ function playMusic() {
         });
     }
 }
-function autoPlayMusic() {
+function autoPlayMusic(){
     $("#playMusic").animate({ left: '85px' }, 200, function () {
         off2.src = "Img/on.png";
         offtxt2.textContent = "ON";
         $("#offtxt2").css("left", "55px");
     });
 }
-
-function autoPlaySound(e) {
+function autoPlaySound(e){
     if (e.key === 'Enter') {
         if (count === 1) {
             sound.play();
