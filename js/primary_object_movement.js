@@ -356,14 +356,12 @@ class hiddencircle {
 //create Life
 heart.push(new Life);
 function createLife() {
-
-    if (timetodrawlife % 200 === 0) {
+    if (timetodrawlife % 1000 === 0) {
         if (heart.length === 1) {
             heart.splice(0, 1);
         }
         heart.push(new Life());
     }
-
     if (heart.length > 0) {
         let distance_x = (player1.x + 25) - heart[0].x;
         let distance_y = (player1.y + 25) - heart[0].y;
@@ -371,13 +369,11 @@ function createLife() {
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             heart.splice(0, 1);
             lifeScoreIncrease();
-
         }
     }
     if (heart.length > 0) {
         heart[0].draw();
     }
-
 }
 //create star
 starr.push(new Star);
@@ -395,14 +391,11 @@ function createStar() {
         if (distance_x * distance_x + distance_y * distance_y <= radii_sum * radii_sum) {
             starr.splice(0, 1);
             starScoreIncrease();
-
         }
     }
-
     if (starr.length > 0) {
         starr[0].draw();
     }
-
 }
 //create enemies 
 function makeEnemies(enemycounter) {
@@ -505,7 +498,7 @@ function lifeScoreIncrease() {
     if (countMusic === 1) {
         fxLife.play();
     }
-    lifeScore += 2;
+    lifeScore += 1;
     $("#lifeScore").text(+lifeScore);
     $("#lifeScore").css("text-shadow", "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue");
     $("#life").css({
@@ -531,7 +524,7 @@ function Win() {
         nextLevel2();
         level2 = false;
     }
-    else if (starScore >= 100) {
+    else if (starScore >= 120) {
         End();
     }
 
@@ -701,24 +694,18 @@ function animate() {
             };
         });
     }
-
     ///star power up///
     timetodrawstar++;
     createStar();
     ///life power up///
     timetodrawlife++;
     createLife();
-
-
     //obstacles
     for (let i = 0; i < obstaclearray.length; i++) {
         ctx.drawImage(obst, obstaclearray[i].sx * 46, 0, 46, 60, obstaclearray[i].x, obstaclearray[i].y, 75, 132)
         circlearray[i].collision();
     }
-   
-
     // request another animation loop
     requestAnimationFrame(animate);
 }
-
 obsnum();

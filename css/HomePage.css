@@ -2,7 +2,8 @@ html{
     height: 100%;
 }
 body{
-    background-image:url("../Img/dragon.jpg");
+    /* background-image:url("../Img/dragon.jpg"); */
+    background-image:url("../Img/dragons3.jpg");
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
