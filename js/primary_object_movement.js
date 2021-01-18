@@ -705,17 +705,7 @@ function animate() {
         ctx.drawImage(obst, obstaclearray[i].sx * 46, 0, 46, 60, obstaclearray[i].x, obstaclearray[i].y, 75, 132)
         circlearray[i].collision();
     }
-<<<<<<< HEAD
     // request another animation loop
     requestAnimationFrame(animate);
 }
 obsnum();
-=======
-   
-
-    // request another animation loop
-    requestAnimationFrame(animate);
-}
-
-obsnum();
->>>>>>> eb7f7477935089bb2715130f0d182d60cc0cdfd8
