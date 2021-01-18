@@ -1,4 +1,7 @@
-# Dragon Arena
+ ```
+    # Dragon Arena
+```
+
 # Deployment Link
 [Dragon Arena Game]()
 
@@ -59,6 +62,15 @@
     6. open /close game sound effects 
 ![](Img/10.PNG)
 
+# Game LEVEL
+* ## LEVEL 1
+### start with 5 lifes,there is 3 enemy, and your speed is slow. 
+* ## LEVEL 2
+### there is two more enemies there, and your speed is intermidate. 
+
+* ## LEVEL 3
+### there is two more enemies there, and your speed is hight. 
+
 
 # Game Alerts
 * ### Ready to play?
@@ -74,13 +86,4 @@
 * ### Are you sure to back?
   ![](Img/5.PNG)
   ![](Img/3.PNG)
-
-# Game LEVEL
-* ## LEVEL 1
-### start with 5 lifes,there is 3 enemy, and your speed is slow. 
-* ## LEVEL 2
-### there is two more enemies there, and your speed is intermidate. 
-
-* ## LEVEL 3
-### there is two more enemies there, and your speed is hight. 
 
