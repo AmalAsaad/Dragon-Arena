@@ -623,7 +623,7 @@ function animate() {
         return;
     }
     if (enemies.length < 3) {
-        totalEnemies = 2;
+        totalEnemies = 1;
         for (let i = 0; i < totalEnemies; i++) {
             makeEnemies(4);
         }
