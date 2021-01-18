@@ -14,27 +14,25 @@
 * js folder: Here all javaScript files.
 * css folder: Here all Stylesheets files.
 
-
-
 # Game Pages
 * ## Start Page
     This is welcome to our Game where here you can See the owner of game and Some instruction details about the Game.
     you Can go to Home page by press any Key.
-![](Img/dragon.jpg)
+![](Img/dragon.png)
 
 * ## Home Page 
     This is Main home Game.
     you Can start game by click on Play.
-![](Img/homePage.jpg)
+![](Img/homePage.png)
 
 * ## Start Game Page
     This is game area page where here you can start to play.
     you Can start game by click on Play.
-![](Img/gamePage.jpg)
+![](Img/gamePage.png)
 
 # Game Dom
 * ### Owners
-![](Img/9.jpg)
+![](Img/9.png)
 
 * ### Instructions
     Here display docmentation about game and HOW TO PLAY?
@@ -50,16 +48,23 @@
     4. cotinue playing
     5. open /close background music
     6. open /close game sound effects 
-![](Img/10.jpg)
+![](Img/10.png)
 
 
 # Game Alerts
 * ### Ready to play?
+![](Img/1.png)
 * ### Game Over!
+![](Img/2.png)
 * ### Congratulation Win!
+![](Img/8.png)
 * ### Good Job LEVEL 2
+![](Img/6.png)
 * ### Good Job LEVEL 3
+![](Img/7.png)
 * ### Are you sure to back?
+  - ![](Img/2.png)
+  - ![](Img/3.png)
 
 # Game LEVEL
 * ## LEVEL 1
