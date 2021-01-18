@@ -7,7 +7,7 @@
 body{
     /* background-image:url("../Img/dragons1.jpg") ; */
     /* background-image:url("../Img/dragons2.jpg") ; */
-    background-image:url("../Img/dragons3.jpg") ;
+    background-image:url("../Img/introBg.jpg") ;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -25,7 +25,7 @@ body{
 .container span{
     text-transform: uppercase;
     display: block;
-    background-color:sandybrown;
+    background-color:rgb(223, 180, 41);
 }
 
 .text1{
