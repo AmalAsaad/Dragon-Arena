@@ -13,21 +13,21 @@
 * Img folder:Here all image data used in Game.
 * js folder: Here all javaScript files.
 * css folder: Here all Stylesheets files.
+# project OOP structure
 
 # Game Pages
 * ## Start Page
     This is welcome to our Game where here you can See the owner of game and Some instruction details about the Game.
     you Can go to Home page by press any Key.
-![](Img/dragon.PNG)
+![](Img/startPage.PNG)
 
 * ## Home Page 
     This is Main home Game.
     you Can start game by click on Play.
 ![](Img/homePage.PNG)
 
-* ## Start Game Page
+* ## Game Page
     This is game area page where here you can start to play.
-    you Can start game by click on Play.
 ![](Img/gamePage.PNG)
 
 # Game Dom
@@ -63,10 +63,15 @@
 * ### Good Job LEVEL 3
 ![](Img/7.PNG)
 * ### Are you sure to back?
-  - ![](Img/2.PNG)
-  - ![](Img/3.PNG)
+  ![](Img/5.PNG)
+  ![](Img/3.PNG)
 
 # Game LEVEL
 * ## LEVEL 1
+### start with 5 lifes,there is 3 enemy, and your speed is slow. 
 * ## LEVEL 2
+### there is two more enemies there, and your speed is intermidate. 
+
 * ## LEVEL 3
+### there is two more enemies there, and your speed is hight. 
+
