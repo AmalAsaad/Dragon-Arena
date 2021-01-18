@@ -14,14 +14,14 @@
 * js folder: Here all javaScript files.
 * css folder: Here all Stylesheets files.
 
-![](Img/file.PNG)
+![](Img/file.png)
 
 # project FlowChart 
-![](Img/FlowChart.PNG)
+![](Img/FlowChart.png)
 
 
 # project UML (OOP structure)
-![](Img/oop.PNG)
+![](Img/oop.png)
 
 
 # Game Pages
