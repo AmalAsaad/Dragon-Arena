@@ -5,8 +5,9 @@
 }
 
 body{
-    /* background-color: #5e0e53; */
-    background-image:url("../Img/introBg.jpg") ;
+    /* background-image:url("../Img/dragons1.jpg") ; */
+    /* background-image:url("../Img/dragons2.jpg") ; */
+    background-image:url("../Img/dragons3.jpg") ;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -22,9 +23,9 @@ body{
     width: 100%;
 }
 .container span{
-    color: rgb(3, 11, 14);
     text-transform: uppercase;
     display: block;
+    background-color:sandybrown;
 }
 
 .text1{
@@ -32,20 +33,21 @@ body{
     font-size: 100px;
     font-weight: 700;
     margin-bottom: 20px;
-    background: #f1d34d;
+    /* background: #f1d34d; */
     position: relative;
     animation: text 3s 1;
-
+    color: rgb(3, 11, 14);
 }
 
 .text2{
     font-size: 70px;
     animation: text 3s 1; 
+    color:black;
 }
 
 @keyframes text{
     0%{
-        color: rgb(252, 227, 7);
+        color:darkorange;
         margin-bottom: -85px;
     }
 
