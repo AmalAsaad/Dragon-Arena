@@ -13,16 +13,25 @@
 * Img folder:Here all image data used in Game.
 * js folder: Here all javaScript files.
 * css folder: Here all Stylesheets files.
-# project OOP structure
+
+![](Img/file.PNG)
+
+# project FlowChart 
+![](Img/FlowChart.PNG)
+
+
+# project UML (OOP structure)
+![](Img/oop.PNG)
+
 
 # Game Pages
 * ## Start Page
-    This is welcome to our Game where here you can See the owner of game and Some instruction details about the Game.
+    This is welcome to our Game.
     you Can go to Home page by press any Key.
 ![](Img/startPage.PNG)
 
 * ## Home Page 
-    This is Main home Game.
+    This is Main home Game,where here you can See the owner of game and Some instruction details about the Game.
     you Can start game by click on Play.
 ![](Img/homePage.PNG)
 
@@ -40,7 +49,7 @@
     2. How to play
     3. Power Ups
 
-* ### Control Menue
+* ### Control Menu
     Here you can control the game:
     1. pause game
     2. reset level 
