@@ -614,8 +614,6 @@ function End() {
 
     }, 2000);
 }
-window.setTimeout(1000,fixedEnemylevel1);
-window.setTimeout(1000,fixedEnemylevel2);
 function fixedEnemylevel1(){
     if(indicate1){
         if (enemies.length < 5) {
