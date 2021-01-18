@@ -18,21 +18,21 @@
 * ## Start Page
     This is welcome to our Game where here you can See the owner of game and Some instruction details about the Game.
     you Can go to Home page by press any Key.
-![](Img/dragon.png)
+![](Img/dragon.PNG)
 
 * ## Home Page 
     This is Main home Game.
     you Can start game by click on Play.
-![](Img/homePage.png)
+![](Img/homePage.PNG)
 
 * ## Start Game Page
     This is game area page where here you can start to play.
     you Can start game by click on Play.
-![](Img/gamePage.png)
+![](Img/gamePage.PNG)
 
 # Game Dom
 * ### Owners
-![](Img/9.png)
+![](Img/9.PNG)
 
 * ### Instructions
     Here display docmentation about game and HOW TO PLAY?
@@ -48,23 +48,23 @@
     4. cotinue playing
     5. open /close background music
     6. open /close game sound effects 
-![](Img/10.png)
+![](Img/10.PNG)
 
 
 # Game Alerts
 * ### Ready to play?
-![](Img/1.png)
+![](Img/1.PNG)
 * ### Game Over!
-![](Img/2.png)
+![](Img/2.PNG)
 * ### Congratulation Win!
-![](Img/8.png)
+![](Img/8.PNG)
 * ### Good Job LEVEL 2
-![](Img/6.png)
+![](Img/6.PNG)
 * ### Good Job LEVEL 3
-![](Img/7.png)
+![](Img/7.PNG)
 * ### Are you sure to back?
-  - ![](Img/2.png)
-  - ![](Img/3.png)
+  - ![](Img/2.PNG)
+  - ![](Img/3.PNG)
 
 # Game LEVEL
 * ## LEVEL 1
