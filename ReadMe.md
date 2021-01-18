@@ -1,6 +1,7 @@
- ```
-    # Dragon Arena
-```
+
+#                                                       Dragon Arena
+                                           
+                                                    ![](Img/logo.jpg)
 
 # Deployment Link
 [Dragon Arena Game]()
