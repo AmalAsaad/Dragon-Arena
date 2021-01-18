@@ -46,6 +46,8 @@ var bulletscounter;
 var gameframe = 0;
 var level1 = true;
 var level2 = true;
+var indicate1 = false;
+var indicate2 = false;
 
 //get random value in range of 2 values
 var minH = Math.floor(this.y);
@@ -513,8 +515,13 @@ function lifeScoreIncrease() {
     Win();
 }
 function Win() {
+    if (enemies.length < 3) {
+        totalEnemies = 1;
+        for (let i = 0; i < totalEnemies; i++) {
+            makeEnemies(4);
+        }
+    }
     if (starScore >= 35 && level1) {
-        // paused = true;
         nextLevel.play();
         nextLevel1();
         level1 = false;
@@ -533,7 +540,7 @@ function gameOver() {
     if (lifeScore < 1) {
         fxlose.play();
         paused = true;
-        swal("UNFORTIONATLY", "YOU LOOSE", "error", {
+        swal("GAME OVER", "YOU LOOSE", "error", {
             button: "TRY AGAIN",
         })
             .then((value) => {
@@ -566,6 +573,7 @@ function lifeDecrese() {
 
     }
 }
+
 function nextLevel1() {
     swal("GOOD JOb..!", " Now you Become faster And there is more ENEMYIES Now", "success", {
         button: "To LEVEL 2!",
@@ -580,8 +588,7 @@ function nextLevel1() {
 
             }, 2000);
         });
-
-
+        indicate1 = true;
 }
 function nextLevel2() {
     swal("GOOD JOb..!", " Now you Become faster And there is more ENEMYIES Now", "success", {
@@ -590,13 +597,14 @@ function nextLevel2() {
         .then((value) => {
             window.setTimeout(function () {
                 player1.speed = 10;
-                totalEnemies = 4;
+                totalEnemies = 3;
                 for (var i = 0; i < totalEnemies; i++) {
                     makeEnemies(10);
                 }
 
             }, 2000);
         });
+        indicate2 = true;
 }
 function End() {
     fxWin.play();
@@ -613,6 +621,32 @@ function End() {
 
     }, 2000);
 }
+window.setTimeout(1000,fixedEnemylevel1);
+window.setTimeout(1000,fixedEnemylevel2);
+function fixedEnemylevel1(){
+    if(indicate1){
+        if (enemies.length < 5) {
+            totalEnemies = 1;
+            for (let i = 0; i < totalEnemies; i++) {
+                makeEnemies(4);
+            }
+        }
+    }
+
+}
+function fixedEnemylevel2(){
+    if(indicate2){
+        if (enemies.length < 7) {
+            totalEnemies = 1;
+            for (let i = 0; i < totalEnemies; i++) {
+                makeEnemies(9);
+            }
+        }
+    }
+
+}
+
+
 //draw component of canvas 
 function drawsprite(img, sx, sy, sw, sh, dx, dy, dw, dh) {
     ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
@@ -622,12 +656,10 @@ function animate() {
     if (paused) {
         return;
     }
-    if (enemies.length < 3) {
-        totalEnemies = 1;
-        for (let i = 0; i < totalEnemies; i++) {
-            makeEnemies(4);
-        }
-    }
+    Win();
+    fixedEnemylevel1();
+    fixedEnemylevel2();
+
     //animate anything
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -683,8 +715,10 @@ function animate() {
         ctx.drawImage(obst, obstaclearray[i].sx * 46, 0, 46, 60, obstaclearray[i].x, obstaclearray[i].y, 75, 132)
         circlearray[i].collision();
     }
+   
 
     // request another animation loop
     requestAnimationFrame(animate);
 }
+
 obsnum();
